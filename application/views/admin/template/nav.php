@@ -21,30 +21,7 @@
         <ul class="nav navbar-nav">
             <!-- Messages: style can be found in dropdown.less-->
 
-            <li class="nav nav-item dropdown">
-                <a class="nav-link" data-toggle="dropdown" href="#">
-                    <i class="far fa-bell" style="color: white"></i>
-                    <?php if (empty($numOut)) { ?>
-                        <span></span>
-                    <?php } else { ?>
-                        <span class="badge badge-warning"><?= $numOut; ?></span>
-                    <?php } ?>
-                </a>
-                <div class="dropdown-menu dropdown-menu-lg">
-                    <span class="dropdown-item dropdown-header" style="background-color: #a9e3e5;color: white;"><?= $numOut; ?> Notifikasi</span>
-                    <div class="dropdown-divider"></div>
-                    <?php foreach ($notifOut as $c) : ?>
-                        <div class="card-footer">
-                            <a href="#" style="text-decoration: none; color: black;"><strong><?= $c->id_surat; ?><br><?= $c->id_tangki; ?><br><?= $c->jenis_surat; ?></strong><br>
-                                <small style="color: red;">Mati Tanggal <strong><?= date('d/m/Y', strtotime($c->tanggal_expired)); ?></strong></small></a>
-                            <!-- <a href="#" class="dropdown-item">
-                  </a> -->
-                        </div>
-                    <?php endforeach ?>
-                    <div class="dropdown-divider"></div>
-                    <a href="#" class="dropdown-item dropdown-footer"></a>
-                </div>
-            </li>
+           
 
             <!-- User Account: style can be found in dropdown.less -->
             <li class="dropdown user user-menu">

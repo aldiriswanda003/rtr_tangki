@@ -53,8 +53,7 @@
                                         <th>Nomor Seri</th>
                                         <th>Ukuran</th>
                                         <th>Keterangan</th>
-                                        <th style="width:58px">Edit</th>
-                                        <th style="width:58px">Hapus</th>
+                                        <th style="width:58px">Aksi</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -76,8 +75,8 @@
                                                 
 
 
-                                                <td><a href="<?= base_url('admin/edit_seri/' . $sb->id_seri_ban); ?>" type="button" class="btn btn-sm btn-success" name="btn_edit"><i class="fa fa-edit"></i>&nbsp;Edit</a></td>
-                                                <td><a href="<?= base_url('admin/hapus_seri/' . $sb->id_seri_ban); ?>" type="button" class="btn btn-sm btn-danger btn-delete" name="btn_delete"><i class="fa fa-trash"></i>&nbsp;Hapus</a></td>
+                                                <td><a href="<?= base_url('admin/edit_seri/' . $sb->id_seri_ban); ?>" type="button" class="btn btn-sm btn-success" name="btn_edit"><i class="fa fa-edit"></i>&nbsp;Edit</a>
+                                                <a href="<?= base_url('admin/hapus_seri/' . $sb->id_seri_ban); ?>" type="button" class="btn btn-sm btn-danger btn-delete" name="btn_delete"><i class="fa fa-trash"></i>&nbsp;Hapus</a></td>
                                                 <!-- ulah function tombol hapus nya di admin controller -->
                                             </tr>
                                         <?php endforeach; ?>

@@ -91,10 +91,17 @@
                                     </div>
 
                                     <div class="form-group">
+                                        <label for="foto_nota" class="form-label">Foto Nota</label>
+                                        <input type="file" name="foto_nota" class="form-control" id="foto_nota" placeholder="Masukkan Foto Nota">
+                                        <span><small style="color:red"><strong>UPLOAD MINIMAL SIZE 2MB</strong></small></span>
+                                    </div>
+
+                                    <div class="form-group">
                                     <label for="text" class="form-label">Biaya</label>
                                     <input type="text" name="biaya_perbaikan" class="form-control" id="" placeholder="Masukkan Perkiraan biaya" required>
                                     </div>
 
+                                   
             
                                       
                                 </div>

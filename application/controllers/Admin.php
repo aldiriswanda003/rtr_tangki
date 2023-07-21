@@ -9,6 +9,7 @@ class Admin extends CI_Controller
         parent::__construct();
         $this->load->model('M_admin');
         $this->load->library('upload');
+        $this->load->library('mailer');
         if ($this->session->userdata('status') != 'login') {
             redirect(base_url("login"));
         }
@@ -20,6 +21,7 @@ class Admin extends CI_Controller
 
         $data['notifOut'] = $this->M_admin->notif_exp_surat('table_surat_tangki', $tgl);
         $data['numOut'] = $this->M_admin->notif_angka_exp('table_surat_tangki', $tgl);
+        // $data['avatar'] = $this->M_admin->get_data_avatar('tb_user', $this->session->userdata('name'));
         $this->load->view('admin/template/nav', $data);
     }
 
@@ -277,8 +279,8 @@ class Admin extends CI_Controller
             'overwrite'    => true,
             // 'file_name'	=> uniqid(),
             'max_size' => 2048,
-            'max_height' => 1080,
-            'max_width' => 1920
+            'max_height' => 2000,
+            'max_width' => 2000
         );
         $this->load->library('upload', $config);
         $this->upload->initialize($config);
@@ -362,6 +364,7 @@ class Admin extends CI_Controller
     {
         $this->form_validation->set_rules('nama_supir', 'Nama Supir', 'trim|required');
         $this->form_validation->set_rules('no_telp', 'No Telp', 'trim|required');
+        $this->form_validation->set_rules('email_supir', 'email_supir', 'trim|required');
 
         if ($this->form_validation->run() === TRUE) {
             $foto_supir = $this->upload_gambarsupir();
@@ -370,10 +373,12 @@ class Admin extends CI_Controller
 
             $nama = $this->input->post('nama_supir', TRUE);
             $no_hp = $this->input->post('no_telp', TRUE);
+            $email_supir = $this->input->post('email_supir', TRUE);
 
             $data = array(
                 'nama_supir' => $nama,
                 'no_telp' => $no_hp,
+                'email_supir' => $email_supir,
                 'foto_supir' => $foto_supir,
                 'foto_sim' => $foto_sim,
                 'foto_ktp' => $foto_ktp
@@ -728,7 +733,7 @@ class Admin extends CI_Controller
     {
         $config = array(
             'upload_path' => './assets/upload/surat_tangki/',
-            'allowed_types' => 'gif|jpg|png',
+            'allowed_types' => 'gif|jpg|png|pdf',
             'ecrypt_name'    => false,
             'overwrite'    => true,
             // 'file_name'	=> uniqid(), 
@@ -1092,6 +1097,7 @@ class Admin extends CI_Controller
         $this->form_validation->set_rules('tgl_masuk', 'Tanggal Masuk Perbaikan', 'trim|required');
         $this->form_validation->set_rules('keluhan', 'keluhan', 'trim|required');
         $this->form_validation->set_rules('biaya', 'biaya nya bujur kah', 'trim|required');
+        $this->form_validation->set_rules('foto_nota', 'FOTO nya bujur kah', 'trim|required');
         $this->form_validation->set_rules('status', 'status perbaikan', 'trim|required');
 
 
@@ -1101,6 +1107,7 @@ class Admin extends CI_Controller
             $tgl_masuk = $this->input->post('tgl_masuk', TRUE);
             $keluhan = $this->input->post('keluhan', TRUE);
             $biaya = $this->input->post('biaya', TRUE);
+            $foto_nota = $this->input->post('foto_nota', TRUE);
             $status = $this->input->post('status', TRUE);
 
 
@@ -1110,6 +1117,7 @@ class Admin extends CI_Controller
                 'tgl_masuk' => $tgl_masuk,
                 'keluhan' => $keluhan,
                 'biaya' => $biaya,
+                'foto_nota' => $foto_nota,
                 'status' => $status
 
             );
@@ -1118,7 +1126,7 @@ class Admin extends CI_Controller
             redirect(base_url('admin/tabel_service_masuk'));
         } else {
             $data['avatar'] = $this->M_admin->get_data_avatar('tb_user', $this->session->userdata('name'));
-            $data['title'] = 'Tambah Data Supir & Tan gki ';
+            $data['title'] = 'Tambah Data Service Masuk ';
             $this->load->view('admin/form_service_masuk/tambah_service_masuk', $data);
         }
     }
@@ -1147,6 +1155,7 @@ class Admin extends CI_Controller
         $this->form_validation->set_rules('tgl_masuk', 'Tanggal Masuk Perbaikan', 'trim|required');
         $this->form_validation->set_rules('keluhan', 'keluhan', 'trim|required');
         $this->form_validation->set_rules('biaya', 'biaya nya bujur kah', 'trim|required');
+        // $this->form_validation->set_rules('foto_nota', 'Foto nya bujur kah', 'trim|required');
         $this->form_validation->set_rules('status', 'status perbaikan', 'trim|required');
 
 
@@ -1158,6 +1167,7 @@ class Admin extends CI_Controller
             $tgl_masuk = $this->input->post('tgl_masuk', TRUE);
             $keluhan = $this->input->post('keluhan', TRUE);
             $biaya = $this->input->post('biaya', TRUE);
+            // $foto_nota = $this->input->post('foto_nota', TRUE);
             $status = $this->input->post('status', TRUE);
 
             $where = array('id_service_masuk' => $id_service_masuk);
@@ -1168,6 +1178,7 @@ class Admin extends CI_Controller
                 'tgl_masuk' => $tgl_masuk,
                 'keluhan' => $keluhan,
                 'biaya' => $biaya,
+                // 'foto_nota' => $foto_nota,
                 'status' => $status
 
             );
@@ -1371,6 +1382,36 @@ class Admin extends CI_Controller
         $this->load->view('admin/form_perbaikan/perbaikan', $data);
     }
 
+
+
+    public function upload_foto_nota()
+    {
+        $config = array(
+            'upload_path' => './assets/upload/perbaikan/foto_nota/',
+            'allowed_types' => 'gif|jpg|png|jpeg',
+            'ecrypt_name'    => false,
+            'overwrite'    => true,
+            // 'file_name'	=> uniqid(),
+            'max_size' => 2048,
+            'max_height' => 2000,
+            'max_width' => 2000
+        );
+        $this->load->library('upload', $config);
+        $this->upload->initialize($config);
+
+        if (!$this->upload->do_upload('foto_nota')) {
+            $error = $this->upload->display_errors();
+            return $error;
+            // die('gagal diupload');
+        } else {
+            $data_upload = array('upload_data' => $this->upload->data());
+            $userfile = $data_upload['upload_data']['file_name'];
+
+            return $userfile;
+        }
+    }
+
+
     public function tambah_perbaikan()
     {
 
@@ -1391,11 +1432,16 @@ class Admin extends CI_Controller
         // $this->form_validation->set_rules('id_bengkel', 'Nama Bengkel', 'trim|required');
         $this->form_validation->set_rules('tgl_perbaikan', 'Tanggal Perbaikan', 'trim|required');
         $this->form_validation->set_rules('keterangan', 'keterangan', 'trim|required');
+        // $this->form_validation->set_rules('foto_nota', 'foto_nota', 'trim|required');
         $this->form_validation->set_rules('biaya_perbaikan', 'biaya nya bujur kah', 'trim|required');
         // $this->form_validation->set_rules('status', 'status perbaikan', 'trim|required');
 
 
         if ($this->form_validation->run() === TRUE) {
+
+            $foto_nota = $this->upload_foto_nota();
+
+
             $id_service_masuk = $this->input->post('id_service_masuk', TRUE);
             // $id_supir_tangki = $this->input->post('id_supir_tangki', TRUE);
             // $id_bengkel = $this->input->post('id_bengkel', TRUE);
@@ -1411,6 +1457,7 @@ class Admin extends CI_Controller
                 // 'id_bengkel' => $id_bengkel,
                 'tgl_perbaikan' => $tgl_perbaikan,
                 'keterangan' => $keterangan,
+                'foto_nota' => $foto_nota,
                 'biaya_perbaikan' => $biaya_perbaikan,
 
 
@@ -1448,8 +1495,9 @@ class Admin extends CI_Controller
         $this->form_validation->set_rules('id_service_masuk', 'service masuk', 'trim|required');
         // $this->form_validation->set_rules('id_supir_tangki', 'Nama Supir dan Truk Tangki', 'trim|required');
         // $this->form_validation->set_rules('id_bengkel', 'Nama Bengkel', 'trim|required');
-        $this->form_validation->set_rules('tgl_masuk', 'Tanggal Masuk Perbaikan', 'trim|required');
+        $this->form_validation->set_rules('tgl_perbaikan', 'Tanggal Masuk Perbaikan', 'trim|required');
         $this->form_validation->set_rules('keterangan', 'keterangan', 'trim|required');
+        // $this->form_validation->set_rules('foto_nota', 'FOTO NOTA', 'trim|required');
         $this->form_validation->set_rules('biaya_perbaikan', 'biaya nya bujur kah', 'trim|required');
         // $this->form_validation->set_rules('status', 'status perbaikan', 'trim|required');
 
@@ -1459,10 +1507,19 @@ class Admin extends CI_Controller
             $id_service_masuk = $this->input->post('id_service_masuk', TRUE);
             // $id_supir_tangki = $this->input->post('id_supir_tangki', TRUE);
             // $id_bengkel = $this->input->post('id_bengkel', TRUE);
-            $tgl_masuk = $this->input->post('tgl_masuk', TRUE);
+            $tgl_perbaikan = $this->input->post('tgl_perbaikan', TRUE);
             $keterangan = $this->input->post('keterangan', TRUE);
             $biaya_perbaikan = $this->input->post('biaya_perbaikan', TRUE);
             // $status = $this->input->post('status', TRUE);
+            $foto_nota_old = $this->input->post('foto_nota_old', TRUE);
+
+            $foto_nota = $this->upload_foto_nota();
+
+            if ($foto_nota == '<p>You did not select a file to upload.</p>') {
+                $foto_nota_new = $foto_nota_old;
+            } else {
+                $foto_nota_new = $foto_nota;
+            };
 
 
             $where = array('id_perbaikan' => $id_perbaikan);
@@ -1471,8 +1528,9 @@ class Admin extends CI_Controller
                 'id_service_masuk' => $id_service_masuk,
                 // 'id_supir_tangki' => $id_supir_tangki,
                 // 'id_bengkel' => $id_bengkel,
-                'tgl_masuk' => $tgl_masuk,
+                'tgl_perbaikan' => $tgl_perbaikan,
                 'keterangan' => $keterangan,
+                'foto_nota' => $foto_nota_new,
                 'biaya_perbaikan' => $biaya_perbaikan
             );
             $this->M_admin->update('tb_perbaikan', $data, $where); //kalo di proses edit andaki where
@@ -1502,7 +1560,7 @@ class Admin extends CI_Controller
 
     public function tabel_exp_surat()
     {
-        $data['exp_surat'] = $this->M_admin->get_exp_surat('tb_exp_surat');
+        $data['exp_surat'] = $this->M_admin->tabel_exp_surat('tb_exp_surat');
         $data['avatar'] = $this->M_admin->get_data_avatar('tb_user', $this->session->userdata('name'));
         $data['title'] = 'Exp Surat Tangki';
         $this->load->view('admin/form_exp_surat/exp_surat', $data);
@@ -1512,7 +1570,7 @@ class Admin extends CI_Controller
     {
 
         $data['list_surat_tangki'] = $this->M_admin->get_exp_surat('table_surat_tangki');
-        $data['list_tangki'] = $this->M_admin->select('tb_tangki');
+        // $data['list_tangki'] = $this->M_admin->select('tb_tangki');
 
 
         // $data['list_supir'] = $this->M_admin->select('tb_supir');
@@ -1525,6 +1583,7 @@ class Admin extends CI_Controller
     {
 
         $this->form_validation->set_rules('id_surat', 'Surat Tangki', 'trim|required');
+        $this->form_validation->set_rules('perkiraan_biaya', 'perkiraan biaya', 'trim|required');
         // $this->form_validation->set_rules('id_supir_tangki', 'Nama Supir dan Truk Tangki', 'trim|required');
         // $this->form_validation->set_rules('id_bengkel', 'Nama Bengkel', 'trim|required');
         // $this->form_validation->set_rules('jenis_surat', 'Jenis Surat', 'trim|required');
@@ -1537,6 +1596,7 @@ class Admin extends CI_Controller
         if ($this->form_validation->run() === TRUE) {
             // $id_exp_surat = $this->input->post('id_exp_surat', TRUE);
             $id_surat = $this->input->post('id_surat', TRUE);
+            $perkiraan_biaya = $this->input->post('perkiraan_biaya', TRUE);
             // $id_tangki = $this->input->post('id_tangki', TRUE);
             // $id_supir_tangki = $this->input->post('id_supir_tangki', TRUE);
             // $id_bengkel = $this->input->post('id_bengkel', TRUE);
@@ -1550,6 +1610,7 @@ class Admin extends CI_Controller
 
                 // 'id_exp_surat' => $id_exp_surat,
                 'id_surat' => $id_surat,
+                'perkiraan_biaya' => $perkiraan_biaya,
                 // 'id_tangki' => $id_tangki,
                 // 'id_supir_tangki' => $id_supir_tangki,
                 // 'id_bengkel' => $id_bengkel,
@@ -1569,7 +1630,77 @@ class Admin extends CI_Controller
         }
     }
 
+    public function edit_exp_surat()
+    {
+        $uri = $this->uri->segment(3);
+        $where = array('id_exp_surat' => $uri);
 
+        $data['list_exp_surat'] = $this->M_admin->ambil_exp_surat('tb_exp_surat', $where);
+        $data['list_surat_tangki'] = $this->M_admin->get_exp_surat('table_surat_tangki');
+
+        // $data['list_surat'] = $this->M_admin->select('table_surat_tangki');
+        // $data['list_tangki'] = $this->M_admin->select('tb_tangki');
+
+
+        // $data['list_supir'] = $this->M_admin->select('tb_supir');
+        $data['avatar'] = $this->M_admin->get_data_avatar('tb_user', $this->session->userdata('name'));
+        $data['title'] = 'Tambah Expired Surat';
+        $this->load->view('admin/form_exp_surat/edit_exp_surat', $data);
+    }
+
+
+    public function proses_edit_exp_surat()
+    {
+
+        $this->form_validation->set_rules('id_surat', 'Surat Tangki', 'trim|required');
+        $this->form_validation->set_rules('perkiraan_biaya', 'perkiraan biaya', 'trim|required');
+        // $this->form_validation->set_rules('id_supir_tangki', 'Nama Supir dan Truk Tangki', 'trim|required');
+        // $this->form_validation->set_rules('id_bengkel', 'Nama Bengkel', 'trim|required');
+        // $this->form_validation->set_rules('jenis_surat', 'Jenis Surat', 'trim|required');
+        // $this->form_validation->set_rules('tanggal_expired', 'Tanggal Habis Masa berlaku', 'trim|required');
+        // $this->form_validation->set_rules('status', 'Status', 'trim|required');
+        // $this->form_validation->set_rules('biaya_perbaikan', 'biaya nya bujur kah', 'trim|required');
+        // $this->form_validation->set_rules('status', 'status perbaikan', 'trim|required');
+
+
+        if ($this->form_validation->run() === TRUE) {
+            // $id_exp_surat = $this->input->post('id_exp_surat', TRUE);
+            $id_surat = $this->input->post('id_surat', TRUE);
+            $perkiraan_biaya = $this->input->post('perkiraan_biaya', TRUE);
+            // $id_tangki = $this->input->post('id_tangki', TRUE);
+            // $id_supir_tangki = $this->input->post('id_supir_tangki', TRUE);
+            // $id_bengkel = $this->input->post('id_bengkel', TRUE);
+            // $jenis_surat = $this->input->post('jenis_surat', TRUE);
+            // $tanggal_expired = $this->input->post('tanggal_expired', TRUE);
+            // $status = $this->input->post('status', TRUE);
+            // $biaya_perbaikan = $this->input->post('biaya_perbaikan', TRUE);
+            $id_exp_surat = $this->input->post('id_exp_surat', TRUE);
+
+            $where = array('id_exp_surat' => $id_exp_surat);
+            $data = array(
+
+                // 'id_exp_surat' => $id_exp_surat,
+                'id_surat' => $id_surat,
+                'perkiraan_biaya' => $perkiraan_biaya,
+                // 'id_tangki' => $id_tangki,
+                // 'id_supir_tangki' => $id_supir_tangki,
+                // 'id_bengkel' => $id_bengkel,
+                // 'jenis_surat' => $jenis_surat,
+                // 'tanggal_expired' => $tanggal_expired,
+                // 'status' => $status 
+
+
+            );
+            $this->M_admin->update('tb_exp_surat', $data, $where);
+            //mun edit tulisan update mun tambah tulisannya insert
+            $this->session->set_flashdata('msg_sukses', 'Data Berhasil Di Tambahkan');
+            redirect(base_url('admin/tabel_exp_surat'));
+        } else {
+            $data['avatar'] = $this->M_admin->get_data_avatar('tb_user', $this->session->userdata('name'));
+            $data['title'] = 'Tambah Pengajuan Exp Surat Tangki Disetujui ';
+            $this->load->view('admin/form_exp_surat/edit_exp_surat', $data);
+        }
+    }
 
 
     public function hapus_exp_surat()
@@ -1653,8 +1784,8 @@ class Admin extends CI_Controller
             $id_tujuan = $this->input->post('id_tujuan', true);
             $nama_tujuan = $this->input->post('nama_tujuan', true);
             $kilometer_pp = $this->input->post('kilometer_pp', TRUE);
-            
-            
+
+
 
             $where = array('id_tujuan' => $id_tujuan);
             $data = array(
@@ -1667,27 +1798,52 @@ class Admin extends CI_Controller
         } else {
             $data['avatar'] = $this->M_admin->get_data_avatar('tb_user', $this->session->userdata('name'));
             $data['title'] = 'Edit Tujuan';
-            $this->load->view('admin/form_supir/edit_tujuan', $data);
+            $this->load->view('admin/form_tujuan/edit_tujuan', $data);
         }
     }
 
     public function hapus_tujuan()
-        {
-            $uri = $this->uri->segment(3);
-            $where = array('id_tujuan' => $uri);
-    
-            $this->M_admin->delete('tb_tujuan', $where);
-            $this->session->set_flashdata('msg_sukses', 'Data Tujuan Berhasil Dihapus');
-            redirect(base_url('admin/tabel_tujuan'));
-        }
-
-        ##### END TUJUAN #####
-        ##### END TUJUAN #####
-        ##### END TUJUAN #####
-
-        public function tabel_angkutan()
     {
-        $data['angkutan'] = $this->M_admin->get_angkutan('tb_angkutan');
+        $uri = $this->uri->segment(3);
+        $where = array('id_tujuan' => $uri);
+
+        $this->M_admin->delete('tb_tujuan', $where);
+        $this->session->set_flashdata('msg_sukses', 'Data Tujuan Berhasil Dihapus');
+        redirect(base_url('admin/tabel_tujuan'));
+    }
+
+    ##### END TUJUAN #####
+    ##### END TUJUAN #####
+    ##### END TUJUAN #####
+
+    public function tabel_angkutan()
+    {
+        $tgl_awal = $this->input->get('tgl_awal');
+        $tgl_akhir = $this->input->get('tgl_akhir');
+        $nopol = $this->input->get('nopol');
+
+        // $label = 'Periode Tanggal ' . date('d-m-Y', strtotime($tgl_awal)) . ' s/d ' .  date('d-m-Y', strtotime($tgl_akhir));
+        if (empty($tgl_awal) or empty($tgl_akhir) or empty($nopol)) { // Cek jika tgl_awal atau tgl_akhir kosong, maka :            
+            $data['angkutan'] = $this->M_admin->get_angkutan('tb_angkutan');
+            $data['total_data'] = $this->M_admin->sum_angkutan('tb_angkutan');
+
+            $label = 'Nopol........ Dari Tanggal .... Sampai Tanggal ...';
+        } else {
+
+
+
+
+
+            $data['angkutan'] = $this->M_admin->angkutan_periode($tgl_awal, $tgl_akhir, $nopol);
+            $data['total_data'] = $this->M_admin->hitung_kilo($tgl_awal, $tgl_akhir, $nopol);
+            $label = 'Nopol ' . $nopol . ', Dari Tanggal :' . $tgl_awal . '. Sampai Tanggal : ' .  $tgl_akhir;
+        }
+        $data['label'] = $label;
+        // $data = $this->M_admin->angkutan_periode($tgl_awal, $tgl_akhir);
+
+
+        $data['tangki'] = $this->M_admin->get_sp_tangki('tb_supir_tangki');
+        // $data['angkutan'] = $this->M_admin->get_angkutan('tb_angkutan');
         $data['avatar'] = $this->M_admin->get_data_avatar('tb_user', $this->session->userdata('name'));
         $data['title'] = 'Angkutan RTR';
         $this->load->view('admin/form_angkutan/angkutan', $data);
@@ -1697,12 +1853,155 @@ class Admin extends CI_Controller
     {
 
         $data['angkutan'] = $this->M_admin->get_angkutan('tb_angkutan');
-        // $data['list_tangki'] = $this->M_admin->select('tb_tangki');
+        $data['list_supirtangki'] = $this->M_admin->get_supir_tangki('tb_supir_tangki');
+        $data['tujuan'] = $this->M_admin->select('tb_tujuan');
 
 
         // $data['list_supir'] = $this->M_admin->select('tb_supir');
         $data['avatar'] = $this->M_admin->get_data_avatar('tb_user', $this->session->userdata('name'));
-        $data['title'] = 'Tambah Expired Surat';
+        $data['title'] = 'Tambah Tujuaan';
         $this->load->view('admin/form_angkutan/tambah_angkutan', $data);
+    }
+
+    public function proses_tambah_angkutan()
+    {
+
+        $this->form_validation->set_rules('id_supir_tangki', 'Nama Supir dan Truk Tangki', 'trim|required');
+        $this->form_validation->set_rules('id_tujuan', 'Tujuan dan Jarak', 'trim|required');
+        $this->form_validation->set_rules('tgl_berangkat', 'Tanggal Habis Masa berlaku', 'trim|required');
+
+
+        if ($this->form_validation->run() === TRUE) {
+            $id_supir_tangki = $this->input->post('id_supir_tangki', TRUE);
+            $id_tujuan = $this->input->post('id_tujuan', TRUE);
+            $tgl_berangkat = $this->input->post('tgl_berangkat', TRUE);
+
+
+            $data = array(
+
+                // 'id_exp_surat' => $id_exp_surat,
+                'id_supir_tangki' => $id_supir_tangki,
+                'id_tujuan' => $id_tujuan,
+                // 'id_tangki' => $id_tangki,
+                'tgl_berangkat' => $tgl_berangkat,
+                // 'nama_tujuan' => $nama_tujuan,
+                // 'kilometer_pp' => $kilometer_pp,
+
+                // 'id_bengkel' => $id_bengkel,
+                // 'jenis_surat' => $jenis_surat,
+                // 'tanggal_expired' => $tanggal_expired,
+                // 'status' => $status 
+
+
+            );
+            $this->M_admin->insert('tb_angkutan', $data);
+            $this->session->set_flashdata('msg_sukses', 'Data Berhasil Di Tambahkan');
+            redirect(base_url('admin/tabel_angkutan'));
+        } else {
+            $data['avatar'] = $this->M_admin->get_data_avatar('tb_user', $this->session->userdata('name'));
+            $data['title'] = 'Tambah Angkutan ';
+            $this->load->view('admin/form_angkutan/tambah_angkutan', $data);
+        }
+    }
+
+    public function edit_angkutan()
+    {
+        $uri = $this->uri->segment(3);
+        $where = array('id_angkutan' => $uri);
+
+        $data['angkutan'] = $this->M_admin->get_data('tb_angkutan', $where);
+        $data['list_supirtangki'] = $this->M_admin->get_supir_tangki('tb_supir_tangki');
+        $data['tujuan'] = $this->M_admin->select('tb_tujuan');
+        $data['avatar'] = $this->M_admin->get_data_avatar('tb_user', $this->session->userdata('name'));
+        $data['title'] = 'Edit Supir Tangki';
+        $this->load->view('admin/form_angkutan/edit_angkutan', $data);
+    }
+
+
+    public function proses_edit_angkutan()
+    {
+        $this->form_validation->set_rules('id_supir_tangki', 'Nama Supir dan Truk Tangki', 'trim|required');
+        $this->form_validation->set_rules('id_tujuan', 'Tujuan dan Jarak', 'trim|required');
+        $this->form_validation->set_rules('tgl_berangkat', 'Tanggal Habis Masa berlaku', 'trim|required');
+
+
+        // 
+        if ($this->form_validation->run() === TRUE) {
+            $id_angkutan = $this->input->post('id_angkutan', TRUE);
+            $id_supir_tangki = $this->input->post('id_supir_tangki', TRUE);
+            $id_tujuan = $this->input->post('id_tujuan', TRUE);
+            $tgl_berangkat = $this->input->post('tgl_berangkat', TRUE);
+
+            $where = array('id_angkutan' => $id_angkutan);
+            $data = array(
+
+                'id_supir_tangki' => $id_supir_tangki,
+                'id_tujuan' => $id_tujuan,
+                'tgl_berangkat' => $tgl_berangkat,
+                // 'kilometer_pp' => $ki
+
+
+            );
+
+            $this->M_admin->update('tb_angkutan', $data, $where);
+            $this->session->set_flashdata('msg_sukses', 'Data Berhasil Di Update');
+            redirect(base_url('admin/tabel_angkutan '));
+        } else {
+            $data['avatar'] = $this->M_admin->get_data_avatar('tb_user', $this->session->userdata('name'));
+            $data['title'] = 'Edit Angkutan';
+            $this->load->view('admin/form_angkutan/edit_angkutan', $data);
+        }
+    }
+
+    public function hapus_angkutan()
+    {
+        $uri = $this->uri->segment(3);
+        $where = array('id_angkutan' => $uri);
+
+        $this->M_admin->delete('tb_angkutan', $where);
+        $this->session->set_flashdata('msg_sukses', 'Data Angkutan Berhasil Dihapus');
+        redirect(base_url('admin/tabel_angkutan'));
+    }
+
+    ####################################
+    // test email 
+    ####################################
+
+    public function email()
+    {
+        $data['list_email'] = $this->M_admin->select('tb_user');
+        $data['avatar'] = $this->M_admin->get_data_avatar('tb_user', $this->session->userdata('name'));
+        $data['title'] = 'email';
+        $this->load->view('admin/email/email', $data);
+    }
+
+    public function kirim()
+    {
+        $email_penerima = $this->input->post('email_penerima');
+        $subjek = $this->input->post('subjek');
+        $pesan = $this->input->post('pesan');
+        $attachment = $_FILES['attachment'];
+        $content = $this->load->view('admin/email/content', array('pesan' => $pesan), true); // Ambil isi file content.php dan masukan ke variabel $content
+        $sendmail = array(
+            'email_penerima' => $email_penerima,
+            'subjek' => $subjek,
+            'content' => $content,
+            'attachment' => $attachment
+        );
+        if (empty($attachment['name'])) {
+            $send = $this->mailer->send($sendmail);
+        } else {
+            $send = $this->mailer->send_with_attachment($sendmail);
+        }
+
+        echo "<b>" . $send['status'] . "</b><br />";
+        echo $send['message'];
+
+        // $data['avatar'] = $this->M_admin->get_data_avatar('tb_avatar', $this->session->userdata('name'));
+        // $data['title'] = 'email';
+        // $this->load->view('admin/email/v_email', $data);
+
+        // redirect(base_url('admin/email'));
+        echo "<br /><a href='" . base_url("admin/email") . "'>Kembali ke Form</a>";
     }
 }

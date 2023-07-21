@@ -27,9 +27,9 @@
 
         <div class="container-fluid">
             <!-- Small boxes (Stat box) -->
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="card" style="width: 30%; margin-left: 35%;">
+            <div class="row tengah">
+                <div class="col-md-5">
+                    <div class="card">
                         <div class="card-header">
                             Tambah Data Surat Tangki
                         </div>
@@ -71,32 +71,32 @@
                                     <span><small style="color:red"><strong>UPLOAD MINIMAL SIZE 2MB</strong></small></span>
 
                                     <div class="form-group">
-                                    <label for="date" class="form-label">Tanggal Masa Berlaku</label>
-                                    <input type="date" name="tanggal_expired" class="form-control" id="tanggal_expired" placeholder="Masukkan Tanggal Masa berlaku" required>
-                            
-                                    <div class="form-group">
-                                    <label for="status" class="form-label">Status</label>
-                                    <!-- <input type="text" name="nopol" class="form-control" id="nopol" placeholder="Masukkan Nopol" required> -->
-                                    <select name="status" class="form-control" id="status">
-                                        
-                                    <?php if ($s->status == 0) { ?>
-                                                <option value="0" selected="">BELUM MATI</option>
-                                                <option value="1">SUDAH MATI</option>
-                                                
-                                    <?php } elseif ($s->status == 1) { ?>
-                                                <option value="1" selected="">SUDAH MATI</option>
-                                                <option value="0">BELUM MATI</option>
-                                            
-                                                <?php } ?>
-                                    </select> 
-                                     </div>
+                                        <label for="date" class="form-label">Tanggal Masa Berlaku</label>
+                                        <input type="date" name="tanggal_expired" class="form-control" id="tanggal_expired" placeholder="Masukkan Tanggal Masa berlaku" required>
 
-                                <hr>
-                                <div class="form-group" align="center">
-                                    <a href="<?= base_url('admin/tabel_bengkel'); ?>" type="button" class="btn btn-sm btn-danger" name="btn_kembali"><i class="fa fa-arrow-left mr-2"></i>Batal</a>
-                                    <!-- <button type="reset" class="btn btn-sm btn-warning"><i class="fa fa-eraser mr-2"></i>Reset</button> -->
-                                    <button type="submit" class="btn btn-sm btn-success"><i class="fa fa-check mr-2"></i>Simpan</button>
-                                </div>
+                                        <div class="form-group">
+                                            <label for="status" class="form-label">Status</label>
+                                            <!-- <input type="text" name="nopol" class="form-control" id="nopol" placeholder="Masukkan Nopol" required> -->
+                                            <select name="status" class="form-control" id="status">
+
+                                                <?php if ($s->status == 0) { ?>
+                                                    <option value="0" selected="">BELUM MATI</option>
+                                                    <option value="1">SUDAH MATI</option>
+
+                                                <?php } elseif ($s->status == 1) { ?>
+                                                    <option value="1" selected="">SUDAH MATI</option>
+                                                    <option value="0">BELUM MATI</option>
+
+                                                <?php } ?>
+                                            </select>
+                                        </div>
+
+                                        <hr>
+                                        <div class="form-group" align="center">
+                                            <a href="<?= base_url('admin/tabel_bengkel'); ?>" type="button" class="btn btn-sm btn-danger" name="btn_kembali"><i class="fa fa-arrow-left mr-2"></i>Batal</a>
+                                            <!-- <button type="reset" class="btn btn-sm btn-warning"><i class="fa fa-eraser mr-2"></i>Reset</button> -->
+                                            <button type="submit" class="btn btn-sm btn-success"><i class="fa fa-check mr-2"></i>Simpan</button>
+                                        </div>
                             </form>
                         </div>
                     </div>

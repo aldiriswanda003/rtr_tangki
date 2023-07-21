@@ -50,6 +50,7 @@
                                         <th style="width :10px">No.</th>
                                         <th>Nama</th>
                                         <th>No. Telp</th>
+                                        <th>Email</th>
                                         <th>Foto Supir</th>
                                         <th>Foto SIM</th>
                                         <th>Foto KTP</th>
@@ -66,6 +67,7 @@
                                                 <td><?= $no++; ?></td>
                                                 <td><?= $sp->nama_supir ?></td>
                                                 <td><?= $sp->no_telp ?></td>
+                                                <td><?= $sp->email_supir ?></td>
                                                 <td><img src="<?= base_url('assets/upload/supir/foto_supir/' . $sp->foto_supir); ?>" class="img img-box" width="100" height="100" alt="<?= $sp->nama_supir; ?>"></td>
                                                 <td><img src="<?= base_url('assets/upload/supir/foto_sim/' . $sp->foto_sim); ?>" class="img img-box" width="100" height="100" alt="<?= $sp->nama_supir; ?>"></td>
                                                 <td><img src="<?= base_url('assets/upload/supir/foto_ktp/' . $sp->foto_ktp); ?>" class="img img-box" width="100" height="100" alt="<?= $sp->nama_supir; ?>"></td>

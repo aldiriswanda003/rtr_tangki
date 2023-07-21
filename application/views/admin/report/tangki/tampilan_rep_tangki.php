@@ -50,6 +50,7 @@
                                         <th>Nopol</th>
                                         <th>Tahun Dibuat</th>
                                         <th>Volume Tangki</th>
+                                        <th>AKSI</th>
                                    
                                     </tr>
                                 </thead>
@@ -63,6 +64,8 @@
                                                 <td><?= $t->nopol ?></td>
                                                 <td ><?= $t->tahun_dibuat ?></td>
                                                 <td><?= number_format($t->volume_tangki) ?>&nbsp;Liter</td>
+                                                <td><a href="<?= base_url('report/info_rep_supir/#' . $t->id_tangki); ?>" type="button" class="btn btn-xs btn-warning " name=""><i class="fa fa-circle-info"></i>&nbsp;DETAIL</a></td>
+
                                                
                                             </tr>
                                         <?php endforeach; ?>

@@ -50,12 +50,11 @@
                                     <tr>
                                         <th style="width :10px">No.</th>
                                         <th>Nopol</th>
-                                        <th>Jenis</th>
+                                        <th>Jenis Surat</th>
                                         <th>Foto Surat</th>
                                         <th>Tanggal Exp</th>
                                         <th>Status</th>
-                                        <th style="width:58px">Edit</th>
-                                        <th style="width:58px">Hapus</th>
+                                        <th style="width:58px">Aksi</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -76,8 +75,8 @@
                                                     <td><a href="#" type="button" class="btn btn-danger btn-xs">SUDAH MATI</td>
                                                 <?php } ?>
 
-                                                <td><a href="<?= base_url('admin/edit_surat/' . $st->id_surat); ?>" type="button" class="btn btn-sm btn-success" name="btn_edit"><i class="fa fa-edit"></i>&nbsp;Edit</a></td>
-                                                <td><a href="<?= base_url('admin/hapus_surat/' . $st->id_surat); ?>" type="button" class="btn btn-sm btn-danger btn-delete" name="btn_delete"><i class="fa fa-trash"></i>&nbsp;Hapus</a></td>
+                                                <td><a href="<?= base_url('admin/edit_surat/' . $st->id_surat); ?>" type="button" class="btn btn-sm btn-success" name="btn_edit"><i class="fa fa-edit"></i>&nbsp;Edit</a>
+                                                <a href="<?= base_url('admin/hapus_surat/' . $st->id_surat); ?>" type="button" class="btn btn-sm btn-danger btn-delete" name="btn_delete"><i class="fa fa-trash"></i>&nbsp;Hapus</a></td>
                                                 <!-- ulah function tombol hapus nya di admin controller -->
                                             </tr>
                                         <?php endforeach; ?>
@@ -126,6 +125,7 @@
             // 'searching': faslse,
             // 'ordering': false,
             // 'info': true,
+            'responsive': true,
             'autoWidth': false
         })
     }); //* Script untuk memuat datatable

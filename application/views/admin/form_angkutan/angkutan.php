@@ -41,9 +41,25 @@
                                 </div>
                             <?php } ?>
                             <a href="<?= base_url('admin/tambah_angkutan'); ?>" style="margin-bottom:10px;" type="button" class="btn btn-sm btn-primary" name="tambah_data"><i class="fa fa-plus mr-2" aria-hidden="true"></i>Tambah</a>
+                            <button data-toggle="modal" data-target="#static_angkutan_bulanan" style="margin-bottom:10px;" type="button" class="btn btn-sm btn-warning" name="static_angkutan_bulanan"><i class="fa fa-filter   "></i>&nbsp; FILTER NOPOL & TANGGAL</button>
+
 
                             <table id="example1" class="table table-bordered table-striped table-hover" style="width:100%">
                                 <thead>
+
+                                    <tr>
+                                        <?php foreach ($total_data as $td) : ?>
+                                            <th colspan="8" style="text-align: center;"><?php echo $label ?>
+                                                <br>
+                                                Total Kilometer yang ditempuh :<span style="color: red;">&nbsp;<?= $td->kilometer_pp; ?> KM </span>
+                                            </th>
+                                        <?php endforeach; ?>
+                                    </tr>
+
+
+
+
+
                                     <tr align="center">
                                         <th style="width :10px">No.</th>
                                         <th>Nopol</th>
@@ -51,10 +67,10 @@
                                         <th>Supir</th>
                                         <th>Tgl Berangkat</th>
                                         <th>Tujuan</th>
-                                        <th>Jarak Pulang Pergi (KM)</th>
+                                        <th style="width :20px">Jarak PP</th>
 
 
-                                        <th style="width:58px" colspan="2">Aksi</th>
+                                        <th style="width:58px">Aksi</th>
 
                                     </tr>
                                 </thead>
@@ -66,16 +82,22 @@
                                         <tr>
                                             <td><?= $no++; ?></td>
                                             <td><?= $st->nopol ?></td>
-                                            <td><?= $st->volume ?></td>
+                                            <td><?= $st->volume_tangki ?></td>
                                             <td><?= $st->nama_supir ?></td>
                                             <td><?= $st->tgl_berangkat ?></td>
                                             <td><?= $st->nama_tujuan ?></td>
-                                            <td><?= $st->kilometer_pp ?></td>
+                                            <td><?= $st->kilometer_pp ?> KM</td>
 
 
 
-                                            <td><a href="<?= base_url('admin/edit_data_tujuan/' . $st->id_tujuan); ?>" type="button" class="btn btn-sm btn-success" name="btn_edit"><i class="fa fa-edit"></i>&nbsp;Edit</a></td>
-                                            <td><a href="<?= base_url('admin/hapus_tujuan/' . $st->id_tujuan); ?>" type="button" class="btn btn-sm btn-danger btn-delete" name="btn_delete"><i class="fa fa-trash"></i>&nbsp;Hapus</a></td>
+                                            <td>
+
+                                                <a href="<?= base_url('admin/edit_angkutan/' . $st->id_angkutan); ?>" type="button" class="btn btn-xs btn-success " name="btn_edit"><i class="fa fa-edit"></i>&nbsp;Edit</a>
+                                                <a href="<?= base_url('admin/hapus_angkutan/' . $st->id_angkutan); ?>" type="button" class="btn btn-xs btn-danger btn-delete" name="btn_delete"><i class="fa fa-trash"></i>&nbsp;Hapus</a>
+
+
+
+                                            </td>
                                         </tr>
                                     <?php endforeach; ?>
 
@@ -91,6 +113,62 @@
                             </table>
                         </div>
                     </div>
+
+                    <!-- Modal -->
+                    <div class="modal fade" id="static_angkutan_bulanan" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h6 class="modal-title" id="staticBackdropLabel">FILTER PERTANGGAL</h6>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span>&times;</span>
+                                    </button>
+                                </div>
+
+                                <div class="modal-body">
+                                    <form action="<?= site_url('admin/tabel_angkutan'); ?>" method="get" role="form">
+
+                                        <div class="form-group row">
+                                            <label for="bulan" class="col-sm-3 col-form-label">NOPOL</label>
+                                            <div class="col-sm-6">
+
+
+                                                <select name="nopol" class="form-control" id="nopol">
+                                                    <option value="" selected>NOPOL</option>
+                                                    <?php foreach ($tangki as $s) : ?>
+                                                        <option value="<?= $s->nopol; ?>"><?= $s->nopol; ?> - <?= $s->volume_tangki; ?> Liter
+                                                        </option>
+                                                    <?php endforeach; ?>
+                                                </select>
+
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group row">
+                                            <label for="tgl_awal" class="col-sm-3 col-form-label">dari Tanggal</label>
+                                            <div class="col-sm-6">
+                                                <input type="date" name="tgl_awal" class="form-control" id="tgl_berangkat" required value="<?= date('Y-m-d'); ?>">
+                                            </div>
+                                        </div>
+
+                                        <div class="fomm-group row">
+                                            <label for="bulan2" class="col-sm-3 col-form-label">ke Tanggal</label>
+                                            <div class="col-sm-6">
+                                                <input type="date" name="tgl_akhir" class="form-control" id="tgl_berangkat" value="<?= date('Y-m-d'); ?>">
+                                            </div>
+                                        </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="submit" class="btn btn-success btn-sm">Tampilkan</button>
+                                    <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Close</button>
+                                </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+
                 </div>
             </div>
         </div><!-- /.container-fluid -->

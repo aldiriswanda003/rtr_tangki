@@ -80,7 +80,7 @@
                                 
 
                                 <div class="form-group">
-                                    <label for="date" class="form-label">Tanggal Masuk</label>
+                                    <label for="tgl_perbaikan" class="form-label">Tanggal Perbaikan</label>
                                     <input type="date" name="tgl_perbaikan" class="form-control" id="tgl_perbaikan" placeholder="Masukkan Tanggal Masuk Perbaikan" required value="<?= $sm->tgl_perbaikan; ?>">
                                 </div>                    
 
@@ -93,6 +93,12 @@
                                     <div class="form-group">
                                     <label for="text" class="form-label">Keterangan</label>
                                     <input type="text" name="keterangan" class="form-control" id="keterangan" placeholder="Masukkan Keluhan perbaikan" required value="<?= $sm->keterangan; ?>">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="foto_nota" class="form-label">Foto Nota</label>
+                                        <input type="file" name="foto_nota" class="form-control" id="foto_nota" placeholder="Masukkan Foto Nota">
+                                        <input type="hidden" name="foto_nota" value="<?= $sm->foto_nota; ?>">
                                     </div>
 
                                     <div class="form-group">

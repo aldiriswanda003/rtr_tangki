@@ -51,8 +51,9 @@
                                         <th>Jenis</th>
                                         <th>Tanggal Exp</th>
                                         <th>Status</th>
-                                        <th  style="width:58px" colspan="2">Aksi</th>
-                                        
+                                        <th>Perkiraan Biaya</th>
+                                        <th style="width:58px">Aksi</th>
+
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -72,9 +73,9 @@
                                                 <?php } elseif ($st->status == 1) { ?>
                                                     <td>SUDAH MATI</td>
                                                 <?php } ?>
-
-                                                <td><a href="<?= base_url('admin/edit_exp_surat/' . $st->id_exp_surat); ?>" type="button" class="btn btn-sm btn-success" name="btn_edit"><i class="fa fa-edit"></i>&nbsp;Edit</a></td>
-                                                <td><a href="<?= base_url('admin/hapus_exp_surat/' . $st->id_exp_surat); ?>" type="button" class="btn btn-sm btn-danger btn-delete" name="btn_delete"><i class="fa fa-trash"></i>&nbsp;Hapus</a></td>
+                                                <td>Rp <?=number_format ($st->perkiraan_biaya) ?></td>
+                                                <td><a href="<?= base_url('admin/edit_exp_surat/' . $st->id_exp_surat); ?>" type="button" class="btn btn-sm btn-success" name="btn_edit"><i class="fa fa-edit" title="EDIT"></i></a>
+                                                <a href="<?= base_url('admin/hapus_exp_surat/' . $st->id_exp_surat); ?>" type="button" class="btn btn-sm btn-danger btn-delete" name="btn_delete"><i class="fa fa-trash" title="HAPUS"></i></a></td>
                                                 <!-- ulah function tombol hapus nya di admin controller -->
                                             </tr>
                                         <?php endforeach; ?>

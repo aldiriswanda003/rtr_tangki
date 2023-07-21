@@ -61,7 +61,7 @@ class Login extends CI_Controller
                     } elseif ($isi->level == 1) {
                         redirect(base_url('pimpinan'));
                     } else {
-                        redirect(base_url('koor_perb'));
+                        redirect(base_url('koor'));
                     }
                 } else {
                     $this->session->set_flashdata('msg', 'Username Dan Password Salah');

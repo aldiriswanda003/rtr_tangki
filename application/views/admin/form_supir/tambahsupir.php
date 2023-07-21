@@ -54,10 +54,17 @@
                                     <label for="nama" class="form-label">Nama Supir</label>
                                     <input type="text" name="nama_supir" class="form-control" id="nama" placeholder="Masukkan Nama" required>
                                 </div>
+
                                 <div class="form-group">
                                     <label for="no_hp" class="form-label">No. Telp</label>
                                     <input type="text" maxlength="13" name="no_telp" class="form-control" id="no_hp" placeholder="Masukkan No. Telp" required onkeypress='return (event.charCode > 47 && event.charCode < 58)'>
                                 </div>
+
+                                <div class="form-group">
+                                    <label for="email_supir" class="form-label">Email</label>
+                                    <input type="text" name="email_supir" class="form-control" id="email_supir" placeholder="Masukkan Email" >
+                                </div>
+
                                 <div class="form-group">
                                     <label for="alamat" class="form-label">Foto Supir</label>
                                     <input type="file" name="foto_supir" class="form-control" id="foto_supir" placeholder="Masukkan Foto Supir" required>

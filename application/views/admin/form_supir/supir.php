@@ -49,11 +49,12 @@
                                         <th style="width :10px">No.</th>
                                         <th>Nama</th>
                                         <th>No. Telp</th>
+                                        <th>email</th>
                                         <th>Foto Supir</th>
                                         <th>Foto SIM</th>
                                         <th>Foto KTP</th>
-                                        <th style="width:58px">Edit</th>
-                                        <th style="width:58px">Hapus</th>
+                                        <th style="width:58px">Aksi</th>
+                                        <!-- <th style="width:58px">Hapus</th> -->
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -65,11 +66,12 @@
                                                 <td><?= $no++; ?></td>
                                                 <td><?= $sp->nama_supir ?></td>
                                                 <td><?= $sp->no_telp ?></td>
+                                                <td><?= $sp->email_supir ?></td>
                                                 <td><img src="<?= base_url('assets/upload/supir/foto_supir/' . $sp->foto_supir); ?>" class="img img-box" width="100" height="100" alt="<?= $sp->nama_supir; ?>"></td>
                                                 <td><img src="<?= base_url('assets/upload/supir/foto_sim/' . $sp->foto_sim); ?>" class="img img-box" width="100" height="100" alt="<?= $sp->nama_supir; ?>"></td>
                                                 <td><img src="<?= base_url('assets/upload/supir/foto_ktp/' . $sp->foto_ktp); ?>" class="img img-box" width="100" height="100" alt="<?= $sp->nama_supir; ?>"></td>
-                                                <td><a href="<?= base_url('admin/edit_supir/' . $sp->id_supir); ?>" type="button" class="btn btn-sm btn-success" name="btn_edit"><i class="fa fa-edit"></i>&nbsp;Edit</a></td>
-                                                <td><a href="<?= base_url('admin/hapus_data/' . $sp->id_supir); ?>" type="button" class="btn btn-sm btn-danger btn-delete" name="btn_delete"><i class="fa fa-trash"></i>&nbsp;Hapus</a></td>
+                                                <td><a href="<?= base_url('admin/edit_supir/' . $sp->id_supir); ?>" type="button" class="btn btn-sm btn-success" name="btn_edit"><i class="fa fa-edit"></i>&nbsp;Edit</a>
+                                                <a href="<?= base_url('admin/hapus_data/' . $sp->id_supir); ?>" type="button" class="btn btn-sm btn-danger btn-delete" name="btn_delete"><i class="fa fa-trash"></i>&nbsp;Hapus</a></td>
                                             </tr>
                                         <?php endforeach; ?>
                                     <?php } ?>
@@ -117,6 +119,7 @@
             // 'searching': faslse,
             // 'ordering': false,
             // 'info': true,
+            'responsive': true,
             'autoWidth': false
         })
     }); //* Script untuk memuat datatable
@@ -139,6 +142,9 @@
         return false;
     }); //* Script untuk memuat sweetalert hapus data
 </script>
+
+
+
 </body>
 
 </html>

@@ -40,16 +40,15 @@ $pdf->SetAutoPageBreak(TRUE, PDF_MARGIN_BOTTOM);
 
 $html =
     '<div>
-       <h1 align="center">Laporan Data Sparepart</h1>
+       <h1 align="center">Data Laporan Supir</h1>
        
        <table cellspacing="1" cellpadding="2"  border="1" >
          <tr bgcolor=" #d1d1d1 ">
          <th width="50px" align="center">No.</th>
          <th width="200px" align="center">Nama Supir</th>
          <th align="center"> Nomor Telepon </th>
-         <th  align="center">Foto Supir</th>
-         <th  align="center"> Foto SIM</th>
-         <th  align="center"> Foto KTP</th>
+         <th width="210px" align="center"> Email </th>
+    
          </tr>';
 
 $no = 1;
@@ -59,9 +58,7 @@ foreach ($supir as $d) :
     <td align="center">' . $no . '</td>
     <td >' . $d->nama_supir . '</td>
     <td >' . $d->no_telp . '</td>
-    <td ><img src="' . base_url('assets/upload/supir/foto_supir/' . $d->foto_supir) .'" width="100" height="100" alt="'. $d->nama_supir .'"> </td>
-    <td ><img src="' . base_url('assets/upload/supir/foto_sim/' . $d->foto_sim) .'" width="100" height="100" alt="'. $d->nama_supir .'"> </td>
-    <td ><img src="' . base_url('assets/upload/supir/foto_ktp/' . $d->foto_ktp) .'" width="100" height="100" alt="'. $d->nama_supir .'"> </td>';
+    <td >' . $d->email_supir . '</td>';
     $html .= '</tr>';
     $no++;
 endforeach;

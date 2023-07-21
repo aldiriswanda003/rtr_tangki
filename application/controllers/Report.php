@@ -192,4 +192,81 @@ class Report extends CI_Controller
         $data['title'] = 'Data Supir';
         $this->load->view('admin/report/supir/print_info_supir', $data);
     }
+
+
+
+
+    #############################
+    //PENGELUARAN
+    #############################
+    public function tabel_rep_pengeluaran()
+    {
+        $bulan = $this->input->get('bulan');
+        $tahun = $this->input->get('tahun');
+        if (empty($bulan) or empty($tahun)) { // Cek jika tgl_awal atau tgl_akhir kosong, maka :            
+            $data['pengeluaran'] = $this->M_admin->select('tb_pengeluaran');
+            $data['total_data'] = $this->M_admin->sum_pengeluaran('tb_pengeluaran');
+            $label = 'Bulan ke ...' . ' Tahun ...';
+        } else {
+            $data['pengeluaran'] = $this->M_admin->pengeluaran_periode('tb_pengeluaran', $bulan, $tahun);
+            $data['total_data'] = $this->M_admin->sum_penngeluaranPeriode('tb_pengeluaran', $bulan, $tahun);
+            $label = 'Bulan ke ' . $bulan . ' Tahun ' .  $tahun;
+        }
+        $data['label'] = $label;
+
+        // $data['list_data'] = $this->M_admin->select('tb_pengeluaran');
+        $data['avatar'] = $this->M_admin->get_data_avatar('tb_user', $this->session->userdata('name'));
+        $data['title'] = 'Data Pengeluaran Lain-lain';
+        $this->load->view('admin/report/pengeluaran/tampilan_rep_pengeluaran', $data);
+    }
+
+    public function cetak_rep_pengeluaran()
+    {
+        $bulan = $this->input->post('bulan');
+        $tahun = $this->input->post('tahun');
+        if (empty($bulan) or empty($tahun)) { // Cek jika tgl_awal atau tgl_akhir kosong, maka :            
+            $data['pengeluaran'] = $this->M_admin->select('tb_pengeluaran');
+            $data['total_data'] = $this->M_admin->sum_pengeluaran('tb_pengeluaran');
+            $label = 'Bulan ke ...' . ' Tahun ...';
+        } else {
+            $data['pengeluaran'] = $this->M_admin->pengeluaran_periode('tb_pengeluaran', $bulan, $tahun);
+            $data['total_data'] = $this->M_admin->sum_penngeluaranPeriode('tb_pengeluaran', $bulan, $tahun);
+            $label = 'Bulan ke ' . $bulan . ' Tahun ' .  $tahun;
+        }
+        $data['label'] = $label;
+
+        // $data['list_data'] = $this->M_admin->select('tb_pengeluaran');
+        $data['avatar'] = $this->M_admin->get_data_avatar('tb_user', $this->session->userdata('name'));
+        $data['title'] = 'Data Pengeluaran Lain-lain';
+        $this->load->view('admin/report/pengeluaran/print_rep_pengeluaran', $data);
+    }
+
+
+
+
+
+    
+    public function tabel_rep_service_masuk()
+    {
+        $data['service_masuk'] = $this->M_admin->select_service_masuk('tb_service_masuk');
+
+        $data['avatar'] = $this->M_admin->get_data_avatar('tb_user', $this->session->userdata('name'));
+        $data['title'] = 'REP Service masuk';
+        $this->load->view('admin/report/form_service_masuk/service_masuk', $data);
+    }
+
+
+    
+    public function tabel_exp_surat()
+    {
+        $data['exp_surat'] = $this->M_admin->tabel_exp_surat('tb_exp_surat');
+        $data['total_data'] = $this->M_admin->sum_biaya_exp('tb_exp_surat');
+      
+
+
+        $data['avatar'] = $this->M_admin->get_data_avatar('tb_user', $this->session->userdata('name'));
+        $data['title'] = 'Exp Surat Tangki';
+        $this->load->view('admin/report/exp_surat/tampilan_exp_surat', $data);
+    }
+
 }

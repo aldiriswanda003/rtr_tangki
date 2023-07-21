@@ -58,6 +58,7 @@
                                             <option value="" disabled>-- Pilih Supir --</option>
                                             <?php foreach ($list_supir as $ls) { ?>
                                                 <?php if ($st->id_supir == $ls->id_supir) { ?>
+                                                    
                                                     <option value="<?= $st->id_supir; ?>" selected><?= $ls->nama_supir; ?></option>
                                                 <?php } else { ?>
                                                     <option value="<?= $ls->id_supir; ?>"><?= $ls->nama_supir; ?></option>

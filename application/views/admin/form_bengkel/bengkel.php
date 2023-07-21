@@ -50,8 +50,7 @@
                                         <th>Nama Bengkel</th>
                                         <th>Alamat</th>
                                         <th>No. Telp</th>
-                                        <th style="width:58px">Edit</th>
-                                        <th style="width:58px">Hapus</th>
+                                        <th style="width:58px">Aksi</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -64,8 +63,8 @@
                                                 <td><?= $b->nama_bengkel ?></td>
                                                 <td><?= $b->alamat ?></td>
                                                 <td><?= $b->no_telp ?></td>
-                                                <td><a href="<?= base_url('admin/edit_bengkel/' . $b->id_bengkel); ?>" type="button" class="btn btn-sm btn-success" name="btn_edit"><i class="fa fa-edit"></i>&nbsp;Edit</a></td>
-                                                <td><a href="<?= base_url('admin/hapus_data_bengkel/' . $b->id_bengkel); ?>" type="button" class="btn btn-sm btn-danger btn-delete" name="btn_delete"><i class="fa fa-trash"></i>&nbsp;Hapus</a></td>
+                                                <td><a href="<?= base_url('admin/edit_bengkel/' . $b->id_bengkel); ?>" type="button" class="btn btn-sm btn-success" name="btn_edit"><i class="fa fa-edit"></i>&nbsp;Edit</a>
+                                                <a href="<?= base_url('admin/hapus_data_bengkel/' . $b->id_bengkel); ?>" type="button" class="btn btn-sm btn-danger btn-delete" name="btn_delete"><i class="fa fa-trash"></i>&nbsp;Hapus</a></td>
                                             </tr>
                                         <?php endforeach; ?>
                                     <?php } ?>

@@ -6,7 +6,7 @@
     </a>
 
     <!-- Sidebar -->
-    <div class="sidebar" >
+    <div class="sidebar">
         <!-- Sidebar user panel (optional) -->
         <!-- <div class="user-panel mt-3 pb-3 mb-3 d-flex"> -->
         <div class="image">
@@ -26,7 +26,8 @@
                 <!-- <li class="nav-header">MAIN NAVIGATION</li> -->
                 <li class="nav-item">
                     <a href="<?= base_url('admin') ?>" class="nav-link">
-                        <i class="nav-icon fa fa-home"></i> <p>Dashboard</p>
+                        <i class="nav-icon fa fa-home"></i>
+                        <p>Dashboard</p>
                     </a>
 
                 </li>
@@ -65,9 +66,9 @@
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
                             <a href="<?= base_url(); ?>admin/tabel_supir" class="nav-link ">
-                            <i class="far fa-circle nav-icon"></i>
-                                <p>Data Supir 
-                                    
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Data Supir
+
                                 </p>
                             </a>
                         </li>
@@ -87,58 +88,65 @@
                     </ul>
                 </li>
                 <li class="nav-item">
-                <a href="<?= base_url(); ?>admin/tabel_surat_tangki" class="nav-link">
-                        <i class="nav-icon fa fa-edit"></i> <p>Surat Tangki</p>
+                    <a href="<?= base_url(); ?>admin/tabel_surat_tangki" class="nav-link">
+                        <i class="nav-icon fa fa-edit"></i>
+                        <p>Surat Tangki</p>
                     </a>
 
                 </li>
                 <li class="nav-item">
                     <a href="<?= base_url(); ?>admin/tabel_exp_surat" class="nav-link">
-                        <i class="nav-icon fa fa-edit"></i> <p>Exp Surat</p>
+                        <i class="nav-icon fa fa-edit"></i>
+                        <p>Exp Surat</p>
                     </a>
 
                 </li>
                 <li class="nav-item">
                     <a href="<?= base_url(); ?>admin/tabel_seri_ban" class="nav-link">
-                        <i class="nav-icon fa fa-edit"></i> <p>Seri Ban</p>
+                        <i class="nav-icon fa fa-edit"></i>
+                        <p>Seri Ban</p>
                     </a>
 
                 </li>
                 <li class="nav-item">
                     <a href="<?= base_url(); ?>admin/tabel_supir_tangki" class="nav-link">
-                        <i class="nav-icon fa fa-edit"></i> <p>Supir Tangki</p>
+                        <i class="nav-icon fa fa-edit"></i>
+                        <p>Supir Tangki</p>
                     </a>
 
                 </li>
                 <li class="nav-item">
-                    <a href="<?=base_url(); ?>admin/tabel_service_masuk" class="nav-link">
-                        <i class="nav-icon fa fa-edit"></i> <p>Perbaikan Masuk</p>
+                    <a href="<?= base_url(); ?>admin/tabel_service_masuk" class="nav-link">
+                        <i class="nav-icon fa fa-edit"></i>
+                        <p>Perbaikan Masuk</p>
                     </a>
 
                 </li>
                 <li class="nav-item">
-                    <a href="<?=base_url(); ?>admin/tabel_perbaikan" class="nav-link">
-                        <i class="nav-icon fa fa-edit"></i> <p>Perbaikan Disetujui</p>
+                    <a href="<?= base_url(); ?>admin/tabel_perbaikan" class="nav-link">
+                        <i class="nav-icon fa fa-edit"></i>
+                        <p>Perbaikan Disetujui</p>
                     </a>
 
                 </li>
                 <li class="nav-item">
-                    <a href="<?=base_url(); ?>admin/tabel_pengeluaran" class="nav-link">
-                        <i class="nav-icon fa fa-edit"></i> <p>Pengeluaran</p>
+                    <a href="<?= base_url(); ?>admin/tabel_pengeluaran" class="nav-link">
+                        <i class="nav-icon fa fa-edit"></i>
+                        <p>Pengeluaran</p>
                     </a>
 
                 </li>
 
                 <li class="nav-item">
                     <a href="#" class="nav-link">
-                        <i class="nav-icon fa fa-truck"></i> 
+                        <i class="nav-icon fa fa-truck"></i>
                         <p>
-                            KEBERANGKATAN 
+                            KEBERANGKATAN
                             <i class="right fas fa-angle-left"></i>
                         </p>
                     </a>
                     <ul class="nav nav-treeview">
-                    <li class="nav-item">
+                        <li class="nav-item">
                             <a href="<?= base_url(); ?>admin/tabel_tujuan" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>TUJUAN</p>
@@ -175,7 +183,7 @@
                     </a>
                     <ul class="nav nav-treeview">
 
-                       
+
                         <li class="nav-item">
                             <a href="<?= base_url(); ?>report/tabel_rep_tangki" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
@@ -204,7 +212,14 @@
                             </a>
                         </li>
 
-                        
+                        <li class="nav-item">
+                            <!-- <a href="<?= base_url(); ?>report/tabel_rep_perbaikan" class="nav-link"> -->
+                            <a href="<?= base_url(); ?>report/tabel_rep_service_masuk" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>PERBAIKAN MASUK</p>
+                            </a>
+                        </li>
+
 
                         <li class="nav-item">
                             <!-- <a href="<?= base_url(); ?>report/tabel_rep_perbaikan" class="nav-link"> -->
@@ -213,6 +228,23 @@
                                 <p>PERBAIKAN DISETUJUI</p>
                             </a>
                         </li>
+
+                        <li class="nav-item">
+                            <!-- <a href="<?= base_url(); ?>report/tabel_rep_perbaikan" class="nav-link"> -->
+                            <a href="<?= base_url(); ?>report/tabel_exp_surat" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>EXP SURAT</p>
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <!-- <a href="<?= base_url(); ?>report/tabel_rep_perbaikan" class="nav-link"> -->
+                            <a href="<?= base_url(); ?>report/tabel_rep_pengeluaran" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>PENGELUARAN</p>
+                            </a>
+                        </li>
+
                     </ul>
                 </li>
                 <!-- <li class="nav-header">PENGATURAN</li> -->
@@ -244,6 +276,12 @@
                     <a href="<?= base_url(''); ?>admin/signout" class="nav-link">
                         <i class="fas fa-sign-out-alt nav-icon"></i>
                         <p>Logout</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="<?= base_url(''); ?>admin/email" class="nav-link">
+                        <i class="fas fa-envelope  nav-icon"></i>
+                        <p>Email</p>
                     </a>
                 </li>
             </ul>

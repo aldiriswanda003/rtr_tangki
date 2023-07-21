@@ -60,6 +60,7 @@
                                             </div>
                                         </td>
                                     </tr>
+
                                     <tr>
                                         <th style="vertical-align: middle">Nomor Telepon</th>
                                         <td style="vertical-align: middle;">
@@ -72,6 +73,20 @@
                                             </div>
                                         </td>
                                     </tr>
+
+                                    <tr>
+                                        <th style="vertical-align: middle">Email</th>
+                                        <td style="vertical-align: middle;">
+                                            <div class="row">
+                                                <div class="col-lg-8">
+                                                    <div class="row">
+                                                        :&nbsp;<?= $d->email_supir; ?> </div>
+
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+
                                     <tr>
                                         <th style="vertical-align: middle">Foto Supir</th>
                                         <td style="vertical-align: middle;">
@@ -84,6 +99,20 @@
                                             </div>
                                         </td>
                                     </tr>
+
+                                    <tr>
+                                        <th style="vertical-align: middle">SIM</th>
+                                        <td style="vertical-align: middle;">
+                                            <div class="row">
+                                                <div class="col-lg-8">
+                                                    <div class="row">
+                                                        :&nbsp;<img src="<?= base_url('assets/upload/supir/foto_sim/' . $d->foto_sim); ?>" class="img img-box" width="100" height="100" alt="<?= $d->nama_supir; ?>"> </div>
+
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                
                                     <tr>
                                         <th style="vertical-align: middle">KTP</th>
                                         <td style="vertical-align: middle;">

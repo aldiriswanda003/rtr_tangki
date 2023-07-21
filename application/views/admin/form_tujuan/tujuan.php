@@ -50,7 +50,7 @@
                                         <th>Jarak Pulang Pergi (KM)</th>
 
 
-                                        <th style="width:58px" colspan="2">Aksi</th>
+                                        <th style="width:58px" >Aksi</th>
 
                                     </tr>
                                 </thead>
@@ -66,8 +66,8 @@
 
 
 
-                                                <td><a href="<?= base_url('admin/edit_data_tujuan/' . $st->id_tujuan); ?>" type="button" class="btn btn-sm btn-success" name="btn_edit"><i class="fa fa-edit"></i>&nbsp;Edit</a></td>
-                                                <td><a href="<?= base_url('admin/hapus_tujuan/' . $st->id_tujuan); ?>" type="button" class="btn btn-sm btn-danger btn-delete" name="btn_delete"><i class="fa fa-trash"></i>&nbsp;Hapus</a></td>
+                                                <td><a href="<?= base_url('admin/edit_data_tujuan/' . $st->id_tujuan); ?>" type="button" class="btn btn-sm btn-success" name="btn_edit"><i class="fa fa-edit"></i>&nbsp;Edit</a>
+                                                <a href="<?= base_url('admin/hapus_tujuan/' . $st->id_tujuan); ?>" type="button" class="btn btn-sm btn-danger btn-delete" name="btn_delete"><i class="fa fa-trash"></i>&nbsp;Hapus</a></td>
                                             </tr>
                                         <?php endforeach; ?>
                                     <?php } ?>

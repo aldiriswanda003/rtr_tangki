@@ -19,7 +19,7 @@
     
     
 
-        <h4 style="margin-bottom: 5px;">Laporan Surat-Surat Truk Tangki</h4>
+        <h4 style="margin-bottom: 5px;">MEMO SERVICE MASUK</h4>
         <?php foreach ($list_service_masuk as $d) : ?>
         <table class="table" style="width:100%">
                                     <tr>
@@ -73,7 +73,7 @@
                                     </tr>
 
 <tr>
-                                        <th style="vertical-align: middle">Biaya</th>
+                                        <th style="vertical-align: middle">Perkiraan Biaya</th>
                                         <td style="vertical-align: middle;">
                                             <div class="row">
                                                 <div class="col-lg-8">
@@ -124,8 +124,9 @@
             </tr>
             <tr>
                 <td >
-                <br>
-                <br>
+                    <br><br>
+            <!-- <img src="<?= base_url(); ?>assets/style/stempel rtr 29 mei 2023 copy.png" width="50%" alt=""> -->
+                
                 <p  >..................................</p>
                 </td>
                 <td>

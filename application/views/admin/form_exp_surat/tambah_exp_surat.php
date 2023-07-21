@@ -55,26 +55,39 @@
                                     <select name="id_surat" class="form-control" id="id_surat">
                                         <option value="" selected>-- Pilih Surat --</option>
                                         <?php foreach ($list_surat_tangki as $s) : ?>
-                                            <option value="<?= $s->id_surat; ?>"><?= $s->nopol; ?> - <?= $s->jenis_surat; ?> - <?= $s->tanggal_expired; ?> - <?php if($s->status == 0){
-                                        echo "SUDAH MATI";
-                                    } else {
-                                        echo "BELUM MATI";
-                                    } ?> 
-                                        </option>
+                                            <option value="<?= $s->id_surat; ?>"><?= $s->nopol; ?> - <?= $s->jenis_surat; ?></option>
                                         <?php endforeach ?>
                                     </select>
 
                                 </div>
                                 <!-- <div class="form-group">
-                                    <label for="no_hp" class="form-label">Jenis Surat</label>
-                                    <input type="text" name="jenis_surat" class="form-control" id="jenis_surat" placeholder="Masukkan Jenis Surat" required>
+                                    <label for="perkiraan_biaya" class="form-label">Nopol</label>
+                                    <input type="int" disabled name="nopol" class="form-control" id="nopol" placeholder="Nopol">
                                 </div> -->
 
-                                    <!-- <div class="form-group">
+                                <!-- <div class="form-group">
+                                    <label for="perkiraan_biaya" class="form-label">Jenis Surat</label>
+                                    <input type="int" disabled name="jenis_surat" class="form-control" id="jenis_surat" placeholder="Jenis Surat">
+                                </div> -->
+
+                                <div class="form-group">
+                                    <label for="perkiraan_biaya" class="form-label">Tanggal Expired</label>
+                                    <input type="int" disabled name="tanggal_expired" class="form-control" id="tanggal_expired" placeholder="Tanggal Masa Berlaku">
+                                </div>
+                                <div class="form-group">
+                                    <label for="perkiraan_biaya" class="form-label">Status</label>
+                                    <input type="int" disabled name="status" class="form-control" id="status" placeholder="">
+                                </div>
+                                <div class="form-group">
+                                    <label for="perkiraan_biaya" class="form-label">Perkiraan Biaya</label>
+                                    <input type="int" name="perkiraan_biaya" class="form-control" id="perkiraan_biaya" placeholder="Masukkan Nominal Perkiraan Biaya" required>
+                                </div>
+
+                                <!-- <div class="form-group">
                                     <label for="date" class="form-label">Tanggal Masa Berlaku</label>
                                     <input type="date" name="tanggal_expired" class="form-control" id="tanggal_expired" placeholder="Masukkan Tanggal Masa berlaku" required> -->
-                            
-                                    
+
+
 
                                 <hr>
                                 <div class="form-group" align="center">
@@ -94,6 +107,26 @@
 
 <?php $this->load->view('admin/template/script') ?>
 
+<script>
+    $("#id_surat").change(function() {
+        let id_surat = $(this).val();
+        // let stok_gd = document.getElementById("stok_gd");
+
+        <?php foreach ($list_surat_tangki as $s) { ?>
+            if (id_surat == "<?php echo $s->id_surat ?>") {
+
+                $("#tanggal_expired").val("<?php echo date('d-m-Y', strtotime($s->tanggal_expired)) ?>");
+                // $("#nopol").val("<?php echo $s->nopol ?>");
+                $("#jenis_surat").val("<?php echo $s->jenis_surat ?>");
+                <?php if ($s->status == 0) { ?>
+                    $("#status").val("Belum Mati");
+                <?php } else { ?>
+                    $("#status").val("Belum Mati");
+                <?php } ?>
+            }
+        <?php } ?>
+    })
+</script>
 </body>
 
 </html>

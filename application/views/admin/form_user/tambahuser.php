@@ -72,7 +72,7 @@
                                         <option value="0">User Admin</option>
                                         <option value="1">User Pimpinan</option>
                                         <option value="2">User Koordinator Perbaikan</option>
-                                        <option value="3">User PERCOBAAN</option>
+                                       
                                     </select>
                                 </div>
                                 <hr>

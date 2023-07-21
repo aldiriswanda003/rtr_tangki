@@ -62,7 +62,7 @@
                                             <tr>
                                                 <td><?= $no++; ?></td>
                                                 <td><?= $st->nama_supir ?></td>
-                                                <td><?= $st->nopol ?></td>
+                                                <td> <?= $st->nopol ?> - <?= $st->volume_tangki ?> </td>
                                                 <td><?= $st->tanggal_update ?></td>
                                                
 

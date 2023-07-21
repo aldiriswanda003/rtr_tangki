@@ -10,6 +10,7 @@
                 <div class="col-sm-6">
                     <h1 class="m-0"><ins>Dashboard</ins></h1>
                     
+                    <!-- INI LONCENG BELL NOTIF -->
               <li class="nav nav-item dropdown">
                 <a class="nav-link" data-toggle="dropdown" href="#">
                     <i class="far fa-bell fa-2x" style="color: red"></i>
@@ -25,7 +26,7 @@
                     <?php foreach ($notifOut as $c) : ?>
                         <div class="card-footer">
                             <a href="#" style="text-decoration: none; color: black;"><strong><br><?= $c->nopol; ?><br><?= $c->jenis_surat; ?></strong><br>
-                                <small style="color: red;">Mati Tanggal <strong><?= date('d/m/Y', strtotime($c->tanggal_expired)); ?></strong></small></a>
+                                <small style="color: red;">Mati Tan ggal <strong><?= date('d/m/Y', strtotime($c->tanggal_expired)); ?></strong></small></a>
                             <!-- <a href="#" class="dropdown-item">
                   </a> -->
                         </div>
