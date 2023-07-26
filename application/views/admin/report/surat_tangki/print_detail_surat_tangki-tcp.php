@@ -3,7 +3,7 @@ $pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8',
 
 // document informasi
 $pdf->SetCreator('SIMRENT Genset Web');
-$pdf->SetTitle('Laporan Data Sparepart');
+$pdf->SetTitle('Laporan Surat Tangki');
 $pdf->SetSubject('Operator');
 
 $PDF_HEADER_STRING = "";
@@ -39,41 +39,51 @@ $pdf->AddPage('p');
 $pdf->SetAutoPageBreak(TRUE, PDF_MARGIN_BOTTOM);
 
 $html =
+
     '<div>
-       <h1 align="center">Data Laporan Supir</h1>
+       <h1 align="center">Laporan Surat-Surat Truk Tangki</h1>
        
        <table cellspacing="1" cellpadding="2"  border="1" >
-         <tr bgcolor=" #d1d1d1 ">
+
+
+        <tr bgcolor=" #d1d1d1 ">
          <th width="50px" align="center">No.</th>
-         <th width="200px" align="center">Nama Supir</th>
-         <th align="center"> Nomor Telepon </th>
-         <th width="210px" align="center"> Email </th>
-    
+         <th align="center">Nopol</th>
+         <th align="center" width="250px"> Jenis Surat</th>
+         <th  align="center"> Tanggal Exp</th>
          </tr>';
 
 $no = 1;
 
-foreach ($supir as $d) :
-    $html .= '<tr>
+    foreach ($surat_tangki as $d) :
+        $html .= '<tr>
     <td align="center">' . $no . '</td>
-    <td >' . $d->nama_supir . '</td>
-    <td >' . $d->no_telp . '</td>
-    <td >' . $d->email_supir . '</td>';
-    $html .= '</tr>';
-    $no++;
-endforeach;
+    <td >' . $d->nopol . '</td>
+    <td >' . $d->jenis_surat . '</td>
+    <td >' . $d->tanggal_expired . '</td>';
+    
+
+
+        $html .= '</tr>';
+        $no++;
+    endforeach;
+
+
 
 
 $html .= '
-</table><br><br>
-
-
-<table>
-<tr>
-    <td><br></td>
-    < align="right">Banjarmasin, ' . date('Y-m-d') . '<br>Mengetahui,<br>Admin<br><br><br><br>.........................................................</td>
-</tr>
-</table>
+         </table><br><br><br><br>
+         <table>
+         <tr>
+             <td><br><br><br><br><br></td>
+             <td align="right">Banjarmasin, ' . date('d-M-Y') . '</td>
+         </tr>
+         <tr>
+             <td colspan="2" align="right">' .
+    $this->session->userdata('nama') . '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+             </td>
+         </tr>
+     </table>
        </div>';
 
 $pdf->writeHTMLCell(0, 0, '', '', $html, 0, 0, 0, true, '', true);

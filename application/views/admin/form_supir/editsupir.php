@@ -56,10 +56,16 @@
                                     </div>
                                     <div class="form-group">
                                         <label for="no_hp" class="form-label">No. Telp</label>
-                                         <input type="text" maxlength="25" name="no_telp" class="form-control" id="no_hp" placeholder="Masukkan No. Telp" required   value="<?= $s->no_telp; ?>"> 
-                                         <!-- onkeypress='return (event.charCode > 47 && event.charCode < 58)' -->
-                                         <!-- taruh didalam input -->
+                                        <input type="text" maxlength="25" name="no_telp" class="form-control" id="no_hp" placeholder="Masukkan No. Telp" required value="<?= $s->no_telp; ?>">
+                                        <!-- onkeypress='return (event.charCode > 47 && event.charCode < 58)' -->
+                                        <!-- taruh didalam input -->
                                     </div>
+
+                                    <div class="form-group">
+                                        <label for="email_supir" class="form-label">Email</label>
+                                        <input type="text" name="email_supir" class="form-control" id="email_supir" placeholder="Masukkan Email" required value="<?= $s->email_supir; ?>">
+                                    </div>
+
                                     <div class="form-group">
                                         <label for="alamat" class="form-label">Foto Supir</label>
                                         <input type="file" name="foto_supir" class="form-control" id="foto_supir" placeholder="Masukkan Foto Supir">

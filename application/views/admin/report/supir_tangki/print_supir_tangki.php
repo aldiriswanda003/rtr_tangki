@@ -27,11 +27,12 @@
                                 <thead >
                                 
 
-                                    <tr >
+                                    <tr style="background-color:lightsteelblue;">
                                         <th style="width:1%">No.</th>
                                         
-                                        <th style="width :15%;" >Nama Supir</th>
+                                        <th  style="width :15%;" >Nama Supir</th>
                                         <th style="width :12%;">Truk Tangki</th>
+                                        <th style="width :12%;">Volume Tangki</th>
                                         <th style="width :13%;" >Tanggal Update</th>
                                         
                                         
@@ -51,6 +52,7 @@
                                                 <td><?= $no++; ?></td>
                                                 <td><?= $st->nama_supir ?></td>
                                                 <td><?= $st->nopol ?></td>
+                                                <td><?= number_format($st->volume_tangki)  ?> Liter</td>
                                                 <td><?= $st->tanggal_update ?></td>
                                                
 

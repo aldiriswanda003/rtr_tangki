@@ -89,6 +89,23 @@ class M_admin extends CI_Model
   }
 
 
+  public function filter_nopol_surat($tabel, $nopol)
+  {
+    $query = $this->db->select()
+      ->from($tabel)
+      ->join('tb_tangki', 'tb_tangki.id_tangki = ' . $tabel . '.id_tangki')
+
+      ->where_in('tb_tangki.nopol', $nopol)
+
+      // ->join('tb_sparepart', 'tb_sparepart.id_sparepart = tb_serv_genset.id_sparepart')
+
+      ->get();
+    return $query->result();
+  }
+
+
+
+
   public function get_seri_ban($tabel)
   {
     $query = $this->db->select()
@@ -149,6 +166,7 @@ class M_admin extends CI_Model
       ->get();
     return $query->result();
   }
+  
   public function get_service_masuk($tabel, $where)
   {
     $query = $this->db->select()
@@ -272,7 +290,7 @@ class M_admin extends CI_Model
     return $query->result();
   }
 
-  public function ambil_exp_surat($tabel,$where)
+  public function ambil_exp_surat($tabel, $where)
   {
     $query = $this->db->select()
       ->from($tabel)
@@ -358,6 +376,7 @@ class M_admin extends CI_Model
 
   public function notif_exp_surat($tabel, $tgl)
   {
+
     $query = $this->db->select()
       ->from($tabel)
       // ->join('tb_genset', 'tb_genset.id_genset = tb_unit_keluar.id_genset')
@@ -366,7 +385,39 @@ class M_admin extends CI_Model
       ->join('tb_tangki', 'tb_tangki.id_tangki = table_surat_tangki.id_tangki')
 
       ->where('DATEDIFF(DATE_SUB(tanggal_expired, INTERVAL 1 DAY), "' . $tgl . '") <', 7)
+      // ->where($where)
+      ->get();
+    return $query->result();
+  }
 
+  public function notif_exp_surat1($tabel, $tgl, $where)
+  {
+
+    $query = $this->db->select()
+      ->from($tabel)
+      // ->join('tb_genset', 'tb_genset.id_genset = tb_unit_keluar.id_genset')
+      // ->join('tb_pelanggan', 'tb_pelanggan.id_pelanggan = tb_unit_keluar.id_pelanggan')
+      // ->where('status =', 1)
+      ->join('tb_tangki', 'tb_tangki.id_tangki = table_surat_tangki.id_tangki')
+
+      ->where('DATEDIFF(DATE_SUB(tanggal_expired, INTERVAL 1 DAY), "' . $tgl . '") <', 7)
+      ->where($where)
+      ->get();
+    return $query->result();
+  }
+
+  public function notif_status_perbaikan($tabel, $where)
+  {
+
+    $query = $this->db->select()
+      ->from($tabel)
+      // ->join('tb_genset', 'tb_genset.id_genset = tb_unit_keluar.id_genset')
+      // ->join('tb_pelanggan', 'tb_pelanggan.id_pelanggan = tb_unit_keluar.id_pelanggan')
+      // ->where('status =', 1)
+      ->join('tb_tangki', 'tb_tangki.id_tangki = table_surat_tangki.id_tangki')
+
+      // ->where('DATEDIFF(DATE_SUB(tanggal_expired, INTERVAL 1 DAY), "' . $tgl . '") <', 7)
+      ->where($where)
       ->get();
     return $query->result();
   }
@@ -495,6 +546,19 @@ class M_admin extends CI_Model
   {
     $query = $this->db->select_sum('perkiraan_biaya')
       ->from($tabel)
+      ->get();
+    return $query->result();
+  }
+
+
+  public function get_email($tabel)
+  {
+    $query = $this->db->select()
+      ->from($tabel)
+      // ->join('tb_tangki', 'tb_tangki.id_tangki = table_surat_tangki.id_tangki')
+      ->join('tb_supir', 'tb_supir.id_supir = tb_supir_tangki.id_supir')
+      // ->join('tb_sparepart', 'tb_sparepart.id_sparepart = tb_serv_genset.id_sparepart')
+
       ->get();
     return $query->result();
   }

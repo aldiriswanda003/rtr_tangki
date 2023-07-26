@@ -70,6 +70,7 @@
                                     <input type="file" name="foto_supir" class="form-control" id="foto_supir" placeholder="Masukkan Foto Supir" required>
                                     <span><small style="color:red"><strong>UPLOAD MINIMAL SIZE 2MB</strong></small></span>
                                 </div>
+                                
                                 <div class="form-group">
                                     <label for="alamat" class="form-label">Foto SIM</label>
                                     <input type="file" name="foto_sim" class="form-control" id="foto_supir" placeholder="Masukkan Foto SIM" required>

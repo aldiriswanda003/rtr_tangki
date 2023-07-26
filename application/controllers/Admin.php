@@ -407,6 +407,8 @@ class Admin extends CI_Controller
     {
         $this->form_validation->set_rules('nama_supir', 'Nama Supir', 'trim|required');
         $this->form_validation->set_rules('no_telp', 'No Telp', 'trim|required');
+        $this->form_validation->set_rules('email_supir', 'email_supir', 'trim|required');
+
 
         if ($this->form_validation->run() === TRUE) {
 
@@ -417,6 +419,8 @@ class Admin extends CI_Controller
             $foto_supir_old = $this->input->post('foto_supir_old', true);
             $foto_sim_old = $this->input->post('foto_sim_old', true);
             $foto_ktp_old = $this->input->post('foto_ktp_old', true);
+            $email_supir = $this->input->post('email_supir', TRUE);
+
 
             $foto_supir = $this->upload_gambarsupir();
             $foto_sim = $this->upload_gambarsim();
@@ -444,6 +448,8 @@ class Admin extends CI_Controller
             $data = array(
                 'nama_supir' => $nama,
                 'no_telp' => $no_hp,
+                'email_supir' => $email_supir,
+
                 'foto_supir' => $foto_supir_new,
                 'foto_sim' => $foto_sim_new,
                 'foto_ktp' => $foto_ktp_new
@@ -484,6 +490,130 @@ class Admin extends CI_Controller
         $this->load->view('admin/form_tangki/tangki', $data);
     }
 
+
+
+    public function upload_foto_tangki_depan()
+    {
+        $config = array(
+            'upload_path' => './assets/upload/foto_tangki/',
+            'allowed_types' => 'gif|jpg|png',
+            'ecrypt_name'    => false,
+            'overwrite'    => true,
+            // 'file_name'	=> uniqid(),
+            'max_size' => 2048,
+            'max_height' => 2000,
+            'max_width' => 2000
+        );
+        $this->load->library('upload', $config);
+        $this->upload->initialize($config);
+
+        // if (!$this->upload->do_upload('foto_depan')) {
+        if (!$this->upload->do_upload('foto_depan')) {
+            $error = $this->upload->display_errors();
+            return $error;
+            // die('gagal diupload');
+        } else {
+            $data_upload = array('upload_data' => $this->upload->data());
+            $userfile = $data_upload['upload_data']['file_name'];
+
+            return $userfile;
+        }
+    }
+    public function upload_foto_tangki_belakang()
+    {
+        $config = array(
+            'upload_path' => './assets/upload/foto_tangki/',
+            'allowed_types' => 'gif|jpg|png',
+            'ecrypt_name'    => false,
+            'overwrite'    => true,
+            // 'file_name'	=> uniqid(),
+            'max_size' => 2048,
+            'max_height' => 2000,
+            'max_width' => 2000
+        );
+        $this->load->library('upload', $config);
+        $this->upload->initialize($config);
+
+        // if (!$this->upload->do_upload('foto_depan')) {
+        if (!$this->upload->do_upload('foto_belakang')) {
+            $error = $this->upload->display_errors();
+            return $error;
+            // die('gagal diupload');
+        } else {
+            $data_upload = array('upload_data' => $this->upload->data());
+            $userfile = $data_upload['upload_data']['file_name'];
+
+            return $userfile;
+        }
+    }
+    public function upload_foto_tangki_kiri()
+    {
+        $config = array(
+            'upload_path' => './assets/upload/foto_tangki/',
+            'allowed_types' => 'gif|jpg|png',
+            'ecrypt_name'    => false,
+            'overwrite'    => true,
+            // 'file_name'	=> uniqid(),
+            'max_size' => 2048,
+            'max_height' => 2000,
+            'max_width' => 2000
+        );
+        $this->load->library('upload', $config);
+        $this->upload->initialize($config);
+
+        // if (!$this->upload->do_upload('foto_depan')) {
+        if (!$this->upload->do_upload('foto_kiri')) {
+            $error = $this->upload->display_errors();
+            return $error;
+            // die('gagal diupload');
+        } else {
+            $data_upload = array('upload_data' => $this->upload->data());
+            $userfile = $data_upload['upload_data']['file_name'];
+
+            return $userfile;
+        }
+    }
+    public function upload_foto_tangki_kanan()
+    {
+        $config = array(
+            'upload_path' => './assets/upload/foto_tangki/',
+            'allowed_types' => 'gif|jpg|png',
+            'ecrypt_name'    => false,
+            'overwrite'    => true,
+            // 'file_name'	=> uniqid(),
+            'max_size' => 2048,
+            'max_height' => 2000,
+            'max_width' => 2000
+        );
+        $this->load->library('upload', $config);
+        $this->upload->initialize($config);
+
+        // if (!$this->upload->do_upload('foto_depan')) {
+        if (!$this->upload->do_upload('foto_kanan')) {
+            $error = $this->upload->display_errors();
+            return $error;
+            // die('gagal diupload');
+        } else {
+            $data_upload = array('upload_data' => $this->upload->data());
+            $userfile = $data_upload['upload_data']['file_name'];
+
+            return $userfile;
+        }
+    }
+
+    public function control_detail_tangki()
+    {
+        $uri = $this->uri->segment(3);
+        $where = array('id_tangki' => $uri);
+        $data['tangki'] = $this->M_admin->get_data('tb_tangki', $where);
+        $data['avatar'] = $this->M_admin->get_data_avatar('tb_user', $this->session->userdata('name'));
+        $data['title'] = 'Data Tangki';
+        $this->load->view('admin/form_tangki/detail_tangki', $data);
+    }
+
+
+
+
     public function tambah_tangki()
     {
         $data['avatar'] = $this->M_admin->get_data_avatar('tb_user', $this->session->userdata('name'));
@@ -498,6 +628,11 @@ class Admin extends CI_Controller
         $this->form_validation->set_rules('volume_tangki', 'Volume Tangki', 'trim|required');
 
         if ($this->form_validation->run() === TRUE) {
+            $foto_depan = $this->upload_foto_tangki_depan();
+            $foto_belakang = $this->upload_foto_tangki_belakang();
+            $foto_kiri = $this->upload_foto_tangki_kiri();
+            $foto_kanan = $this->upload_foto_tangki_kanan();
+
             $nopol = $this->input->post('nopol', TRUE);
             $tahun_dibuat = $this->input->post('tahun_dibuat', TRUE);
             $volume_tangki = $this->input->post('volume_tangki', TRUE);
@@ -505,7 +640,11 @@ class Admin extends CI_Controller
             $data = array(
                 'nopol' => $nopol,
                 'tahun_dibuat' => $tahun_dibuat,
-                'volume_tangki' => $volume_tangki
+                'foto_depan' => $foto_depan,
+                'foto_belakang' => $foto_belakang,
+                'foto_kanan' => $foto_kanan,
+                'foto_kiri' => $foto_kiri,
+                'volume_tangki  ' => $volume_tangki
             );
             $this->M_admin->insert('tb_tangki', $data);
             $this->session->set_flashdata('msg_sukses', 'Data Berhasil Di Tambahkan');
@@ -535,15 +674,55 @@ class Admin extends CI_Controller
         $this->form_validation->set_rules('volume_tangki', 'Volume Tangki', 'trim|required');
 
         if ($this->form_validation->run() === TRUE) {
+
+
+
             $id = $this->input->post('id_tangki', TRUE);
             $nopol = $this->input->post('nopol', TRUE);
             $tahun_dibuat = $this->input->post('tahun_dibuat', TRUE);
             $volume_tangki = $this->input->post('volume_tangki', TRUE);
+            $foto_depan_old = $this->input->post('foto_depan_old', TRUE);
+            $foto_belakang_old = $this->input->post('foto_belakang_old', TRUE);
+            $foto_kiri_old = $this->input->post('foto_kiri_old', TRUE);
+            $foto_kanan_old = $this->input->post('foto_kanan_old', TRUE);
+
+            $foto_depan = $this->upload_foto_tangki_depan();
+            $foto_belakang = $this->upload_foto_tangki_belakang();
+            $foto_kiri = $this->upload_foto_tangki_kiri();
+            $foto_kanan = $this->upload_foto_tangki_kanan();
+
+            if ($foto_depan == '<p>You did not select a file to upload.</p>') {
+                $foto_depan_new = $foto_depan_old;
+            } else {
+                $foto_depan_new = $foto_depan;
+            };
+
+            if ($foto_belakang == '<p>You did not select a file to upload.</p>') {
+                $foto_belakang_new = $foto_belakang_old;
+            } else {
+                $foto_belakang_new = $foto_belakang;
+            };
+
+            if ($foto_kiri == '<p>You did not select a file to upload.</p>') {
+                $foto_kiri_new = $foto_kiri_old;
+            } else {
+                $foto_kiri_new = $foto_kiri;
+            };
+
+            if ($foto_kanan == '<p>You did not select a file to upload.</p>') {
+                $foto_kanan_new = $foto_kanan_old;
+            } else {
+                $foto_kanan_new = $foto_kanan;
+            };
 
             $where = array('id_tangki' => $id);
             $data = array(
                 'nopol' => $nopol,
                 'tahun_dibuat' => $tahun_dibuat,
+                'foto_depan' => $foto_depan_new,
+                'foto_belakang' => $foto_belakang_new,
+                'foto_kanan' => $foto_kanan_new,
+                'foto_kiri' => $foto_kiri_new,
                 'volume_tangki' => $volume_tangki
             );
             $this->M_admin->update('tb_tangki', $data, $where);
@@ -1830,10 +2009,6 @@ class Admin extends CI_Controller
             $label = 'Nopol........ Dari Tanggal .... Sampai Tanggal ...';
         } else {
 
-
-
-
-
             $data['angkutan'] = $this->M_admin->angkutan_periode($tgl_awal, $tgl_akhir, $nopol);
             $data['total_data'] = $this->M_admin->hitung_kilo($tgl_awal, $tgl_akhir, $nopol);
             $label = 'Nopol ' . $nopol . ', Dari Tanggal :' . $tgl_awal . '. Sampai Tanggal : ' .  $tgl_akhir;
@@ -1859,7 +2034,7 @@ class Admin extends CI_Controller
 
         // $data['list_supir'] = $this->M_admin->select('tb_supir');
         $data['avatar'] = $this->M_admin->get_data_avatar('tb_user', $this->session->userdata('name'));
-        $data['title'] = 'Tambah Tujuaan';
+        $data['title'] = 'Tambah Angkutan';
         $this->load->view('admin/form_angkutan/tambah_angkutan', $data);
     }
 
@@ -1969,7 +2144,7 @@ class Admin extends CI_Controller
 
     public function email()
     {
-        $data['list_email'] = $this->M_admin->select('tb_user');
+        $data['list_email'] = $this->M_admin->select('tb_supir');
         $data['avatar'] = $this->M_admin->get_data_avatar('tb_user', $this->session->userdata('name'));
         $data['title'] = 'email';
         $this->load->view('admin/email/email', $data);
@@ -1977,6 +2152,108 @@ class Admin extends CI_Controller
 
     public function kirim()
     {
+        $email_penerima = $this->input->post('email_penerima');
+        $subjek = $this->input->post('subjek');
+        $pesan = $this->input->post('pesan');
+        $attachment = $_FILES['attachment'];
+        $content = $this->load->view('admin/email/content', array('pesan' => $pesan), true); // Ambil isi file content.php dan masukan ke variabel $content
+        $sendmail = array(
+            'email_penerima' => $email_penerima,
+            'subjek' => $subjek,
+            'content' => $content,
+            'attachment' => $attachment
+        );
+        if (empty($attachment['name'])) {
+            $send = $this->mailer->send($sendmail);
+        } else {
+            $send = $this->mailer->send_with_attachment($sendmail);
+        }
+
+        echo "<b>" . $send['status'] . "</b><br />";
+        echo $send['message'];
+
+        // $data['avatar'] = $this->M_admin->get_data_avatar('tb_avatar', $this->session->userdata('name'));
+        // $data['title'] = 'email';
+        // $this->load->view('admin/email/v_email', $data);
+
+        // redirect(base_url('admin/email'));
+        echo "<br /><a href='" . base_url("admin/email") . "'>Kembali ke Form</a>";
+    }
+
+
+
+    //////////////////////////
+    //////EMAIL NOTIF SURAT//////
+    /////////////////////////
+
+
+    public function proses_email_surat()
+    {
+        $uri = $this->uri->segment(3);
+        $where = array('id_surat' => $uri);
+
+        $tgl = date('Y-m-d');
+        $data['notifOut'] = $this->M_admin->notif_exp_surat1('table_surat_tangki', $tgl, $where);
+        $data['list_email'] = $this->M_admin->select('tb_supir');
+        $data['avatar'] = $this->M_admin->get_data_avatar('tb_user', $this->session->userdata('name'));
+        $data['title'] = 'email';
+        $this->load->view('admin/email/email_surattangki', $data);
+    }
+
+    public function kirim_email_surat()
+    {
+
+
+        $email_penerima = $this->input->post('email_penerima');
+        $subjek = $this->input->post('subjek');
+        $pesan = $this->input->post('pesan');
+        $attachment = $_FILES['attachment'];
+        $content = $this->load->view('admin/email/content', array('pesan' => $pesan), true); // Ambil isi file content.php dan masukan ke variabel $content
+        $sendmail = array(
+            'email_penerima' => $email_penerima,
+            'subjek' => $subjek,
+            'content' => $content,
+            'attachment' => $attachment
+        );
+        if (empty($attachment['name'])) {
+            $send = $this->mailer->send($sendmail);
+        } else {
+            $send = $this->mailer->send_with_attachment($sendmail);
+        }
+
+        echo "<b>" . $send['status'] . "</b><br />";
+        echo $send['message'];
+
+        // $data['avatar'] = $this->M_admin->get_data_avatar('tb_avatar', $this->session->userdata('name'));
+        // $data['title'] = 'email';
+        // $this->load->view('admin/email/v_email', $data);
+
+        // redirect(base_url('admin/email'));
+        echo "<br /><a href='" . base_url("admin/email") . "'>Kembali ke Form</a>";
+    }
+
+
+    /////////////////////
+    /// NOTIF STATUS
+    /////////////////////
+
+    public function proses_email_statusperbaikan()
+    {
+        $uri = $this->uri->segment(3);
+        $where = array('id_service_masuk' => $uri);
+
+        // $tgl = date('Y-m-d');
+        $data['notifOut'] = $this->M_admin->get_service_masuk('tb_service_masuk', $where);
+        $data['list_email'] = $this->M_admin->select('tb_supir');
+        $data['avatar'] = $this->M_admin->get_data_avatar('tb_user', $this->session->userdata('name'));
+        $data['title'] = 'email';
+        $this->load->view('admin/email/email_statusperbaikan', $data);
+    }
+
+    public function kirim_email_statusperbaikan()
+    {
+
+
         $email_penerima = $this->input->post('email_penerima');
         $subjek = $this->input->post('subjek');
         $pesan = $this->input->post('pesan');

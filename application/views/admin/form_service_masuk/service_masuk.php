@@ -32,7 +32,7 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header">
-                        Data Perbaikan atau service yang masuk
+                            Data Perbaikan atau service yang masuk
                         </div>
                         <div class="card-body">
                             <?php if ($this->session->flashdata('msg_sukses')) { ?>
@@ -43,14 +43,14 @@
                             <?php } ?>
                             <a href="<?= base_url('admin/tambah_service_masuk'); ?>" style="margin-bottom:10px;" type="button" class="btn btn-sm btn-primary" name="tambah_data"><i class="fa fa-plus mr-2" aria-hidden="true"></i>Tambah</a>
 
-                            <table id="example1" class="table table-bordered table-striped table-hover" >
+                            <table id="example1" class="table table-bordered table-striped table-hover">
                                 <thead>
                                     <tr align="center">
                                         <th style="width :10px;">No.</th>
-                                        
-                                        <th style="width: 50px;" >NOPOL</th>
+
+                                        <th style="width: 50px;">NOPOL</th>
                                         <th>Nama Bengkel</th>
-                                        <th style="width: 60px;" >Tanggal Masuk</th>
+                                        <th style="width: 60px;">Tanggal Masuk</th>
                                         <th style="width: 200px;">Keluhan</th>
                                         <th>Perkiraan Biaya</th>
                                         <th>Status</th>
@@ -66,28 +66,29 @@
                                         <?php foreach ($service_masuk as $sm) : ?>
                                             <tr>
                                                 <td><?= $no++; ?></td>
-                                                
+
                                                 <td><?= $sm->nopol ?></td>
                                                 <td><?= $sm->nama_bengkel ?></td>
                                                 <td><?= $sm->tgl_masuk ?></td>
                                                 <td><?= $sm->keluhan ?></td>
                                                 <td>Rp<?= number_format($sm->biaya) ?></td>
-                                            
+
                                                 <?php if ($sm->status == 0) { ?>
-                                                    <td>PROSES</td>
-                                                <?php } elseif ($sm->status == 1) { ?>
-                                                    <td>SUDAH SELESAI</td>
+                                                    <td><a href="#" type="button" class="btn btn-warning btn-sm"> PROSES</a></td>
+                                                <?php } else { ?>
+                                                    <td><a href="<?= base_url('admin/proses_email_statusperbaikan/' . $sm->id_service_masuk); ?>" type="button" class="btn btn-success btn-sm">SELESAI </a></td>
                                                 <?php } ?>
-                                                    
 
 
-                                                
+
+
                                                 <!-- <td><img src="<?= base_url('assets/upload/surat_tangki/' . $st->foto_surat); ?>" class="img img-box" width="100" height="100" alt="<?= $st->foto_surat; ?>"></td> -->
-                                                
 
-                                                <td><a href="<?= base_url('admin/edit_service_masuk/' . $sm->id_service_masuk); ?>" type="button" class="btn btn-xs btn-success" name="btn_edit"><i class="fa fa-edit"></i>&nbsp;Edit</a></td>
-                                                <td><a href="<?= base_url('admin/hapus_service_masuk/' . $sm->id_service_masuk); ?>" type="button" class="btn btn-xs btn-danger btn-delete" name="btn_delete"><i class="fa fa-trash"></i>&nbsp;Hapus</a></td>
-                                                <td><a href="<?= base_url('admin/info_service_unit/' . $sm->id_service_masuk); ?>" type="button" class="btn btn-xs btn-warning " name=""><i class="fa fa-circle-info"></i>&nbsp;INFO</a></td>
+
+                                                <td><a href="<?= base_url('admin/edit_service_masuk/' . $sm->id_service_masuk); ?>" type="button" class="btn btn-sm btn-success" name="btn_edit"><i class="fa fa-edit"></i>&nbsp;</a><br><br>
+                                                    <a href="<?= base_url('admin/hapus_service_masuk/' . $sm->id_service_masuk); ?>" type="button" class="btn btn-sm btn-danger btn-delete" name="btn_delete"><i class="fa fa-trash"></i></a><br><br>
+                                                    <a href="<?= base_url('admin/info_service_unit/' . $sm->id_service_masuk); ?>" type="button" class="btn btn-xs btn-warning " name=""><i class="fa fa-circle-info"></i>&nbsp;Detail</a>
+                                                </td>
                                                 <!-- ulah function tombol hapus nya di admin controller -->
                                             </tr>
                                         <?php endforeach; ?>

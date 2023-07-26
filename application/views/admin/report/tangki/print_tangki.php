@@ -40,40 +40,40 @@ $pdf->SetAutoPageBreak(TRUE, PDF_MARGIN_BOTTOM);
 
 $html =
     '<div>
-       <h1 align="center">Data Laporan Supir</h1>
+       <h1 align="center">Data Truk Tangki RTR</h1>
        
        <table cellspacing="1" cellpadding="2"  border="1" >
          <tr bgcolor=" #d1d1d1 ">
          <th width="50px" align="center">No.</th>
-         <th width="200px" align="center">Nama Supir</th>
-         <th align="center"> Nomor Telepon </th>
-         <th width="210px" align="center"> Email </th>
+         <th width="200px" align="center">Nopol</th>
+         <th align="center"> Tahun Dibuat </th>
+         <th width="210px" align="center"> Volume Tangki </th>
     
          </tr>';
 
 $no = 1;
 
-foreach ($supir as $d) :
+foreach ($tangki as $t) :
     $html .= '<tr>
     <td align="center">' . $no . '</td>
-    <td >' . $d->nama_supir . '</td>
-    <td >' . $d->no_telp . '</td>
-    <td >' . $d->email_supir . '</td>';
+    <td >' . $t->nopol . '</td>
+    <td align="center">' . $t->tahun_dibuat . '</td>
+    <td >' . $t->volume_tangki .' Liter </td>';
     $html .= '</tr>';
     $no++;
 endforeach;
 
 
 $html .= '
-</table><br><br>
+         </table><br><br>
 
 
-<table>
-<tr>
-    <td><br></td>
-    < align="right">Banjarmasin, ' . date('Y-m-d') . '<br>Mengetahui,<br>Admin<br><br><br><br>.........................................................</td>
-</tr>
-</table>
+         <table>
+         <tr>
+             <td><br></td>
+             < align="right">Banjarmasin, ' . date('Y-m-d') . '<br>Mengetahui,<br>Admin<br><br><br><br>.........................................................</td>
+         </tr>
+     </table>
        </div>';
 
 $pdf->writeHTMLCell(0, 0, '', '', $html, 0, 0, 0, true, '', true);

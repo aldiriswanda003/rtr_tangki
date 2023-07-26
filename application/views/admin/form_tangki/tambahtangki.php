@@ -47,7 +47,7 @@
                                 </div>
                             <?php } ?>
 
-                            <form action="<?= base_url('admin/proses_tambah_tangki'); ?>" method="post" role="form">
+                            <form action="<?= base_url('admin/proses_tambah_tangki'); ?>" method="post" role="form" enctype="multipart/form-data">
 
                                 <div class="form-group">
                                     <label for="nopol" class="form-label">Nopol</label>
@@ -65,6 +65,30 @@
                                             <span class="input-group-text">Liter</span>
                                         </div>
                                     </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="foto_depan" class="form-label">Foto dari depan</label>
+                                    <input type="file" name="foto_depan" class="form-control" id="foto_depan" placeholder="Masukkan Foto Truk Tangki" required>
+                                    <span><small style="color:red"><strong>*UPLOAD MINIMAL SIZE 2MB</strong></small></span>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="foto_belakang" class="form-label">Foto dari belakang</label>
+                                    <input type="file" name="foto_belakang" class="form-control" id="foto_belakang" placeholder="Masukkan Foto Truk Tangki" required>
+                                    <span><small style="color:red"><strong>*UPLOAD MINIMAL SIZE 2MB</strong></small></span>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="foto_kiri" class="form-label">Foto dari kiri</label>
+                                    <input type="file" name="foto_kiri" class="form-control" id="foto_kiri" placeholder="Masukkan Foto Truk Tangki" required>
+                                    <span><small style="color:red"><strong>*UPLOAD MINIMAL SIZE 2MB</strong></small></span>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="foto_kanan" class="form-label">Foto dari kanan</label>
+                                    <input type="file" name="foto_kanan" class="form-control" id="foto_kanan" placeholder="Masukkan Foto Truk Tangki" required>
+                                    <span><small style="color:red"><strong>*UPLOAD MINIMAL SIZE 2MB</strong></small></span>
                                 </div>
 
                                 <hr>

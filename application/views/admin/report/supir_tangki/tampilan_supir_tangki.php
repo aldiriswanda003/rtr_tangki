@@ -50,7 +50,8 @@
                                     <tr>
                                         <th style="width :10px">No.</th>
                                         <th>Supir</th>
-                                        <th>Truk Tangki</th>
+                                        <th>NOPOL</th>
+                                        <th>Volume Tangki</th>
                                         <th>Tanggal Update</th>
                                 <!-- <th style="width:58px">Edit</th> -->
                                         <!-- <th style="width:58px">Hapus</th> -->
@@ -64,7 +65,9 @@
                                             <tr>
                                                 <td><?= $no++; ?></td>
                                                 <td><?= $st->nama_supir ?></td>
-                                                <td><?= $st->nopol ?></td>
+                                                <td> <?= $st->nopol ?></td>
+                                                <td><?= number_format($st->volume_tangki ) ?> Liter</td>
+
                                                 <td><?= $st->tanggal_update ?></td>
                                                
 

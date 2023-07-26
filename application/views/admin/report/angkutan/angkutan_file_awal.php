@@ -8,12 +8,12 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h4 class="m-0">REPORT SURAT-SURAT KENDARAAN TRUK TANGKI</h4>
+                    <h4 class="m-0">REPORT DAFTAR ANGKUTAN </h4>
                 </div><!-- /.col -->
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="#">Home</a></li>
-                        <li class="breadcrumb-item active">Surat Tangki</li>
+                        <li class="breadcrumb-item active">tujuan</li>
                     </ol>
                 </div><!-- /.col -->
             </div><!-- /.row -->
@@ -32,8 +32,7 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header">
-                            Surat - Surat Tangki
-                        </div>
+                            angkutan </div>
                         <div class="card-body">
                             <?php if ($this->session->flashdata('msg_sukses')) { ?>
                                 <div class="alert alert-success alert-dismissible">
@@ -41,83 +40,128 @@
                                     <strong>Berhasil!</strong><br> <?= $this->session->flashdata('msg_sukses'); ?>
                                 </div>
                             <?php } ?>
-                            <tr>
-                            <!-- <a href="<?= base_url('report/cetak_rep_surat_tangki'); ?>" style="margin-bottom:10px;" type="button" class="btn btn-sm btn-success" name="cetak_data"><i class="fa fa-print mr-2" aria-hidden="true"></i>Cetak</a> -->
-
+                            <a href="<?= base_url('report/cetak_rep_perbaikan'); ?>"  style="margin-bottom:10px;" type="button" class="btn btn-sm btn-success" name="cetak_data"><i class="fa fa-print mr-2" aria-hidden="true"></i>Cetak</a>
                             
-                                    <!-- <th style="vertical-align: middle;">Filter per Nopol<br><small style="color: red;">*Berdasarkan Periode</small></th> -->
-                                    <td style="vertical-align: middle;">
-                                        <!-- <button data-toggle="modal" data-target="#staticRepPendapatanBulanan" class="btn btn-info btn-sm"><i class="fa fa-table"></i>&nbsp;Pilih Periode</button> -->
-                                        <button data-toggle="modal" data-target="#staticRepPerNopol" class="btn btn-info btn-sm"><i class="fa fa-table"></i>&nbsp;Nopol</button>
-                                    </td>
-                                </tr>
+                            <button data-toggle="modal" data-target="#static_angkutan_bulanan" style="margin-bottom:10px;" type="button" class="btn btn-sm btn-warning" name="static_angkutan_bulanan"><i class="fa fa-filter   "></i>&nbsp; FILTER NOPOL & TANGGAL</button>
+
 
                             <table id="example1" class="table table-bordered table-striped table-hover" style="width:100%">
                                 <thead>
+
                                     <tr>
+                                        <?php foreach ($total_data as $td) : ?>
+                                            <th colspan="8" style="text-align: center;"><?php echo $label ?>
+                                                <br>
+                                                Total Kilometer yang ditempuh :<span style="color: red;">&nbsp;<?= $td->kilometer_pp; ?> KM </span>
+                                            </th>
+                                        <?php endforeach; ?>
+                                    </tr>
+
+
+
+
+
+                                    <tr align="center">
                                         <th style="width :10px">No.</th>
                                         <th>Nopol</th>
-                                        <th>Jenis</th>
-                                        <th>Foto Surat</th>
-                                        <th>Tanggal Exp</th>
-                                     
+                                        <th>Volume</th>
+                                        <th>Supir</th>
+                                        <th>Tgl Berangkat</th>
+                                        <th>Tujuan</th>
+                                        <th style="width :20px">Jarak PP</th>
+
+
+                                        <!-- <th style="width:58px">Aksi</th> -->
+
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <?php
                                     $no = 1;
-                                    if (is_array($surat_tangki)) { ?>
-                                        <?php foreach ($surat_tangki as $st) : ?>
-                                            <tr>
-                                                <td><?= $no++; ?></td>
-                                                <td><?= $st->nopol ?></td>
-                                                <td><?= $st->jenis_surat ?></td>
-                                                <td><img src="<?= base_url('assets/upload/surat_tangki/' . $st->foto_surat); ?>" class="img img-box" width="100" height="100" alt="<?= $st->foto_surat; ?>"></td>
-                                                <td><?= $st->tanggal_expired ?></td>
-                                               
-                                                <!-- ulah function tombol hapus nya di admin controller -->
-                                            </tr>
-                                        <?php endforeach; ?>
-                                    <?php } ?>
+                                    ?>
+                                    <?php foreach ($angkutan as $st) : ?>
+                                        <tr>
+                                            <td><?= $no++; ?></td>
+                                            <td><?= $st->nopol ?></td>
+                                            <td><?= $st->volume_tangki ?></td>
+                                            <td><?= $st->nama_supir ?></td>
+                                            <td><?= $st->tgl_berangkat ?></td>
+                                            <td><?= $st->nama_tujuan ?></td>
+                                            <td><?= $st->kilometer_pp ?> KM</td>
+
+
+
+                                            <!-- <td>
+
+                                                <a href="<?= base_url('admin/edit_angkutan/' . $st->id_angkutan); ?>" type="button" class="btn btn-xs btn-success " name="btn_edit"><i class="fa fa-edit"></i>&nbsp;Edit</a>
+                                                <a href="<?= base_url('admin/hapus_angkutan/' . $st->id_angkutan); ?>" type="button" class="btn btn-xs btn-danger btn-delete" name="btn_delete"><i class="fa fa-trash"></i>&nbsp;Hapus</a>
+
+
+
+                                            </td> -->
+                                        </tr>
+                                    <?php endforeach; ?>
+
                                 </tbody>
                                 <tr>
                                     <thead>
-                                        <th></th>
+                                        <!-- <th></th>
                                         <th style="width: 200px;"><input type="text" name="filter_nama" class="form-control" id="filter_nama" placeholder="Filter Nama Supir"></th>
                                         <th style="width: 200px;"><input type="text" name="filter_no_telp" class="form-control" id="filter_no_telp" placeholder="Filter No. Telp Supir"></th>
-                                        <th colspan="5"></th>
+                                        <th colspan="5"></th> -->
                                     </thead>
                                 </tr>
                             </table>
+                        </div>
+                    </div>
 
-
-                            <!-- TOMBOL MODAL -->
-                            <div class="modal fade" id="staticRepPerNopol" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                    <!-- Modal -->
+                    <div class="modal fade" id="static_angkutan_bulanan" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                         <div class="modal-dialog modal-dialog-centered">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h6 class="modal-title" id="staticBackdropLabel">SURAT TANGKI PER NOPOL</h6>
+                                    <h6 class="modal-title" id="staticBackdropLabel">FILTER PERTANGGAL</h6>
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                         <span>&times;</span>
                                     </button>
                                 </div>
+
                                 <div class="modal-body">
-                                    <form action="<?= site_url('report/cetak_nopol_surat_tangki'); ?>" method="post" role="form" target="_blank">
+                                    <form action="<?= site_url('report/tabel_angkutan'); ?>" method="get" role="form">
+
                                         <div class="form-group row">
-                                            <label for="nopol" class="col-sm-3 col-form-label">Nopol</label>
+                                            <label for="bulan" class="col-sm-3 col-form-label">NOPOL</label>
                                             <div class="col-sm-6">
-                                            <select name="nopol" class="form-control" id="id_tangki">
-                                        <option value="" selected>-- Pilih Nopol --</option>
-                                        <?php foreach ($list_tangki as $s) { ?>
-                                            <option value="<?= $s->nopol; ?>"><?= $s->nopol; ?></option>
-                                        <?php } ?>
-                                    </select>
+
+
+                                                <select name="nopol" class="form-control" id="nopol">
+                                                    <option value="" selected>NOPOL</option>
+                                                    <?php foreach ($tangki as $s) : ?>
+                                                        <option value="<?= $s->nopol; ?>"><?= $s->nopol; ?> - <?= $s->volume_tangki; ?> Liter
+                                                        </option>
+                                                    <?php endforeach; ?>
+                                                </select>
+
+                                                </select>
                                             </div>
                                         </div>
-                             
+
+                                        <div class="form-group row">
+                                            <label for="tgl_awal" class="col-sm-3 col-form-label">dari Tanggal</label>
+                                            <div class="col-sm-6">
+                                                <input type="date" name="tgl_awal" class="form-control" id="tgl_berangkat" required value="<?= date('Y-m-d'); ?>">
+                                            </div>
+                                        </div>
+
+                                        <div class="fomm-group row">
+                                            <label for="bulan2" class="col-sm-3 col-form-label">ke Tanggal</label>
+                                            <div class="col-sm-6">
+                                                <input type="date" name="tgl_akhir" class="form-control" id="tgl_berangkat" value="<?= date('Y-m-d'); ?>">
+                                            </div>
+                                        </div>
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="submit" class="btn btn-success btn-sm"><i class="fas fa-print mr-2"></i> Cetak</button>
+                                    <button type="submit" class="btn btn-success btn-sm">Tampilkan</button>
                                     <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Close</button>
                                 </div>
                                 </form>
@@ -125,8 +169,7 @@
                         </div>
                     </div>
 
-                        </div>
-                    </div>
+
                 </div>
             </div>
         </div><!-- /.container-fluid -->

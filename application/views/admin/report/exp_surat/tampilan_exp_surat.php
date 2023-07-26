@@ -42,7 +42,7 @@
                                 </div>
                             <?php } ?>
                             <!-- <a href="<?= base_url('admin/tambah_exp_surat'); ?>" style="margin-bottom:10px;" type="button" class="btn btn-sm btn-primary" name="tambah_data"><i class="fa fa-plus mr-2" aria-hidden="true"></i>Tambah</a> -->
-                            <a href="<?= base_url('report/cetak_rep_exp_surat'); ?>" style="margin-bottom:10px;" type="button" class="btn btn-sm btn-success" name="tambah_data"><i class="fa fa-print mr-2" aria-hidden="true"></i>Cetak</a>
+                            <a href="<?= base_url('report/cetak_exp_surat'); ?>" style="margin-bottom:10px;" type="button" class="btn btn-sm btn-success" name="tambah_data"><i class="fa fa-print mr-2" aria-hidden="true"></i>Cetak</a>
 
 
                             <table id="example1" class="table table-bordered table-striped table-hover" style="width:100%">

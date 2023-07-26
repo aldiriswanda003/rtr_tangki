@@ -62,7 +62,7 @@
                                             <tr>
                                                 <td><?= $no++; ?></td>
                                                 <td><?= $st->nama_supir ?></td>
-                                                <td> <?= $st->nopol ?> - <?= $st->volume_tangki ?> </td>
+                                                <td> <?= $st->nopol ?> - <?= $st->volume_tangki ?> Liter</td>
                                                 <td><?= $st->tanggal_update ?></td>
                                                
 
@@ -79,10 +79,7 @@
                                 </tbody>
                                 <tr>
                                     <thead>
-                                        <th></th>
-                                        <th style="width: 200px;"><input type="text" name="filter_nama" class="form-control" id="filter_nama" placeholder="Filter Nama Supir"></th>
-                                        <th style="width: 200px;"><input type="text" name="filter_no_telp" class="form-control" id="filter_no_telp" placeholder="Filter No. Telp Supir"></th>
-                                        <th colspan="5"></th>
+                                  
                                     </thead>
                                 </tr>
                             </table>

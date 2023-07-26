@@ -32,7 +32,7 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header">
-                            Data Tangki
+                            KLIK Tombol <b>DETAIL</b> untuk melihat gambar truk tangki
                         </div>
                         <div class="card-body">
                             <?php if ($this->session->flashdata('msg_sukses')) { ?>
@@ -64,8 +64,10 @@
                                                 <td><?= $t->nopol ?></td>
                                                 <td><?= $t->tahun_dibuat ?></td>
                                                 <td><?= number_format($t->volume_tangki) ?>&nbsp;Liter</td>
-                                                <td><a href="<?= base_url('admin/edit_tangki/' . $t->id_tangki); ?>" type="button" class="btn btn-sm btn-success" name="btn_edit"><i class="fa fa-edit"></i>&nbsp;Edit</a>
-                                                <a href="<?= base_url('admin/hapus_data_tangki/' . $t->id_tangki); ?>" type="button" class="btn btn-sm btn-danger btn-delete" name="btn_delete"><i class="fa fa-trash"></i>&nbsp;Hapus</a></td>
+                                                <td><a href="<?= base_url('admin/edit_tangki/' . $t->id_tangki); ?>" type="button" class="btn btn-sm btn-success" name="btn_edit" title="EDIT"><i class="fa fa-edit" title="EDIT"></i></a>&nbsp;
+                                                <a href="<?= base_url('admin/hapus_data_tangki/' . $t->id_tangki); ?>" type="button" class="btn btn-sm btn-danger btn-delete" name="btn_delete" title="HAPUS"><i class="fa fa-trash" title="HAPUS"></i></a>
+                                                <br>
+                                                <a href="<?= base_url('admin/control_detail_tangki/' . $t->id_tangki); ?>" type="button" class="btn btn-xs btn-warning " name=""><i class="fa fa-circle-info"></i>&nbsp;DETAIL</a></td>
                                             </tr>
                                         <?php endforeach; ?>
                                     <?php } ?>

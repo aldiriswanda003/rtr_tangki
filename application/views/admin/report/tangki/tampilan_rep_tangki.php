@@ -41,7 +41,7 @@
                                     <strong>Berhasil!</strong><br> <?= $this->session->flashdata('msg_sukses'); ?>
                                 </div>
                             <?php } ?>
-                            <a href="<?= base_url('report/cetak_rep_tangki'); ?>" style="margin-bottom:10px;" type="button" class="btn btn-sm btn-success" name="tambah_data"><i class="fa fa-print mr-2" aria-hidden="true"></i>Cetak</a>
+                            <a href="<?= base_url('report/cetak_print_tangki'); ?>" style="margin-bottom:10px;" type="button" class="btn btn-sm btn-success" name="tambah_data"><i class="fa fa-print mr-2" aria-hidden="true"></i>Cetak</a>
 
                             <table id="example1" class="table table-bordered table-striped table-hover" style="width:100%">
                                 <thead>
@@ -64,7 +64,7 @@
                                                 <td><?= $t->nopol ?></td>
                                                 <td ><?= $t->tahun_dibuat ?></td>
                                                 <td><?= number_format($t->volume_tangki) ?>&nbsp;Liter</td>
-                                                <td><a href="<?= base_url('report/info_rep_supir/#' . $t->id_tangki); ?>" type="button" class="btn btn-xs btn-warning " name=""><i class="fa fa-circle-info"></i>&nbsp;DETAIL</a></td>
+                                                <td><a href="<?= base_url('report/control_detail_tangki/' . $t->id_tangki); ?>" type="button" class="btn btn-xs btn-warning " name=""><i class="fa fa-circle-info"></i>&nbsp;DETAIL</a></td>
 
                                                
                                             </tr>
@@ -73,11 +73,9 @@
                                 </tbody>
                                 <tr>
                                     <thead>
-                                        <th></th>
-                                        <th style="width: 200px;"><input type="text" name="filter_nopol" class="form-control" id="filter_nopol" placeholder="Filter Nopol"></th>
-                                        <th style="width: 200px;"><input type="text" name="filter_tahun_dibuat" class="form-control" id="filter_tahun_dibuat" placeholder="Filter Tahun Dibuat"></th>
-                                        <th style="width: 200px;"><input type="text" name="filter_volume_tangki" class="form-control" id="filter_volume_tangki" placeholder="Filter Volume Tangki"></th>
-                                     
+                                        
+                                            
+                                            
                                     </thead>
                                
                                 </tr>
