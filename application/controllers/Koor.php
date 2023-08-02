@@ -9,6 +9,7 @@ class Koor extends CI_Controller
         parent::__construct();
         $this->load->model('M_admin');
         $this->load->library('upload');
+        $this->load->library('mailer');
         if ($this->session->userdata('status') != 'login') {
             redirect(base_url("login"));
         }
@@ -183,7 +184,7 @@ class Koor extends CI_Controller
     {
         $data['avatar'] = $this->M_admin->get_data_avatar('tb_user', $this->session->userdata('name'));
         $data['title'] = 'Profile';
-        $this->load->view('admin/form_user/profile', $data);
+        $this->load->view('koor/form_user/profile', $data);
         // $this->load->view('admin/profile', $data);
     }
 
@@ -208,11 +209,11 @@ class Koor extends CI_Controller
             );
             $this->M_admin->update_password('tb_user', $where, $data);
             $this->session->set_flashdata('msg_sukses', 'Password Berhasil Diganti, Silahkan Sign Out dan Login Kembali');
-            redirect(base_url('admin/profile'));
+            redirect(base_url('koor/profile'));
         } else {
             $data['avatar'] = $this->M_admin->get_data_avatar('tb_user', $this->session->userdata('name'));
             $data['title'] = 'Profile';
-            $this->load->view('admin/form_user/profile', $data);
+            $this->load->view('koor/form_user/profile', $data);
         }
     }
 
@@ -1354,35 +1355,38 @@ class Koor extends CI_Controller
     {
         $bulan = $this->input->get('bulan');
         $tahun = $this->input->get('tahun');
-        if (empty($bulan) or empty($tahun)) { // Cek jika tgl_awal atau tgl_akhir kosong, maka :            
+        $nopol = $this->input->get('nopol');
+
+        if (empty($bulan) or empty($tahun) or empty($nopol)) { // Cek jika tgl_awal atau tgl_akhir kosong, maka :            
             $data['perbaikan'] = $this->M_admin->select_perbaikan('tb_perbaikan');
             $data['total_data'] = $this->M_admin->sum_perbaikan('tb_perbaikan');
             $label = 'Bulan ke ...' . ' Tahun ...';
         } else {
-            $data['perbaikan'] = $this->M_admin->perbaikan_periode('tb_perbaikan', $bulan, $tahun);
-            $data['total_data'] = $this->M_admin->sum_perbaikan_periode('tb_perbaikan', $bulan, $tahun);
-            $label = 'Bulan ke ' . $bulan . ' Tahun ' .  $tahun;
+            $data['perbaikan'] = $this->M_admin->perbaikan_periode('tb_perbaikan', $bulan, $tahun, $nopol);
+            $data['total_data'] = $this->M_admin->sum_perbaikan_periode('tb_perbaikan', $bulan, $tahun, $nopol);
+            $label = 'Nopol ' . $nopol . ' Bulan ke ' . $bulan . ' Tahun ' .  $tahun;
+       
         }
         $data['label'] = $label;
 
         // $data['perbaikan'] = $this->M_admin->select_perbaikan('tb_perbaikan');        
-
+        $data['tangki'] = $this->M_admin->get_sp_tangki('tb_supir_tangki');
         $data['avatar'] = $this->M_admin->get_data_avatar('tb_user', $this->session->userdata('name'));
         $data['title'] = 'Perbaikan';
-        $this->load->view('admin/form_perbaikan/perbaikan', $data);
+        $this->load->view('koor/form_perbaikan/perbaikan', $data);
     }
 
-    public function tambah_perbaikan()
-    {
+    // public function tambah_perbaikan()
+    // {
 
-        $data['list_service_masuk'] = $this->M_admin->get_perbaikan('tb_service_masuk');
-        $data['list_supir_tangki'] = $this->M_admin->select('tb_supir_tangki');
-        $data['list_bengkel'] = $this->M_admin->select('tb_bengkel');
-        $data['list_supir'] = $this->M_admin->select('tb_supir');
-        $data['avatar'] = $this->M_admin->get_data_avatar('tb_user', $this->session->userdata('name'));
-        $data['title'] = 'Tambah Perbaikan';
-        $this->load->view('admin/form_perbaikan/tambah_perbaikan', $data);
-    }
+    //     $data['list_service_masuk'] = $this->M_admin->get_perbaikan('tb_service_masuk');
+    //     $data['list_supir_tangki'] = $this->M_admin->select('tb_supir_tangki');
+    //     $data['list_bengkel'] = $this->M_admin->select('tb_bengkel');
+    //     $data['list_supir'] = $this->M_admin->select('tb_supir');
+    //     $data['avatar'] = $this->M_admin->get_data_avatar('tb_user', $this->session->userdata('name'));
+    //     $data['title'] = 'Tambah Perbaikan';
+    //     $this->load->view('admin/form_perbaikan/tambah_perbaikan', $data);
+    // }
 
     public function proses_tambah_perbaikan()
     {
@@ -1427,21 +1431,21 @@ class Koor extends CI_Controller
     }
 
 
-    public function edit_perbaikan()
-    {
+    // public function edit_perbaikan()
+    // {
 
-        $uri = $this->uri->segment(3);
-        $where = array('id_perbaikan' => $uri);
+    //     $uri = $this->uri->segment(3);
+    //     $where = array('id_perbaikan' => $uri);
 
-        $data['list_perbaikan'] = $this->M_admin->get_data('tb_perbaikan', $where);
-        $data['list_service_masuk'] = $this->M_admin->get_perbaikan('tb_service_masuk');
-        $data['list_supir_tangki'] = $this->M_admin->select('tb_supir_tangki');
-        $data['list_bengkel'] = $this->M_admin->select('tb_bengkel');
-        $data['list_supir'] = $this->M_admin->select('tb_supir');
-        $data['avatar'] = $this->M_admin->get_data_avatar('tb_user', $this->session->userdata('name'));
-        $data['title'] = 'Tambah Perbaikan';
-        $this->load->view('admin/form_perbaikan/edit_perbaikan', $data);
-    }
+    //     $data['list_perbaikan'] = $this->M_admin->get_data('tb_perbaikan', $where);
+    //     $data['list_service_masuk'] = $this->M_admin->get_perbaikan('tb_service_masuk');
+    //     $data['list_supir_tangki'] = $this->M_admin->select('tb_supir_tangki');
+    //     $data['list_bengkel'] = $this->M_admin->select('tb_bengkel');
+    //     $data['list_supir'] = $this->M_admin->select('tb_supir');
+    //     $data['avatar'] = $this->M_admin->get_data_avatar('tb_user', $this->session->userdata('name'));
+    //     $data['title'] = 'Tambah Perbaikan';
+    //     $this->load->view('admin/form_perbaikan/edit_perbaikan', $data);
+    // }
 
     public function proses_edit_perbaikan()
     {
@@ -1719,22 +1723,22 @@ class Koor extends CI_Controller
         // $data['angkutan'] = $this->M_admin->get_angkutan('tb_angkutan');
         $data['avatar'] = $this->M_admin->get_data_avatar('tb_user', $this->session->userdata('name'));
         $data['title'] = 'Angkutan RTR';
-        $this->load->view('admin/form_angkutan/angkutan', $data);
+        $this->load->view('koor/form_angkutan/angkutan', $data);
     }
 
-    public function tambah_angkutan()
-    {
+    // public function tambah_angkutan()
+    // {
 
-        $data['angkutan'] = $this->M_admin->get_angkutan('tb_angkutan');
-        $data['list_supirtangki'] = $this->M_admin->get_supir_tangki('tb_supir_tangki');
-        $data['tujuan'] = $this->M_admin->select('tb_tujuan');
+    //     $data['angkutan'] = $this->M_admin->get_angkutan('tb_angkutan');
+    //     $data['list_supirtangki'] = $this->M_admin->get_supir_tangki('tb_supir_tangki');
+    //     $data['tujuan'] = $this->M_admin->select('tb_tujuan');
 
 
-        // $data['list_supir'] = $this->M_admin->select('tb_supir');
-        $data['avatar'] = $this->M_admin->get_data_avatar('tb_user', $this->session->userdata('name'));
-        $data['title'] = 'Tambah Tujuaan';
-        $this->load->view('admin/form_angkutan/tambah_angkutan', $data);
-    }
+    //     // $data['list_supir'] = $this->M_admin->select('tb_supir');
+    //     $data['avatar'] = $this->M_admin->get_data_avatar('tb_user', $this->session->userdata('name'));
+    //     $data['title'] = 'Tambah Tujuaan';
+    //     $this->load->view('admin/form_angkutan/tambah_angkutan', $data);
+    // }
 
     public function proses_tambah_angkutan()
     {
@@ -1777,18 +1781,18 @@ class Koor extends CI_Controller
         }
     }
 
-    public function edit_angkutan()
-    {
-        $uri = $this->uri->segment(3);
-        $where = array('id_angkutan' => $uri);
+    // public function edit_angkutan()
+    // {
+    //     $uri = $this->uri->segment(3);
+    //     $where = array('id_angkutan' => $uri);
 
-        $data['angkutan'] = $this->M_admin->get_data('tb_angkutan', $where);
-        $data['list_supirtangki'] = $this->M_admin->get_supir_tangki('tb_supir_tangki');
-        $data['tujuan'] = $this->M_admin->select('tb_tujuan');
-        $data['avatar'] = $this->M_admin->get_data_avatar('tb_user', $this->session->userdata('name'));
-        $data['title'] = 'Edit Supir Tangki';
-        $this->load->view('admin/form_angkutan/edit_angkutan', $data);
-    }
+    //     $data['angkutan'] = $this->M_admin->get_data('tb_angkutan', $where);
+    //     $data['list_supirtangki'] = $this->M_admin->get_supir_tangki('tb_supir_tangki');
+    //     $data['tujuan'] = $this->M_admin->select('tb_tujuan');
+    //     $data['avatar'] = $this->M_admin->get_data_avatar('tb_user', $this->session->userdata('name'));
+    //     $data['title'] = 'Edit Supir Tangki';
+    //     $this->load->view('admin/form_angkutan/edit_angkutan', $data);
+    // }
 
 
     public function proses_edit_angkutan()
@@ -1835,4 +1839,55 @@ class Koor extends CI_Controller
         $this->session->set_flashdata('msg_sukses', 'Data Angkutan Berhasil Dihapus');
         redirect(base_url('admin/tabel_angkutan'));
     }
+
+    /////////////////////
+    /// NOTIF STATUS
+    /////////////////////
+
+    public function proses_email_statusperbaikan()
+    {
+        $uri = $this->uri->segment(3);
+        $where = array('id_service_masuk' => $uri);
+
+        // $tgl = date('Y-m-d');
+        $data['notifOut'] = $this->M_admin->get_service_masuk('tb_service_masuk', $where);
+        $data['list_email'] = $this->M_admin->select('tb_supir');
+        $data['avatar'] = $this->M_admin->get_data_avatar('tb_user', $this->session->userdata('name'));
+        $data['title'] = 'email';
+        $this->load->view('koor/email/email_statusperbaikan', $data);
+    }
+
+    public function kirim_email_statusperbaikan()
+    {
+
+
+        $email_penerima = $this->input->post('email_penerima');
+        $subjek = $this->input->post('subjek');
+        $pesan = $this->input->post('pesan');
+        $attachment = $_FILES['attachment'];
+        $content = $this->load->view('koor/email/content', array('pesan' => $pesan), true); // Ambil isi file content.php dan masukan ke variabel $content
+        $sendmail = array(
+            'email_penerima' => $email_penerima,
+            'subjek' => $subjek,
+            'content' => $content,
+            'attachment' => $attachment
+        );
+        if (empty($attachment['name'])) {
+            $send = $this->mailer->send($sendmail);
+        } else {
+            $send = $this->mailer->send_with_attachment($sendmail);
+        }
+
+        echo "<b>" . $send['status'] . "</b><br />";
+        echo $send['message'];
+
+        // $data['avatar'] = $this->M_admin->get_data_avatar('tb_avatar', $this->session->userdata('name'));
+        // $data['title'] = 'email';
+        // $this->load->view('admin/email/v_email', $data);
+
+        // redirect(base_url('admin/email'));
+        echo "<br /><a href='" . base_url("koor/tabel_service_masuk") . "'>Kembali ke Tabel Perbaikan Masuk</a>";
+    }
+
+
 }

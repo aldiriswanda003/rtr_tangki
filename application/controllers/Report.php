@@ -135,18 +135,22 @@ class Report extends CI_Controller
     {
         $bulan = $this->input->get('bulan');
         $tahun = $this->input->get('tahun');
-        if (empty($bulan) or empty($tahun)) { // Cek jika tgl_awal atau tgl_akhir kosong, maka :            
+        $nopol = $this->input->get('nopol');
+        
+        if (empty($bulan) or empty($tahun) or empty($nopol)) { // Cek jika tgl_awal atau tgl_akhir kosong, maka :            
             $data['perbaikan'] = $this->M_admin->select_perbaikan('tb_perbaikan');
             $data['total_data'] = $this->M_admin->sum_perbaikan('tb_perbaikan');
             $label = 'Bulan ke ...' . ' Tahun ...';
         } else {
-            $data['perbaikan'] = $this->M_admin->perbaikan_periode('tb_perbaikan', $bulan, $tahun);
-            $data['total_data'] = $this->M_admin->sum_perbaikan_periode('tb_perbaikan', $bulan, $tahun);
-            $label = 'Bulan ke ' . $bulan . ' Tahun ' .  $tahun;
+            $data['perbaikan'] = $this->M_admin->perbaikan_periode('tb_perbaikan', $bulan, $tahun, $nopol);
+            $data['total_data'] = $this->M_admin->sum_perbaikan_periode('tb_perbaikan', $bulan, $tahun, $nopol);
+            $label = 'Nopol ' . $nopol . ' Bulan ke ' . $bulan . ' Tahun ' .  $tahun;
+
         }
         $data['label'] = $label;
 
         // $data['perbaikan'] = $this->M_admin->select_perbaikan('tb_perbaikan');        
+        $data['tangki'] = $this->M_admin->get_sp_tangki('tb_supir_tangki');
 
         $data['avatar'] = $this->M_admin->get_data_avatar('tb_user', $this->session->userdata('name'));
         $data['title'] = 'Perbaikan';
@@ -157,19 +161,23 @@ class Report extends CI_Controller
     {
         $bulan = $this->input->get('bulan');
         $tahun = $this->input->get('tahun');
-        if (empty($bulan) or empty($tahun)) { // Cek jika tgl_awal atau tgl_akhir kosong, maka :            
+        $nopol = $this->input->get('nopol');
+
+        if (empty($bulan) or empty($tahun) or empty($nopol)) { // Cek jika tgl_awal atau tgl_akhir kosong, maka :            
             $data['perbaikan'] = $this->M_admin->select_perbaikan('tb_perbaikan');
             $data['total_data'] = $this->M_admin->sum_perbaikan('tb_perbaikan');
             $label = 'Bulan ke ...' . ' Tahun ...';
         } else {
-            $data['perbaikan'] = $this->M_admin->perbaikan_periode('tb_perbaikan', $bulan, $tahun);
-            $data['total_data'] = $this->M_admin->sum_perbaikan_periode('tb_perbaikan', $bulan, $tahun);
-            $label = 'Bulan ke ' . $bulan . ' Tahun ' .  $tahun;
+            $data['perbaikan'] = $this->M_admin->perbaikan_periode('tb_perbaikan', $bulan, $tahun, $nopol);
+            $data['total_data'] = $this->M_admin->sum_perbaikan_periode('tb_perbaikan', $bulan, $tahun, $nopol);
+            $label = 'Nopol ' . $nopol . ' Bulan ke ' . $bulan . ' Tahun ' .  $tahun;
+
         }
         $data['label'] = $label;
 
         // $data['perbaikan'] = $this->M_admin->select_perbaikan('tb_perbaikan');        
 
+        $data['tangki'] = $this->M_admin->get_sp_tangki('tb_supir_tangki');
         $data['avatar'] = $this->M_admin->get_data_avatar('tb_user', $this->session->userdata('name'));
         $data['title'] = 'Perbaikan';
         $this->load->view('admin/report/perbaikan/print_rep_perbaikan', $data);

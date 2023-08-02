@@ -1,6 +1,6 @@
 <?php $this->load->view('template/head'); ?>
-<?php $this->load->view('admin/template/nav'); ?>
-<?php $this->load->view('admin/template/sidebar'); ?>
+<?php $this->load->view('koor/template/nav'); ?>
+<?php $this->load->view('koor/template/sidebar'); ?>
 
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -8,7 +8,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h4 class="m-0">REPORT 2 PERBAIKAN DISETUJUI</h4>
+                    <h4 class="m-0">REPORT PERBAIKAN DISETUJUI</h4>
                 </div><!-- /.col -->
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
@@ -63,7 +63,23 @@
                                 </div>
                                 
                                 <div class="modal-body">
-                                    <form action="<?= site_url('report/cetak_rep_perbaikan'); ?>" method="get" role="form">
+                                    <form action="<?= site_url('report_koor/cetak_rep_perbaikan'); ?>" method="get" role="form">
+
+                                    <div class="form-group row">
+                                            <label for="bulan" class="col-sm-3 col-form-label">NOPOL</label>
+                                            <div class="col-sm-6">
+
+
+                                                <select name="nopol" class="form-control" id="nopol">
+                                                    <option value="" selected>NOPOL</option>
+                                                    <?php foreach ($tangki as $s) : ?>
+                                                        <option value="<?= $s->nopol; ?>"><?= $s->nopol; ?> - <?= $s->volume_tangki; ?> Liter
+                                                        </option>
+                                                    <?php endforeach; ?>
+                                                </select>
+
+                                            </div>
+                                        </div>
 
                                         <div class="form-group row">
                                             <label for="bulan" class="col-sm-3 col-form-label">Bulan</label>
@@ -111,7 +127,7 @@
 </div>
 <?php $this->load->view('template/footer'); ?>
 
-<?php $this->load->view('admin/template/script') ?>
+<?php $this->load->view('koor/template/script') ?>
 <script>
     //* Script untuk menampilkan loading
     document.onreadystatechange = function() {

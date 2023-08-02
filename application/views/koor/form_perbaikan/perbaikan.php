@@ -1,6 +1,6 @@
 <?php $this->load->view('template/head'); ?>
-<?php $this->load->view('admin/template/nav'); ?>
-<?php $this->load->view('admin/template/sidebar'); ?>
+<?php $this->load->view('koor/template/nav'); ?>
+<?php $this->load->view('koor/template/sidebar'); ?>
 
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -8,12 +8,12 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h4 class="m-0">DAFTAR ANGKUTAN </h4>
+                    <h4 class="m-0">PERBAIKAN DISETUJUI</h4>
                 </div><!-- /.col -->
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="#">Home</a></li>
-                        <li class="breadcrumb-item active">tujuan</li>
+                        <li class="breadcrumb-item"><a href="<?= base_url('koor/index/'); ?>">Home</a></li>
+                        <li class="breadcrumb-item active">Perbaikan disetujui</li>
                     </ol>
                 </div><!-- /.col -->
             </div><!-- /.row -->
@@ -32,7 +32,8 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header">
-                            angkutan </div>
+                                Data Perbaikan yang proses nya sudah selesai atau sudah disetujui
+                        </div>
                         <div class="card-body">
                             <?php if ($this->session->flashdata('msg_sukses')) { ?>
                                 <div class="alert alert-success alert-dismissible">
@@ -40,95 +41,82 @@
                                     <strong>Berhasil!</strong><br> <?= $this->session->flashdata('msg_sukses'); ?>
                                 </div>
                             <?php } ?>
-                            <a href="<?= base_url('admin/tambah_angkutan'); ?>" style="margin-bottom:10px;" type="button" class="btn btn-sm btn-primary" name="tambah_data"><i class="fa fa-plus mr-2" aria-hidden="true"></i>Tambah</a>
-                            <button data-toggle="modal" data-target="#static_angkutan_bulanan" style="margin-bottom:10px;" type="button" class="btn btn-sm btn-warning" name="static_angkutan_bulanan"><i class="fa fa-filter   "></i>&nbsp; FILTER NOPOL & TANGGAL</button>
-
-
-                            <table id="example1" class="table table-bordered table-striped table-hover" style="width:100%">
+                            <!-- <a href="<?= base_url('koor/tambah_perbaikan'); ?>" style="margin-bottom:10px;" type="button" class="btn btn-sm btn-primary" name="tambah_data"><i class="fa fa-plus mr-2" aria-hidden="true"></i>Tambah</a> -->
+                            <button data-toggle="modal" data-target="#static_perbaikan_bulanan" style="margin-bottom:10px;" type="button" class="btn btn-sm btn-success" name="static_perbaikan_bulanan"><i class="fa fa-table"></i>&nbsp;Pilih Periode</button>
+                            
+                            <table id="example1" class="table table-bordered table-striped table-hover" >
                                 <thead>
-
-                                    <tr>
+                                <tr>
                                         <?php foreach ($total_data as $td) : ?>
-                                            <th colspan="8" style="text-align: center;"><?php echo $label ?>
-                                                <br>
-                                                Total Kilometer yang ditempuh :<span style="color: red;">&nbsp;<?= $td->kilometer_pp; ?> KM </span>
-                                            </th>
+                                            <th colspan="8" style="text-align: center;">Total Perbaikan <?php echo $label ?> : <span style="color: red;">Rp&nbsp;<?= number_format($td->biaya_perbaikan); ?></span></th>
                                         <?php endforeach; ?>
-                                    </tr>
-
-
-
-
+                                        </tr>
 
                                     <tr align="center">
-                                        <th style="width :10px">No.</th>
-                                        <th>Nopol</th>
-                                        <th>Volume</th>
-                                        <th>Supir</th>
-                                        <th>Tgl Berangkat</th>
-                                        <th>Tujuan</th>
-                                        <th style="width :20px">Jarak PP</th>
+                                        <th style="width :10px;">No.</th>
+                                        
+                                        <th style="width: 100px;" >NOPOL</th>
+                                        <th>Nama Bengkel</th>
+                                        <th style="width: 60px;" >Tanggal</th>
+                                        <th style="width: 200px;">Keterangan</th>
+                                        <th >Foto Nota</th>
+                                        <th>Biaya</th>
+                                        
 
 
-                                        <th style="width:58px">Aksi</th>
-
+                                        <!-- <th style="width:58px" >Aksi</th> -->
+                                        <!-- <th style="width:58px">Hapus</th> -->
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <?php
                                     $no = 1;
-                                    ?>
-                                    <?php foreach ($angkutan as $st) : ?>
-                                        <tr>
-                                            <td><?= $no++; ?></td>
-                                            <td><?= $st->nopol ?></td>
-                                            <td><?= $st->volume_tangki ?></td>
-                                            <td><?= $st->nama_supir ?></td>
-                                            <td><?= $st->tgl_berangkat ?></td>
-                                            <td><?= $st->nama_tujuan ?></td>
-                                            <td><?= $st->kilometer_pp ?> KM</td>
+                                    if (is_array($perbaikan)) { ?>
+                                        <?php foreach ($perbaikan as $sm) : ?>
+                                            <tr>
+                                                <td><?= $no++; ?></td>
+                                                
+                                                <td><?= $sm->nopol ?></td>
+                                                <td><?= $sm->nama_bengkel ?></td>
+                                                <td><?= $sm->tgl_perbaikan ?></td>
+                                                <td><?= $sm->keterangan ?></td>
+                                                <td><img src="<?= base_url('assets/upload/perbaikan/foto_nota/' . $sm->foto_nota); ?>" class="img img-box" width="100" height="100" alt="<?= $sm->foto_nota; ?>"></td>
 
-
-
-                                            <td>
-
-                                                <a href="<?= base_url('admin/edit_angkutan/' . $st->id_angkutan); ?>" type="button" class="btn btn-xs btn-success " name="btn_edit"><i class="fa fa-edit"></i>&nbsp;Edit</a>
-                                                <a href="<?= base_url('admin/hapus_angkutan/' . $st->id_angkutan); ?>" type="button" class="btn btn-xs btn-danger btn-delete" name="btn_delete"><i class="fa fa-trash"></i>&nbsp;Hapus</a>
-
-
-
-                                            </td>
-                                        </tr>
-                                    <?php endforeach; ?>
-
+                                                <td>Rp <?= number_format($sm->biaya_perbaikan) ?></td>
+                                            
+                       
+                                                <!-- <td><a href="<?= base_url('koor/edit_perbaikan/' . $sm->id_perbaikan); ?>" type="button" class="btn btn-sm btn-success" name="btn_edit"><i class="fa fa-edit" title="Edit"></i></a>
+                                                <a href="<?= base_url('koor/hapus_data_perbaikan/' . $sm->id_perbaikan); ?>" type="button" class="btn btn-sm btn-danger btn-delete" name="btn_delete"><i class="fa fa-trash" title="Hapus"></i></a></td> -->
+                                                <!-- ulah function tombol hapus nya di koor controller -->
+                                            </tr>
+                                        <?php endforeach; ?>
+                                    <?php } ?>
                                 </tbody>
                                 <tr>
                                     <thead>
-                                        <!-- <th></th>
-                                        <th style="width: 200px;"><input type="text" name="filter_nama" class="form-control" id="filter_nama" placeholder="Filter Nama Supir"></th>
-                                        <th style="width: 200px;"><input type="text" name="filter_no_telp" class="form-control" id="filter_no_telp" placeholder="Filter No. Telp Supir"></th>
-                                        <th colspan="5"></th> -->
+                                        
                                     </thead>
                                 </tr>
                             </table>
                         </div>
                     </div>
+                    
 
-                    <!-- Modal -->
-                    <div class="modal fade" id="static_angkutan_bulanan" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+<!-- Modal -->
+<div class="modal fade" id="static_perbaikan_bulanan" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                         <div class="modal-dialog modal-dialog-centered">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h6 class="modal-title" id="staticBackdropLabel">FILTER PERTANGGAL</h6>
+                                    <h6 class="modal-title" id="staticBackdropLabel">Tampilkan Bulanan</h6>
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                         <span>&times;</span>
                                     </button>
                                 </div>
-
                                 <div class="modal-body">
-                                    <form action="<?= site_url('admin/tabel_angkutan'); ?>" method="get" role="form">
+                                    <form action="<?= site_url('koor/tabel_perbaikan'); ?>" method="get" role="form">
 
-                                        <div class="form-group row">
+
+                                    <div class="form-group row">
                                             <label for="bulan" class="col-sm-3 col-form-label">NOPOL</label>
                                             <div class="col-sm-6">
 
@@ -141,21 +129,33 @@
                                                     <?php endforeach; ?>
                                                 </select>
 
-                                               
                                             </div>
                                         </div>
 
                                         <div class="form-group row">
-                                            <label for="tgl_awal" class="col-sm-3 col-form-label">dari Tanggal</label>
+                                            <label for="bulan" class="col-sm-3 col-form-label">Bulan</label>
                                             <div class="col-sm-6">
-                                                <input type="date" name="tgl_awal" class="form-control" id="tgl_berangkat" required value="<?= date('Y-m-d'); ?>">
+                                                <select name="bulan" id="bulan" class="form-control">
+                                                    <option value="" selected="">--Pilih Bulan--</option>
+                                                    <option value="01">Januari</option>
+                                                    <option value="02">Februari</option>
+                                                    <option value="03">Maret</option>
+                                                    <option value="04">April</option>
+                                                    <option value="05">Mei</option>
+                                                    <option value="06">Juni</option>
+                                                    <option value="07">Juli</option>
+                                                    <option value="08">Agustus</option>
+                                                    <option value="09">September</option>
+                                                    <option value="10">Oktober</option>
+                                                    <option value="11">November</option>
+                                                    <option value="12">Desember</option>
+                                                </select>
                                             </div>
                                         </div>
-
-                                        <div class="fomm-group row">
-                                            <label for="bulan2" class="col-sm-3 col-form-label">ke Tanggal</label>
+                                        <div class="form-group row">
+                                            <label for="tahun" class="col-sm-3 col-form-label">Tahun</label>
                                             <div class="col-sm-6">
-                                                <input type="date" name="tgl_akhir" class="form-control" id="tgl_berangkat" value="<?= date('Y-m-d'); ?>">
+                                                <input type="text" name="tahun" class="form-control" id="tahun" value="<?= date('Y'); ?>">
                                             </div>
                                         </div>
                                 </div>
@@ -169,6 +169,8 @@
                     </div>
 
 
+
+
                 </div>
             </div>
         </div><!-- /.container-fluid -->
@@ -176,7 +178,7 @@
 </div>
 <?php $this->load->view('template/footer'); ?>
 
-<?php $this->load->view('admin/template/script') ?>
+<?php $this->load->view('koor/template/script') ?>
 <script>
     //* Script untuk menampilkan loading
     document.onreadystatechange = function() {

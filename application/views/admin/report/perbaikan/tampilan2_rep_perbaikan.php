@@ -65,6 +65,22 @@
                                 <div class="modal-body">
                                     <form action="<?= site_url('report/cetak_rep_perbaikan'); ?>" method="get" role="form">
 
+                                    <div class="form-group row">
+                                            <label for="bulan" class="col-sm-3 col-form-label">Nopol</label>
+                                            <div class="col-sm-6">
+
+                                            
+                                                <select name="nopol" class="form-control" id="nopol">
+                                                    <option value="" selected>NOPOL</option>
+                                                    <?php foreach ($tangki  as $s) : ?>
+                                                        <option value="<?= $s->nopol; ?>"><?= $s->nopol; ?> - <?= $s->volume_tangki; ?> Liter
+                                                        </option>
+                                                    <?php endforeach; ?>
+                                                </select>
+
+                                            </div>
+                                        </div>
+
                                         <div class="form-group row">
                                             <label for="bulan" class="col-sm-3 col-form-label">Bulan</label>
                                             <div class="col-sm-6">

@@ -84,13 +84,6 @@
 
                                                 <td>Rp <?= number_format($sm->biaya_perbaikan) ?></td>
                                             
-                                              
-                                                    
-
-
-                                                
-                                                
-
                                                 <td><a href="<?= base_url('admin/edit_perbaikan/' . $sm->id_perbaikan); ?>" type="button" class="btn btn-sm btn-success" name="btn_edit"><i class="fa fa-edit" title="Edit"></i></a>
                                                 <a href="<?= base_url('admin/hapus_data_perbaikan/' . $sm->id_perbaikan); ?>" type="button" class="btn btn-sm btn-danger btn-delete" name="btn_delete"><i class="fa fa-trash" title="Hapus"></i></a></td>
                                                 <!-- ulah function tombol hapus nya di admin controller -->
@@ -118,10 +111,27 @@
                                         <span>&times;</span>
                                     </button>
                                 </div>
+
                                 <div class="modal-body">
                                     <form action="<?= site_url('admin/tabel_perbaikan'); ?>" method="get" role="form">
 
-                                        <div class="form-group row">
+                                    <div class="form-group row">
+                                            <label for="bulan" class="col-sm-3 col-form-label">NOPOL</label>
+                                            <div class="col-sm-6">
+
+
+                                                <select name="nopol" class="form-control" id="nopol">
+                                                    <option value="" selected>NOPOL</option>
+                                                    <?php foreach ($tangki as $s) : ?>
+                                                        <option value="<?= $s->nopol; ?>"><?= $s->nopol; ?> - <?= $s->volume_tangki; ?> Liter
+                                                        </option>
+                                                    <?php endforeach; ?>
+                                                </select>
+
+                                            </div>
+                                        </div>
+
+                                            <div class="form-group row">
                                             <label for="bulan" class="col-sm-3 col-form-label">Bulan</label>
                                             <div class="col-sm-6">
                                                 <select name="bulan" id="bulan" class="form-control">
@@ -140,6 +150,7 @@
                                                     <option value="12">Desember</option>
                                                 </select>
                                             </div>
+
                                         </div>
                                         <div class="form-group row">
                                             <label for="tahun" class="col-sm-3 col-form-label">Tahun</label>

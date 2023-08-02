@@ -1,4 +1,4 @@
-<nav class="main-header navbar navbar-expand  navbar-blue">
+<nav class="main-header navbar navbar-expand " style="background-color: #8d1616;">
     <!-- Left navbar links -->
     <ul class="navbar-nav">
         <li class="nav-item">
@@ -29,7 +29,7 @@
                     <?php foreach ($avatar as $a) { ?>
                         <img src="<?= base_url('assets/upload/user/' . $a->nama_file); ?>" class="user-image" alt="User Image">
                     <?php } ?>-->
-                <i class="far fa-user"></i>&nbsp;
+                <i class="far fa-user" style="color: aliceblue;"></i>&nbsp;
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                     <span style="color:aliceblue" class="hidden-xs"><?= $this->session->userdata('name') ?></span>
                 </a>

@@ -1276,7 +1276,7 @@ class Admin extends CI_Controller
         $this->form_validation->set_rules('tgl_masuk', 'Tanggal Masuk Perbaikan', 'trim|required');
         $this->form_validation->set_rules('keluhan', 'keluhan', 'trim|required');
         $this->form_validation->set_rules('biaya', 'biaya nya bujur kah', 'trim|required');
-        $this->form_validation->set_rules('foto_nota', 'FOTO nya bujur kah', 'trim|required');
+        // $this->form_validation->set_rules('foto_nota', 'FOTO nya bujur kah', 'trim|required');
         $this->form_validation->set_rules('status', 'status perbaikan', 'trim|required');
 
 
@@ -1286,7 +1286,7 @@ class Admin extends CI_Controller
             $tgl_masuk = $this->input->post('tgl_masuk', TRUE);
             $keluhan = $this->input->post('keluhan', TRUE);
             $biaya = $this->input->post('biaya', TRUE);
-            $foto_nota = $this->input->post('foto_nota', TRUE);
+            // $foto_nota = $this->input->post('foto_nota', TRUE);
             $status = $this->input->post('status', TRUE);
 
 
@@ -1296,7 +1296,7 @@ class Admin extends CI_Controller
                 'tgl_masuk' => $tgl_masuk,
                 'keluhan' => $keluhan,
                 'biaya' => $biaya,
-                'foto_nota' => $foto_nota,
+                // 'foto_nota' => $foto_nota,
                 'status' => $status
 
             );
@@ -1543,19 +1543,20 @@ class Admin extends CI_Controller
     {
         $bulan = $this->input->get('bulan');
         $tahun = $this->input->get('tahun');
-        if (empty($bulan) or empty($tahun)) { // Cek jika tgl_awal atau tgl_akhir kosong, maka :            
+        $nopol = $this->input->get('nopol');
+        if (empty($bulan) or empty($tahun) or empty($nopol)) { // Cek jika tgl_awal atau tgl_akhir kosong, maka :            
             $data['perbaikan'] = $this->M_admin->select_perbaikan('tb_perbaikan');
             $data['total_data'] = $this->M_admin->sum_perbaikan('tb_perbaikan');
             $label = 'Bulan ke ...' . ' Tahun ...';
         } else {
-            $data['perbaikan'] = $this->M_admin->perbaikan_periode('tb_perbaikan', $bulan, $tahun);
-            $data['total_data'] = $this->M_admin->sum_perbaikan_periode('tb_perbaikan', $bulan, $tahun);
-            $label = 'Bulan ke ' . $bulan . ' Tahun ' .  $tahun;
+            $data['perbaikan'] = $this->M_admin->perbaikan_periode('tb_perbaikan', $bulan, $tahun, $nopol);
+            $data['total_data'] = $this->M_admin->sum_perbaikan_periode('tb_perbaikan', $bulan, $tahun, $nopol);
+            $label = 'Nopol ' . $nopol . ' Bulan ke ' . $bulan . ' Tahun ' .  $tahun;
         }
         $data['label'] = $label;
 
         // $data['perbaikan'] = $this->M_admin->select_perbaikan('tb_perbaikan');        
-
+        $data['tangki'] = $this->M_admin->get_sp_tangki('tb_supir_tangki');
         $data['avatar'] = $this->M_admin->get_data_avatar('tb_user', $this->session->userdata('name'));
         $data['title'] = 'Perbaikan';
         $this->load->view('admin/form_perbaikan/perbaikan', $data);

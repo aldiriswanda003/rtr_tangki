@@ -3,7 +3,7 @@ $pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8',
 
 // document informasi
 $pdf->SetCreator('SIMRENT Genset Web');
-$pdf->SetTitle('Laporan Data Sparepart');
+$pdf->SetTitle('Admin - Laporan Perbaikan Masuk');
 $pdf->SetSubject('Operator');
 
 $PDF_HEADER_STRING = "";

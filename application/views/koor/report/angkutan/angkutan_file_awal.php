@@ -8,7 +8,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h4 class="m-0">DAFTAR ANGKUTAN </h4>
+                    <h4 class="m-0">REPORT DAFTAR ANGKUTAN </h4>
                 </div><!-- /.col -->
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
@@ -40,7 +40,8 @@
                                     <strong>Berhasil!</strong><br> <?= $this->session->flashdata('msg_sukses'); ?>
                                 </div>
                             <?php } ?>
-                            <a href="<?= base_url('admin/tambah_angkutan'); ?>" style="margin-bottom:10px;" type="button" class="btn btn-sm btn-primary" name="tambah_data"><i class="fa fa-plus mr-2" aria-hidden="true"></i>Tambah</a>
+                            <a href="<?= base_url('report/cetak_rep_perbaikan'); ?>"  style="margin-bottom:10px;" type="button" class="btn btn-sm btn-success" name="cetak_data"><i class="fa fa-print mr-2" aria-hidden="true"></i>Cetak</a>
+                            
                             <button data-toggle="modal" data-target="#static_angkutan_bulanan" style="margin-bottom:10px;" type="button" class="btn btn-sm btn-warning" name="static_angkutan_bulanan"><i class="fa fa-filter   "></i>&nbsp; FILTER NOPOL & TANGGAL</button>
 
 
@@ -70,7 +71,7 @@
                                         <th style="width :20px">Jarak PP</th>
 
 
-                                        <th style="width:58px">Aksi</th>
+                                        <!-- <th style="width:58px">Aksi</th> -->
 
                                     </tr>
                                 </thead>
@@ -90,14 +91,14 @@
 
 
 
-                                            <td>
+                                            <!-- <td>
 
                                                 <a href="<?= base_url('admin/edit_angkutan/' . $st->id_angkutan); ?>" type="button" class="btn btn-xs btn-success " name="btn_edit"><i class="fa fa-edit"></i>&nbsp;Edit</a>
                                                 <a href="<?= base_url('admin/hapus_angkutan/' . $st->id_angkutan); ?>" type="button" class="btn btn-xs btn-danger btn-delete" name="btn_delete"><i class="fa fa-trash"></i>&nbsp;Hapus</a>
 
 
 
-                                            </td>
+                                            </td> -->
                                         </tr>
                                     <?php endforeach; ?>
 
@@ -126,7 +127,7 @@
                                 </div>
 
                                 <div class="modal-body">
-                                    <form action="<?= site_url('admin/tabel_angkutan'); ?>" method="get" role="form">
+                                    <form action="<?= site_url('report/tabel_angkutan'); ?>" method="get" role="form">
 
                                         <div class="form-group row">
                                             <label for="bulan" class="col-sm-3 col-form-label">NOPOL</label>
@@ -141,7 +142,7 @@
                                                     <?php endforeach; ?>
                                                 </select>
 
-                                               
+                                                </select>
                                             </div>
                                         </div>
 

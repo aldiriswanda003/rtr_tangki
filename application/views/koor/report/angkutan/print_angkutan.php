@@ -3,7 +3,7 @@ $pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8',
 
 // document informasi
 $pdf->SetCreator('SIMRENT Genset Web');
-$pdf->SetTitle('KOOR - Laporan Perbaikan Disetujui');
+$pdf->SetTitle('Laporan Data Angkutan');
 $pdf->SetSubject('Operator');
 
 $PDF_HEADER_STRING = "";
@@ -41,30 +41,33 @@ $pdf->SetAutoPageBreak(TRUE, PDF_MARGIN_BOTTOM);
 $html =
 
     '<div>
-       <h1 align="center">Perbaikan Truk Tangki</h1>
+       <h1 align="center">Data Angkutan</h1>
        
        <table cellspacing="1" cellpadding="2"  border="1" >
 
 
         <tr bgcolor=" #d1d1d1 ">
          <th width="30px" align="center">No.</th>
-         <th width="100px" align="center">NOPOL</th>
-         <th align="center"> Nama Bengkel </th>
-         <th align="center">Tanggal</th>
-         <th  width="200px" align="center"> Keterangan</th>
-         <th  align="center"> Biaya</th>
+         <th align="center">NOPOL</th>
+         <th width="70px" align="center"> Volume </th>
+         <th align="center">Supir</th>
+         <th align="center"> Tanggal Berangkat</th>
+         <th width="180px" align="center"> Tujuan</th>
+         <th align="center"> Kilometer PP</th>
+         
          </tr>';
 
 $no = 1;
 
-foreach ($perbaikan as $d) :
+foreach ($angkutan as $d) :
     $html .= '<tr>
     <td align="center">' . $no . '</td>
     <td >' . $d->nopol . '</td>
-    <td >' . $d->nama_bengkel . '</td>
-    <td align="center">' . $d->tgl_perbaikan . '</td>
-    <td >' . $d->keterangan . '</td>
-    <td>Rp' . number_format($d->biaya_perbaikan) . '</td>';
+    <td align="center">' . number_format($d->volume_tangki) . ' L</td>
+    <td align="center">' . $d->nama_supir . '</td>
+    <td align="center">' . $d->tgl_berangkat . '</td>
+    <td >' . $d->nama_tujuan . '</td>
+    <td align="right">' . number_format($d->kilometer_pp) .  ' Km</td>';
 
     $html .= '</tr>';
     $no++;
@@ -73,8 +76,8 @@ endforeach;
 foreach ($total_data as $td) :
     $html .=
         '<tr>
-                                            <th colspan="5" align="center"><b>Total </b> </th>
-                                            <th ><b><span style="color: red;">Rp&nbsp;' . number_format($td->biaya_perbaikan) . '</span></b></th>
+                                            <th colspan="6" align="center"><b>Total </b> </th>
+                                            <th align="right"><b><span style="color: red;">' . number_format($td->kilometer_pp) . 'Km</span></b></th>
                                             </tr>';
 endforeach;
 
@@ -92,7 +95,6 @@ $html .= '
     $this->session->userdata('nama') . '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
              </td>
          </tr>
-         
      </table>
        </div>';
 
