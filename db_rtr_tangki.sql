@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 26, 2023 at 06:09 PM
+-- Generation Time: Aug 02, 2023 at 03:06 PM
 -- Server version: 10.4.6-MariaDB
 -- PHP Version: 7.2.22
 
@@ -172,7 +172,8 @@ INSERT INTO `tb_perbaikan` (`id_perbaikan`, `id_service_masuk`, `tgl_perbaikan`,
 (8, 7, '2023-06-24', 'BELAKANG KIRI 2', 100000, ''),
 (10, 11, '2023-05-27', 'perbaikan kampas kopling dan kampas rem', 330000, 'DA_8313_ZD_-_OLI_MESIN_DLL.jpeg'),
 (11, 13, '2023-07-03', 'perbaikan kelistrikan, kabel 1 roll, upah maintenance', 300000, 'DA_8936_TAO_-_PINION.jpeg'),
-(12, 12, '2023-07-06', 'LAS TANGKI', 150000, 'KH_8505_AV_-_klahar_sel_buntut.jpeg');
+(12, 12, '2023-07-06', 'LAS TANGKI', 150000, 'KH_8505_AV_-_klahar_sel_buntut.jpeg'),
+(13, 14, '2023-07-30', 'Tali gigi pagat, dibelikan di BUDI MOTOR Sparepart nya', 600000, 'DA_8197_JH_-_FILTER_UDARA.jpeg');
 
 -- --------------------------------------------------------
 
@@ -195,7 +196,8 @@ CREATE TABLE `tb_seri_ban` (
 --
 
 INSERT INTO `tb_seri_ban` (`id_seri_ban`, `id_tangki`, `tanggal_beli`, `tempat_beli`, `no_seri_ban`, `ukuran_ban`, `keterangan`) VALUES
-(5, 1, '2023-07-17', 'HASNUR BAN', 'BAN 0221', '750.20', 'ditaruh didepan sebelah kiri');
+(5, 1, '2023-07-17', 'HASNUR BAN', 'BAN 0221', '750.20', 'ditaruh didepan sebelah kiri'),
+(7, 9, '2023-07-29', 'REMAJA BAN', 'GT 002', '1000 - 20', 'BELAKANG KIRI 2');
 
 -- --------------------------------------------------------
 
@@ -222,7 +224,8 @@ INSERT INTO `tb_service_masuk` (`id_service_masuk`, `id_supir_tangki`, `id_bengk
 (10, 6, 3, '2023-06-18', 'ban rabit', 150000, 0),
 (11, 6, 1, '2023-05-27', 'kampas kopling', 200000, 1),
 (12, 2, 4, '2023-05-24', 'Ban Pecah jarrr', 200000, 1),
-(13, 6, 4, '2023-07-02', 'lampu mati', 200000, 1);
+(13, 6, 4, '2023-07-02', 'lampu mati', 200000, 1),
+(14, 9, 8, '2023-07-30', 'Pagat Tali gigi', 600000, 1);
 
 -- --------------------------------------------------------
 
@@ -248,7 +251,7 @@ INSERT INTO `tb_supir` (`id_supir`, `nama_supir`, `no_telp`, `email_supir`, `fot
 (1, 'Kasnuri anjir', '0823-5052-9288', '', 'KASNURI_-_MAU.png', 'KTP_-_KASNURI.jpg', 'KTP_-_KASNURI.jpg'),
 (2, 'M Tri Ade Septiawan', '0852-4682-0886', '', 'M_TRI_ADE_SEPTIAWAN_-_FOTO_2.jpg', 'SIM_WAWAN.jpg', 'febad731-81f4-4e63-9535-66535bd42f34.jpg'),
 (3, 'JAMALI', '082155603699', '', 'JAMALI_-_FOTO.jpg', 'JAMALI_-_SIM.png', 'JAMALI_-_KTP.png'),
-(4, 'SARMIDI', '081345458234', 'aldiriswanda003@gmail.com', 'SARMIDI_-_FOTO.jpg', 'SIM_B_II_UMUM_-_SARMIDI.jpg', 'SARMIDI_-_KTP.jpg'),
+(4, 'SARMIDI', '081345458234', 'devina.tirtha43@gmail.com', 'SARMIDI_-_FOTO.jpg', 'SIM_B_II_UMUM_-_SARMIDI.jpg', 'SARMIDI_-_KTP.jpg'),
 (6, 'M. BUDI PRAYITNO', '081258422869', '', 'BUDI_-_FOTO_3.jpg', 'SIM_-_BUDI.jpg', 'KTP_-BUDI.jpg'),
 (7, 'RAMADANI', '082214720840', '', 'RAMADANI_4x6.jpg', 'SIM_BII_UMUM_-_RAMADANI.jpg', 'KTP_-_RAMADANI.jpg'),
 (8, 'AKHMAD RIDUAN', '081256894940', '', 'AKHMAD_RIDUAN_-_FOTO_2.jpg', 'SIM_RIDUAN.jpg', 'KTP_ridwan_asli.jpg'),
@@ -349,12 +352,12 @@ CREATE TABLE `tb_user` (
 --
 
 INSERT INTO `tb_user` (`id`, `username`, `nama`, `password`, `level`) VALUES
-(1, 'admin', 'admin1', '$2y$10$STphH7zHEGhlbIs55h9vPeyDSZYLrsRZeMN95drCnk.2MuX/Lagf.', 0),
+(1, 'admin', 'admin1', '$2y$10$cM37T1xmMrLlmmyEDXIpdu/q4q7.TxFGLrinLAo87NBlyyKil7zi6', 0),
 (2, 'coba1', 'COBA1', '$2y$10$/kgb.p2hPcATlYR21e2T6uZcT4oQUZjNVzYPsueTAiHc5m/6k6x16', 2),
 (3, 'ary', 'ary', '$2y$10$jIKsox9oYFtjVKUObbbNvOaaeirce2rgG9b5JHWGhWGu.PsSXjxu.', 1),
 (4, 'admin2', 'Jaka Permana', '$2y$10$aN4zNgD3rGEu8TJ7wP.ApO6zr4rWN9uZWduh3X.N0BZJDP7/KvP3u', 0),
 (5, 'devinabos', 'Devina', '$2y$10$JUTH5jAnVVD3AxLCuJv9leqP66Sz35Luc8OHfdWymZYRw81gq5D0m', 1),
-(6, 'bayunug', 'Bayu Nugroho', '$2y$10$cL8CMIW0ecS.4rFCGmSPL.FZNQmSM4s1jT7LVAgA.aThueVJ9Ci0G', 2);
+(6, 'bayunug', 'Bayu Nugroho', '$2y$10$kIHuyHv8llmMPM2HESMF3.ujGZIIKLYj6VBgEJAx03Ui6Cm6QCiZG', 2);
 
 --
 -- Indexes for dumped tables
@@ -487,19 +490,19 @@ ALTER TABLE `tb_pengeluaran`
 -- AUTO_INCREMENT for table `tb_perbaikan`
 --
 ALTER TABLE `tb_perbaikan`
-  MODIFY `id_perbaikan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id_perbaikan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `tb_seri_ban`
 --
 ALTER TABLE `tb_seri_ban`
-  MODIFY `id_seri_ban` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id_seri_ban` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `tb_service_masuk`
 --
 ALTER TABLE `tb_service_masuk`
-  MODIFY `id_service_masuk` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id_service_masuk` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `tb_supir`
