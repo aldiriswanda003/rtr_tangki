@@ -42,6 +42,7 @@
                                 </div>
                             <?php } ?>
                             <a href="<?= base_url('admin/tambah_seri_ban'); ?>" style="margin-bottom:10px;" type="button" class="btn btn-sm btn-primary" name="tambah_seri"><i class="fa fa-plus mr-2" aria-hidden="true"></i>Tambah</a>
+                            <button data-toggle="modal" data-target="#static_nopol_seriban" style="margin-bottom:10px;" type="button" class="btn btn-sm btn-warning" name="static_nopol_seriban"><i class="fa fa-filter   "></i>&nbsp; FILTER NOPOL</button>
 
                             <table id="example1" class="table table-bordered table-striped table-hover" style="width:100%">
                                 <thead>
@@ -72,11 +73,12 @@
 
 
                                                 <!-- <td><img src="<?= base_url('assets/upload/surat_tangki/' . $st->foto_surat); ?>" class="img img-box" width="100" height="100" alt="<?= $st->foto_surat; ?>"></td> -->
-                                                
+
 
 
                                                 <td><a href="<?= base_url('admin/edit_seri/' . $sb->id_seri_ban); ?>" type="button" class="btn btn-sm btn-success" name="btn_edit"><i class="fa fa-edit"></i>&nbsp;Edit</a>
-                                                <a href="<?= base_url('admin/hapus_seri/' . $sb->id_seri_ban); ?>" type="button" class="btn btn-sm btn-danger btn-delete" name="btn_delete"><i class="fa fa-trash"></i>&nbsp;Hapus</a></td>
+                                                    <a href="<?= base_url('admin/hapus_seri/' . $sb->id_seri_ban); ?>" type="button" class="btn btn-sm btn-danger btn-delete" name="btn_delete"><i class="fa fa-trash"></i>&nbsp;Hapus</a>
+                                                </td>
                                                 <!-- ulah function tombol hapus nya di admin controller -->
                                             </tr>
                                         <?php endforeach; ?>
@@ -93,6 +95,49 @@
                             </table>
                         </div>
                     </div>
+
+                    <!-- Modal -->
+                    <div class="modal fade" id="static_nopol_seriban" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h6 class="modal-title" id="staticBackdropLabel">FILTER PERTANGGAL</h6>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span>&times;</span>
+                                    </button>
+                                </div>
+
+                                <div class="modal-body">
+                                    <form action="<?= site_url('admin/tabel_seri_ban'); ?>" method="get" role="form">
+
+                                        <div class="form-group row">
+                                            <label for="bulan" class="col-sm-3 col-form-label">NOPOL</label>
+                                            <div class="col-sm-6">
+
+
+                                                <select name="nopol" class="form-control" id="nopol">
+                                                    <option value="" selected>NOPOL</option>
+                                                    <?php foreach ($tangki as $s) : ?>
+                                                        <option value="<?= $s->nopol; ?>"><?= $s->nopol; ?> - <?= $s->volume_tangki; ?> Liter
+                                                        </option>
+                                                    <?php endforeach; ?>
+                                                </select>
+
+
+                                            </div>
+                                        </div>
+
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="submit" class="btn btn-success btn-sm">Tampilkan</button>
+                                    <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Close</button>
+                                </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+
                 </div>
             </div>
         </div><!-- /.container-fluid -->

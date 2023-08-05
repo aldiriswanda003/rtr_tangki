@@ -102,6 +102,14 @@
                     </a> -->
 
                 </li>
+
+                <li class="nav-item">
+                            <a href="<?= base_url(); ?>koor/tabel_tangki" class="nav-link">
+                                <i class="nav-icon fa fa-truck"></i>
+                                <p>Data Tangki</p>
+                            </a>
+                        </li>
+
                 <li class="nav-item">
                     <a href="<?= base_url(); ?>koor/tabel_seri_ban" class="nav-link">
                         <i class="nav-icon fa fa-edit"></i>
@@ -109,6 +117,8 @@
                     </a>
 
                 </li>
+
+
                 <!-- <li class="nav-item">
                     <a href="<?= base_url(); ?>koor/tabel_supir_tangki" class="nav-link">
                         <i class="nav-icon fa fa-edit"></i>
@@ -191,6 +201,13 @@
                                 <p>SERI BAN</p>
                             </a>
                         </li> -->
+
+                        <li class="nav-item">
+                            <a href="<?= base_url(); ?>report_koor/tabel_rep_tangki" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>TRUK TANGKI</p>
+                            </a>
+                        </li>
 
                         <li class="nav-item">
                             <a href="<?= base_url(); ?>report_koor/tabel_rep_service_masuk" class="nav-link">

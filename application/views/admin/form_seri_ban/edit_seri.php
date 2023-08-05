@@ -1,4 +1,3 @@
-<?php $this->load->view('template/head'); ?>
 <?php $this->load->view('admin/template/nav'); ?>
 <?php $this->load->view('admin/template/sidebar'); ?>
 

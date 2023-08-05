@@ -35,4 +35,13 @@ class pimpinan extends CI_Controller
         redirect('login');
     }
 
+    public function tabel_supir()
+    {
+        $data['supir'] = $this->M_admin->select('tb_supir');
+        $data['avatar'] = $this->M_admin->get_data_avatar('tb_user', $this->session->userdata('name'));
+        $data['title'] = 'Data Supir';
+        $this->load->view('pimpinan/form_supir/supir', $data);
+    }
+
+
 }

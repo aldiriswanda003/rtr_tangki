@@ -36,7 +36,7 @@ class Report_koor extends CI_Controller
         $data['tangki'] = $this->M_admin->select('tb_tangki');
         $data['avatar'] = $this->M_admin->get_data_avatar('tb_user', $this->session->userdata('name'));
         $data['title'] = 'Data Tangki';
-        $this->load->view('admin/report/tangki/tampilan_rep_tangki', $data);
+        $this->load->view('koor/report/tangki/tampilan_rep_tangki', $data);
     }
 
 
@@ -45,8 +45,19 @@ class Report_koor extends CI_Controller
         $data['tangki'] = $this->M_admin->select('tb_tangki');
         $data['avatar'] = $this->M_admin->get_data_avatar('tb_user', $this->session->userdata('name'));
         $data['title'] = 'Data Tangki';
-        $this->load->view('admin/report/tangki/rep_tangki', $data);
+        $this->load->view('koor/report/tangki/rep_tangki', $data);
     }
+
+    public function control_detail_tangki()
+    {
+        $uri = $this->uri->segment(3);
+        $where = array('id_tangki' => $uri);
+        $data['tangki'] = $this->M_admin->get_data('tb_tangki', $where);
+        $data['avatar'] = $this->M_admin->get_data_avatar('tb_user', $this->session->userdata('name'));
+        $data['title'] = 'Data Tangki';
+        $this->load->view('koor/report/tangki/detail_tangki', $data);
+    }
+
 
     ##### END REPORT TANGKI ######
     ##### END REPORT TANGKI ######

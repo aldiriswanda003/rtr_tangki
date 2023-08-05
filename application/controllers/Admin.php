@@ -44,6 +44,10 @@ class Admin extends CI_Controller
 
 
         $data['dataSupir'] = $this->M_admin->numrows('tb_supir');
+        $data['tangki'] = $this->M_admin->numrows('tb_tangki');
+        $data['dataServMasuk'] = $this->M_admin->numrows('tb_service_masuk');
+        $data['dataPerbaikan'] = $this->M_admin->numrows('tb_perbaikan');
+        $data['dataPengeluaran'] = $this->M_admin->numrows('tb_perbaikan');
         $data['avatar'] = $this->M_admin->get_data_avatar('tb_user', $this->session->userdata('name'));
         $data['title'] = 'Home';
         $this->load->view('admin/index', $data);
@@ -1010,8 +1014,20 @@ class Admin extends CI_Controller
 
     public function tabel_seri_ban()
     {
-        // $data['seri_ban'] = $this->M_admin->select('tb_seri_ban');
-        $data['seri_ban'] = $this->M_admin->get_seri_ban('tb_seri_ban');
+        $nopol = $this->input->get('nopol');
+
+
+
+        if (empty($nopol)) {
+            $data['seri_ban'] = $this->M_admin->get_seri_ban('tb_seri_ban');
+        } else {
+
+            $data['seri_ban'] = $this->M_admin->nopol_seri_ban($nopol);
+        }
+
+
+        $data['tangki'] = $this->M_admin->get_sp_tangki('tb_supir_tangki');
+
         $data['avatar'] = $this->M_admin->get_data_avatar('tb_user', $this->session->userdata('name'));
         $data['title'] = 'Seri Ban';
         $this->load->view('admin/form_seri_ban/seri_ban', $data);

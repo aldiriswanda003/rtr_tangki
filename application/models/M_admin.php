@@ -117,6 +117,7 @@ class M_admin extends CI_Model
   {
     $query = $this->db->select()
       ->from($tabel)
+      
       ->join('tb_tangki', 'tb_tangki.id_tangki = tb_seri_ban.id_tangki')
       // ->join('tb_sparepart', 'tb_sparepart.id_sparepart = tb_serv_genset.id_sparepart')
 
@@ -124,7 +125,18 @@ class M_admin extends CI_Model
     return $query->result();
   }
 
+  public function nopol_seri_ban($nopol)
+  {
+    // $nopol = $this->db->escape($nopol);
+    $query = $this->db->select()
+      ->from('tb_seri_ban')
+      ->join('tb_tangki', 'tb_tangki.id_tangki = tb_seri_ban.id_tangki')
+      ->where_in('tb_tangki.nopol', $nopol)
+      // ->join('tb_sparepart', 'tb_sparepart.id_sparepart = tb_serv_genset.id_sparepart')
 
+      ->get();
+    return $query->result();
+  }
   public function get_supir_tangki($tabel)
   {
     $query = $this->db->select()

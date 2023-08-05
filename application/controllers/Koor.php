@@ -478,14 +478,14 @@ class Koor extends CI_Controller
         $data['tangki'] = $this->M_admin->select('tb_tangki');
         $data['avatar'] = $this->M_admin->get_data_avatar('tb_user', $this->session->userdata('name'));
         $data['title'] = 'Data Tangki';
-        $this->load->view('admin/form_tangki/tangki', $data);
+        $this->load->view('koor/form_tangki/tangki', $data);
     }
 
     public function tambah_tangki()
     {
         $data['avatar'] = $this->M_admin->get_data_avatar('tb_user', $this->session->userdata('name'));
         $data['title'] = 'Tambah Data Tangki';
-        $this->load->view('admin/form_tangki/tambahtangki', $data);
+        $this->load->view('koor/form_tangki/tambahtangki', $data);
     }
 
     public function proses_tambah_tangki()
@@ -510,7 +510,7 @@ class Koor extends CI_Controller
         } else {
             $data['avatar'] = $this->M_admin->get_data_avatar('tb_avatar', $this->session->userdata('name'));
             $data['title'] = 'Tambah Data Tangki';
-            $this->load->view('admin/form_tangki/tambahtangki', $data);
+            $this->load->view('koor/form_tangki/tambahtangki', $data);
         }
     }
 
@@ -521,7 +521,7 @@ class Koor extends CI_Controller
         $data['tangki'] = $this->M_admin->get_data('tb_tangki', $where);
         $data['avatar'] = $this->M_admin->get_data_avatar('tb_user', $this->session->userdata('name'));
         $data['title'] = 'Edit Tangki';
-        $this->load->view('admin/form_tangki/edittangki', $data);
+        $this->load->view('koor/form_tangki/edittangki', $data);
     }
 
     public function proses_edit_tangki()
@@ -545,11 +545,11 @@ class Koor extends CI_Controller
             );
             $this->M_admin->update('tb_tangki', $data, $where);
             $this->session->set_flashdata('msg_sukses', 'Data Berhasil Di Update');
-            redirect(base_url('admin/tabel_tangki'));
+            redirect(base_url('koor/tabel_tangki'));
         } else {
             $data['avatar'] = $this->M_admin->get_data_avatar('tb_avatar', $this->session->userdata('name'));
             $data['title'] = 'Edit Tangki';
-            $this->load->view('admin/form_tangki/edittangki', $data);
+            $this->load->view('koor/form_tangki/edittangki', $data);
         }
     }
 
@@ -560,8 +560,19 @@ class Koor extends CI_Controller
 
         $this->M_admin->delete('tb_tangki', $where);
         $this->session->set_flashdata('msg_sukses', 'Data Berhasil Dihapus');
-        redirect(base_url('admin/tabel_tangki'));
+        redirect(base_url('koor/tabel_tangki'));
     }
+
+    public function control_detail_tangki()
+    {
+        $uri = $this->uri->segment(3);
+        $where = array('id_tangki' => $uri);
+        $data['tangki'] = $this->M_admin->get_data('tb_tangki', $where);
+        $data['avatar'] = $this->M_admin->get_data_avatar('tb_user', $this->session->userdata('name'));
+        $data['title'] = 'Detail Tangki';
+        $this->load->view('koor/form_tangki/detail_tangki', $data);
+    }
+
 
     ####################################
     //* End Data Tangki
@@ -828,12 +839,25 @@ class Koor extends CI_Controller
 
     public function tabel_seri_ban()
     {
-        // $data['seri_ban'] = $this->M_admin->select('tb_seri_ban');
-        $data['seri_ban'] = $this->M_admin->get_seri_ban('tb_seri_ban');
+        $nopol = $this->input->get('nopol');
+
+
+
+        if (empty($nopol)) {
+            $data['seri_ban'] = $this->M_admin->get_seri_ban('tb_seri_ban');
+        } else {
+
+            $data['seri_ban'] = $this->M_admin->nopol_seri_ban($nopol);
+        }
+
+
+        $data['tangki'] = $this->M_admin->get_sp_tangki('tb_supir_tangki');
+
         $data['avatar'] = $this->M_admin->get_data_avatar('tb_user', $this->session->userdata('name'));
         $data['title'] = 'Seri Ban';
         $this->load->view('koor/form_seri_ban/seri_ban', $data);
     }
+
 
     public function tambah_seri_ban()
     {

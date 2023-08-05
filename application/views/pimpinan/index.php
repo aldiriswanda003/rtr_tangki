@@ -8,7 +8,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                   <h1 class="m-0"><ins>Dashboard</ins></h1>
+                   <h1 class="m-0"><ins>Dashboard - Pimpinan</ins></h1>
                 </div><!-- /.col -->
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
@@ -29,7 +29,7 @@
         <div class="container-fluid">
             <!-- Small boxes (Stat box) -->
             <h2 align="center">Selamat Datang <strong><?= $this->session->userdata('name') ?></strong> ! di :</h2>
-            <h3 align="center">APLIKASI MANAJEMEN PERBAIKAN DAN PENDATAAN TRUK TANGKI DI PT.RAHMAT TAUFIK RAMADAN BERBASIS WEB</h3>
+            <!-- <h3 align="center">APLIKASI MANAJEMEN PERBAIKAN DAN PENDATAAN TRUK TANGKI DI PT.RAHMAT TAUFIK RAMADAN BERBASIS WEB</h3> -->
             <div class="row">
 
 
