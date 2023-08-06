@@ -1,4 +1,4 @@
-<aside class="main-sidebar sidebar-dark-primary elevation-4" style="position:absolute ;">
+<aside class="main-sidebar sidebar-dark-primary elevation-4" style="position:absolute ; background-color: #5C5427;">
     <!-- Brand Logo -->
     <a href="#" class="brand-link">
         <img src="<?= base_url(); ?>assets/style/logo/logo.png" width="100px" height="100px" alt="pimpinanLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
@@ -271,12 +271,12 @@
                     </a>
                 </li>
 
-                <li class="nav-item">
+                <!-- <li class="nav-item">
                     <a href="<?= base_url(''); ?>pimpinan/email" class="nav-link">
                         <i class="fas fa-envelope  nav-icon"></i>
                         <p>Email</p>
                     </a>
-                </li>
+                </li> -->
                 
             </ul>
         </nav>

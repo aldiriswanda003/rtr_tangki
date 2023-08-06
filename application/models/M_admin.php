@@ -457,7 +457,7 @@ class M_admin extends CI_Model
       ->join('tb_tangki', 'tb_tangki.id_tangki = table_surat_tangki.id_tangki')
       // ->join('tb_pelanggan', 'tb_pelanggan.id_pelanggan = tb_unit_keluar.id_pelanggan')
       // ->where('status =', 1)
-      ->where('DATEDIFF(DATE_SUB(tanggal_expired, INTERVAL 1 DAY), "' . $tgl . '") <', 7)
+      ->where('DATEDIFF(DATE_SUB(tanggal_expired, INTERVAL 1 DAY), "' . $tgl . '") <', 14)
 
       ->get();
     return $query->num_rows();

@@ -1,6 +1,6 @@
 <?php $this->load->view('template/head'); ?>
-<?php $this->load->view('admin/template/nav'); ?>
-<?php $this->load->view('admin/template/sidebar'); ?>
+<?php $this->load->view('pimpinan/template/nav'); ?>
+<?php $this->load->view('pimpinan/template/sidebar'); ?>
 
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -40,7 +40,7 @@
                                     <strong>Berhasil!</strong><br> <?= $this->session->flashdata('msg_sukses'); ?>
                                 </div>
                             <?php } ?>
-                            <a href="<?= base_url('report/cetak_angkutan'); ?>"  style="margin-bottom:10px;" type="button" class="btn btn-sm btn-success" name="cetak_data"><i class="fa fa-print mr-2" aria-hidden="true"></i>Cetak Semua</a>
+                            <a href="<?= base_url('report_pimpinan/cetak_angkutan'); ?>"  style="margin-bottom:10px;" type="button" class="btn btn-sm btn-success" name="cetak_data"><i class="fa fa-print mr-2" aria-hidden="true"></i>Cetak Semua</a>
                             
                             <button data-toggle="modal" data-target="#static_angkutan_bulanan" style="margin-bottom:10px;" type="button" class="btn btn-sm btn-warning" name="static_angkutan_bulanan"><i class="fa fa-filter   "></i>&nbsp; FILTER NOPOL & TANGGAL</button>
 
@@ -112,7 +112,7 @@
 </div>
 <?php $this->load->view('template/footer'); ?>
 
-<?php $this->load->view('admin/template/script') ?>
+<?php $this->load->view('pimpinan/template/script') ?>
 <script>
     //* Script untuk menampilkan loading
     document.onreadystatechange = function() {

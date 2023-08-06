@@ -81,7 +81,7 @@ class Report_pimpinan extends CI_Controller
         $data['surat_tangki'] = $this->M_admin->get_surat_tangki('table_surat_tangki');
         $data['avatar'] = $this->M_admin->get_data_avatar('tb_user', $this->session->userdata('name'));
         $data['title'] = 'Data Surat-Surat Kendaraan Truk Tangki';
-        $this->load->view('admin/report/surat_tangki/tampilan_rep_surat_tangki', $data);
+        $this->load->view('pimpinan/report/surat_tangki/tampilan_rep_surat_tangki', $data);
     }
 
     public function cetak_rep_surat_tangki()
@@ -95,7 +95,7 @@ class Report_pimpinan extends CI_Controller
         }
         $data['avatar'] = $this->M_admin->get_data_avatar('tb_user', $this->session->userdata('name'));
         $data['title'] = 'Report Surat Tangki';
-        $this->load->view('admin/report/surat_tangki/print_surat_tangki-tcp', $data);
+        $this->load->view('pimpinan/report/surat_tangki/print_surat_tangki-tcp', $data);
     }
 
     public function cetak_nopol_surat_tangki()
@@ -109,7 +109,7 @@ class Report_pimpinan extends CI_Controller
         }
         $data['avatar'] = $this->M_admin->get_data_avatar('tb_user', $this->session->userdata('name'));
         $data['title'] = 'Report Surat Tangki';
-        $this->load->view('admin/report/surat_tangki/print_detail_surat_tangki-tcp', $data);
+        $this->load->view('pimpinan/report/surat_tangki/print_detail_surat_tangki-tcp', $data);
     }
 
 
@@ -154,7 +154,7 @@ class Report_pimpinan extends CI_Controller
 
         $data['avatar'] = $this->M_admin->get_data_avatar('tb_user', $this->session->userdata('name'));
         $data['title'] = 'Perbaikan';
-        $this->load->view('admin/report/perbaikan/tampilan2_rep_perbaikan', $data);
+        $this->load->view('pimpinan/report/perbaikan/tampilan2_rep_perbaikan', $data);
     }
 
     public function cetak_rep_perbaikan()
@@ -180,7 +180,7 @@ class Report_pimpinan extends CI_Controller
         $data['tangki'] = $this->M_admin->get_sp_tangki('tb_supir_tangki');
         $data['avatar'] = $this->M_admin->get_data_avatar('tb_user', $this->session->userdata('name'));
         $data['title'] = 'Perbaikan';
-        $this->load->view('admin/report/perbaikan/print_rep_perbaikan', $data);
+        $this->load->view('pimpinan/report/perbaikan/print_rep_perbaikan', $data);
     }
 
     #############################
@@ -243,7 +243,7 @@ class Report_pimpinan extends CI_Controller
         $data['supir'] = $this->M_admin->get_data('tb_supir', $where);
         $data['avatar'] = $this->M_admin->get_data_avatar('tb_user', $this->session->userdata('name'));
         $data['title'] = 'Data Supir';
-        $this->load->view('admin/report/supir/print_info_supir', $data);
+        $this->load->view('pimpinan/report/supir/print_info_supir', $data);
     }
 
 
@@ -270,7 +270,7 @@ class Report_pimpinan extends CI_Controller
         // $data['list_data'] = $this->M_admin->select('tb_pengeluaran');
         $data['avatar'] = $this->M_admin->get_data_avatar('tb_user', $this->session->userdata('name'));
         $data['title'] = 'Data Pengeluaran Lain-lain';
-        $this->load->view('admin/report/pengeluaran/tampilan_rep_pengeluaran', $data);
+        $this->load->view('pimpinan/report/pengeluaran/tampilan_rep_pengeluaran', $data);
     }
 
     public function cetak_rep_pengeluaran()
@@ -291,7 +291,7 @@ class Report_pimpinan extends CI_Controller
         // $data['list_data'] = $this->M_admin->select('tb_pengeluaran');
         $data['avatar'] = $this->M_admin->get_data_avatar('tb_user', $this->session->userdata('name'));
         $data['title'] = 'Data Pengeluaran Lain-lain';
-        $this->load->view('admin/report/pengeluaran/print_rep_pengeluaran', $data);
+        $this->load->view('pimpinan/report/pengeluaran/print_rep_pengeluaran', $data);
     }
 
 
@@ -305,7 +305,7 @@ class Report_pimpinan extends CI_Controller
 
         $data['avatar'] = $this->M_admin->get_data_avatar('tb_user', $this->session->userdata('name'));
         $data['title'] = 'REP Service masuk';
-        $this->load->view('admin/report/form_service_masuk/service_masuk', $data);
+        $this->load->view('pimpinan/report/form_service_masuk/service_masuk', $data);
     }
 
 
@@ -319,7 +319,7 @@ class Report_pimpinan extends CI_Controller
 
         $data['avatar'] = $this->M_admin->get_data_avatar('tb_user', $this->session->userdata('name'));
         $data['title'] = 'Exp Surat Tangki';
-        $this->load->view('admin/report/exp_surat/tampilan_exp_surat', $data);
+        $this->load->view('pimpinan/report/exp_surat/tampilan_exp_surat', $data);
     }
 
     public function cetak_exp_surat()
@@ -331,7 +331,7 @@ class Report_pimpinan extends CI_Controller
 
         $data['avatar'] = $this->M_admin->get_data_avatar('tb_user', $this->session->userdata('name'));
         $data['title'] = 'Exp Surat Tangki';
-        $this->load->view('admin/report/exp_surat/print_exp_surat', $data);
+        $this->load->view('pimpinan/report/exp_surat/print_exp_surat', $data);
     }
 
     ################################################
@@ -364,7 +364,7 @@ class Report_pimpinan extends CI_Controller
         // $data['angkutan'] = $this->M_admin->get_angkutan('tb_angkutan');
         $data['avatar'] = $this->M_admin->get_data_avatar('tb_user', $this->session->userdata('name'));
         $data['title'] = 'Angkutan RTR';
-        $this->load->view('admin/report/angkutan/angkutan', $data);
+        $this->load->view('pimpinan/report/angkutan/angkutan', $data);
     }
 
 
@@ -396,6 +396,6 @@ class Report_pimpinan extends CI_Controller
         // $data['angkutan'] = $this->M_admin->get_angkutan('tb_angkutan');
         $data['avatar'] = $this->M_admin->get_data_avatar('tb_user', $this->session->userdata('name'));
         $data['title'] = 'Angkutan RTR';
-        $this->load->view('admin/report/angkutan/print_angkutan', $data);
+        $this->load->view('pimpinan/report/angkutan/print_angkutan', $data);
     }
 }

@@ -1,6 +1,6 @@
 <?php $this->load->view('template/head'); ?>
-<?php $this->load->view('admin/template/nav'); ?>
-<?php $this->load->view('admin/template/sidebar'); ?>
+<?php $this->load->view('pimpinan/template/nav'); ?>
+<?php $this->load->view('pimpinan/template/sidebar'); ?>
 
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -127,7 +127,7 @@
 </div>
 <?php $this->load->view('template/footer'); ?>
 
-<?php $this->load->view('admin/template/script') ?>
+<?php $this->load->view('pimpinan/template/script') ?>
 <script>
     //* Script untuk menampilkan loading
     document.onreadystatechange = function() {

@@ -33,9 +33,9 @@
             <div class="row">
 
 
-                <div class="col-lg-3 col-xs-6">
+            <div class="col-lg-3 col-xs-6">
                     <!-- small box -->
-                    <div class="small-box bg-info">
+                    <div class="small-box bg-black" style="background-color: #5C5427;">
                         <div class="inner">
                             <?php if (!empty($dataSupir)) { ?>
                                 <h3><?= $dataSupir ?></h3>
@@ -45,27 +45,30 @@
                             <p>Supir</p>
                         </div>
                         <div class="icon">
-                            <i class="fas fa-users"></i>
+                            <i class="fas"> <img src="assets/upload/supir/MUHAMMAD ISMAIL - FOTO 2.png" alt="" width="80px"></i>
+
                         </div>
-                        <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                        <a href="<?= base_url(); ?>report_pimpinan/tabel_supir" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
                     </div>
                 </div>
+
                 <!-- ./col -->
                 <div class="col-lg-3 col-xs-6">
                     <!-- small box -->
-                    <div class="small-box bg-success">
+                    <div class="small-box bg-black" style="background-color: #5C5427;">
                         <div class="inner">
-                            <?php if (!empty($dataTruk)) { ?>
-                                <h3><?= $dataTruk ?></h3>
+                            <?php if (!empty($tangki)) { ?>
+                                <h3><?= $tangki ?></h3>
                             <?php } else { ?>
                                 <h3>0</h3>
                             <?php } ?>
-                            <p>Truk</p>
+                            <p>Truk Tangki</p>
                         </div>
                         <div class="icon">
-                            <i class="fas fa-truck"></i>
+                            <!-- <i class="fas fa-truck"></i> -->
+                            <i class="fas"> <img src="assets/upload/foto_tangki/W 9981 UC - DEPAN SAMPING KIRI copy.png" alt="" width="120px"></i>
                         </div>
-                        <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                        <a href="report_pimpinan/tabel_tangki" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
                     </div>
                 </div>
                 <!-- ./col -->
@@ -73,55 +76,46 @@
                 <!-- ./col -->
                 <div class="col-lg-3 col-xs-6">
                     <!-- small box -->
-                    <div class="small-box bg-danger">
+                    <div class="small-box bg-black" style="background-color: #5C5427;">
+                        <div class="inner">
+                            <?php if (!empty($dataServMasuk)) { ?>
+                                <h3><?= $dataServMasuk ?></h3>
+                            <?php } else { ?>
+                                <h3>0</h3>
+                            <?php } ?>
+                            <p>Perbaikan Masuk</p>
+                        </div>
+                        <div class="icon">
+                            <!-- <i class="fas fa-wrench"></i> -->
+                            <i class="fas"> <img src="assets/upload/perbaikan_masuk.png" alt="" width="100px"></i>
+
+                        </div>
+                        <a href="admin/tabel_service_masuk" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-xs-6">
+                    <!-- small box -->
+                    <div style="background-color: #5C5427;" class="small-box bg-black" style="background-color: #5C5427;">
                         <div class="inner">
                             <?php if (!empty($dataPerbaikan)) { ?>
                                 <h3><?= $dataPerbaikan ?></h3>
                             <?php } else { ?>
                                 <h3>0</h3>
                             <?php } ?>
-                            <p>Perbaikan</p>
+                            <p>Perbaikan Disetujui</p>
                         </div>
                         <div class="icon">
-                            <i class="fas fa-wrench"></i>
+                            <!-- <i class="fas fa-wrench"></i> -->
+                            <i class="fas"> <img src="assets/upload/perbaikan_disetujui.png" alt="" width="100px"></i>
+
                         </div>
-                        <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                        <a href="admin/tabel_perbaikan" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
                     </div>
                 </div>
-                <div class="col-lg-3 col-xs-6">
-                    <!-- small box -->
-                    <div class="small-box bg-purple">
-                        <div class="inner">
-                            <?php if (!empty($dataPengeluaran)) { ?>
-                                <h3><?= $dataPengeluaran ?></h3>
-                            <?php } else { ?>
-                                <h3>Rp 0</h3>
-                            <?php } ?>
-                            <p>Pengeluaran</p>
-                        </div>
-                        <div class="icon">
-                            <i class="fas fa-envelope-open"></i>
-                        </div>
-                        <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-xs-6">
-                    <!-- small box -->
-                    <div class="small-box bg-primary">
-                        <div class="inner">
-                            <?php if (!empty($dataSrtExp)) { ?>
-                                <h3><?= $dataSrtExp ?></h3>
-                            <?php } else { ?>
-                                <h3>0</h3>
-                            <?php } ?>
-                            <p>Surat Expired</p>
-                        </div>
-                        <div class="icon">
-                            <i class="fas fa-envelope"></i>
-                        </div>
-                        <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
-                    </div>
-                </div>
+
+               
+
                 <!-- <div class="card">
                     <div class="card-body">
                         <?php if (is_array($count)) { ?>

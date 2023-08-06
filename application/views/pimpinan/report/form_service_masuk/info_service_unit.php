@@ -1,6 +1,6 @@
 <?php $this->load->view('template/head'); ?>
-<?php $this->load->view('admin/template/nav'); ?>
-<?php $this->load->view('admin/template/sidebar'); ?>
+<?php $this->load->view('pimpinan/template/nav'); ?>
+<?php $this->load->view('pimpinan/template/sidebar'); ?>
 
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -41,10 +41,10 @@
                                     <strong>Berhasil!</strong><br> <?= $this->session->flashdata('msg_sukses'); ?>
                                 </div>
                             <?php } ?>
-                            <!-- <a href="<?= base_url('admin/tambah_service_masuk'); ?>" style="margin-bottom:10px;" type="button" class="btn btn-sm btn-primary" name="tambah_data"><i class="fa fa-plus mr-2" aria-hidden="true"></i>Tambah</a> -->
+                            <!-- <a href="<?= base_url('pimpinan/tambah_service_masuk'); ?>" style="margin-bottom:10px;" type="button" class="btn btn-sm btn-primary" name="tambah_data"><i class="fa fa-plus mr-2" aria-hidden="true"></i>Tambah</a> -->
 
                             <?php foreach ($list_service_masuk as $d) : ?>
-                                <a href="<?= base_url('report/cetak_info_service_unit/' . $d->id_service_masuk); ?>" style="margin-bottom:10px;" type="button" class="btn btn-sm btn-success" name=""><i class="fa fa-print mr-2" aria-hidden="true"></i>Cetak</a>
+                                <a href="<?= base_url('report_pimpinan/cetak_info_service_unit/' . $d->id_service_masuk); ?>" style="margin-bottom:10px;" type="button" class="btn btn-sm btn-success" name=""><i class="fa fa-print mr-2" aria-hidden="true"></i>Cetak</a>
 
                                 <table class="table" style="width:100%">
                                     <tr>
@@ -143,7 +143,7 @@
                                     </tr> -->
                                     <!-- <tr>
                                         <th style="vertical-align: middle">Ket. Perbaikan</th>
-                                        <form action="<?= site_url('admin/proses_update_ket_service'); ?>" method="post" role="form">
+                                        <form action="<?= site_url('pimpinan/proses_update_ket_service'); ?>" method="post" role="form">
                                             <td style="vertical-align: middle;">
                                                 <div class="row">
                                                     <div class="col-lg-8">
@@ -192,7 +192,7 @@
 </div>
 <?php $this->load->view('template/footer'); ?>
 
-<?php $this->load->view('admin/template/script') ?>
+<?php $this->load->view('pimpinan/template/script') ?>
 <script>
     //* Script untuk menampilkan loading
     document.onreadystatechange = function() {

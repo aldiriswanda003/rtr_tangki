@@ -1,6 +1,6 @@
 <?php $this->load->view('template/head'); ?>
-<?php $this->load->view('admin/template/nav'); ?>
-<?php $this->load->view('admin/template/sidebar'); ?>
+<?php $this->load->view('pimpinan/template/nav'); ?>
+<?php $this->load->view('pimpinan/template/sidebar'); ?>
 
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -41,8 +41,8 @@
                                     <strong>Berhasil!</strong><br> <?= $this->session->flashdata('msg_sukses'); ?>
                                 </div>
                             <?php } ?>
-                            <!-- <a href="<?= base_url('admin/tambah_exp_surat'); ?>" style="margin-bottom:10px;" type="button" class="btn btn-sm btn-primary" name="tambah_data"><i class="fa fa-plus mr-2" aria-hidden="true"></i>Tambah</a> -->
-                            <a href="<?= base_url('report/cetak_exp_surat'); ?>" style="margin-bottom:10px;" type="button" class="btn btn-sm btn-success" name="tambah_data"><i class="fa fa-print mr-2" aria-hidden="true"></i>Cetak</a>
+                            <!-- <a href="<?= base_url('pimpinan/tambah_exp_surat'); ?>" style="margin-bottom:10px;" type="button" class="btn btn-sm btn-primary" name="tambah_data"><i class="fa fa-plus mr-2" aria-hidden="true"></i>Tambah</a> -->
+                            <a href="<?= base_url('report_pimpinan/cetak_exp_surat'); ?>" style="margin-bottom:10px;" type="button" class="btn btn-sm btn-success" name="tambah_data"><i class="fa fa-print mr-2" aria-hidden="true"></i>Cetak</a>
 
 
                             <table id="example1" class="table table-bordered table-striped table-hover" style="width:100%">
@@ -84,9 +84,9 @@
                                                 <td>Rp <?= number_format($st->perkiraan_biaya) ?></td>
 
 
-                                                <!-- <td><a href="<?= base_url('admin/edit_exp_surat/' . $st->id_exp_surat); ?>" type="button" class="btn btn-sm btn-success" name="btn_edit"><i class="fa fa-edit" title="EDIT"></i></a>
-                                                <a href="<?= base_url('admin/hapus_exp_surat/' . $st->id_exp_surat); ?>" type="button" class="btn btn-sm btn-danger btn-delete" name="btn_delete"><i class="fa fa-trash" title="HAPUS"></i></a></td> -->
-                                                <!-- ulah function tombol hapus nya di admin controller -->
+                                                <!-- <td><a href="<?= base_url('pimpinan/edit_exp_surat/' . $st->id_exp_surat); ?>" type="button" class="btn btn-sm btn-success" name="btn_edit"><i class="fa fa-edit" title="EDIT"></i></a>
+                                                <a href="<?= base_url('pimpinan/hapus_exp_surat/' . $st->id_exp_surat); ?>" type="button" class="btn btn-sm btn-danger btn-delete" name="btn_delete"><i class="fa fa-trash" title="HAPUS"></i></a></td> -->
+                                                <!-- ulah function tombol hapus nya di pimpinan controller -->
                                             </tr>
                                         <?php endforeach; ?>
                                     <?php } ?>
@@ -110,7 +110,7 @@
 </div>
 <?php $this->load->view('template/footer'); ?>
 
-<?php $this->load->view('admin/template/script') ?>
+<?php $this->load->view('pimpinan/template/script') ?>
 <script>
     //* Script untuk menampilkan loading
     document.onreadystatechange = function() {

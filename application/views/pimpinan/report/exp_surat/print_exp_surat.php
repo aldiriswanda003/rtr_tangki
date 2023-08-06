@@ -2,9 +2,9 @@
 $pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
 
 // document informasi
-$pdf->SetCreator('SIMRENT Genset Web');
+$pdf->SetCreator('RTR');
 $pdf->SetTitle('Laporan Exp Surat');
-$pdf->SetSubject('Operator');
+$pdf->SetSubject('Pimpinan');
 
 $PDF_HEADER_STRING = "";
 

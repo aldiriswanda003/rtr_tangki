@@ -8,12 +8,12 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h4 class="m-0">REPORT SURAT-SURAT KENDARAAN TRUK TANGKI</h4>
+                    <h1 class="m-0">Data User</h1>
                 </div><!-- /.col -->
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="#">Home</a></li>
-                        <li class="breadcrumb-item active">Surat Tangki</li>
+                        <li class="breadcrumb-item active">Data User</li>
                     </ol>
                 </div><!-- /.col -->
             </div><!-- /.row -->
@@ -32,7 +32,7 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header">
-                            Surat - Surat Tangki
+                            Data User
                         </div>
                         <div class="card-body">
                             <?php if ($this->session->flashdata('msg_sukses')) { ?>
@@ -41,44 +41,47 @@
                                     <strong>Berhasil!</strong><br> <?= $this->session->flashdata('msg_sukses'); ?>
                                 </div>
                             <?php } ?>
-                            <a href="<?= base_url('report/cetak_rep_surat_tangki'); ?>" style="margin-bottom:10px;" type="button" class="btn btn-sm btn-success" name="cetak_data"><i class="fa fa-print mr-2" aria-hidden="true"></i>Cetak</a>
+                            <a href="<?= base_url('admin/tambah_users'); ?>" style="margin-bottom:10px;" type="button" class="btn btn-sm btn-primary" name="tambah_data"><i class="fa fa-plus mr-2" aria-hidden="true"></i>Tambah</a>
 
                             <table id="example1" class="table table-bordered table-striped table-hover" style="width:100%">
                                 <thead>
                                     <tr>
                                         <th style="width :10px">No.</th>
-                                        <th>Nopol</th>
-                                        <th>Jenis</th>
-                                        <th>Foto Surat</th>
-                                        <th>Tanggal Exp</th>
-                                     
+                                        <th>Nama</th>
+                                        <th>Username</th>
+                                        <th>Level</th>
+                                        <th style="width:58px">Edit</th>
+                                        <th style="width:58px">Hapus</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <?php
                                     $no = 1;
-                                    if (is_array($surat_tangki)) { ?>
-                                        <?php foreach ($surat_tangki as $st) : ?>
+                                    if (is_array($user)) { ?>
+                                        <?php foreach ($user as $u) : ?>
                                             <tr>
                                                 <td><?= $no++; ?></td>
-                                                <td><?= $st->nopol ?></td>
-                                                <td><?= $st->jenis_surat ?></td>
-                                                <td><img src="<?= base_url('assets/upload/surat_tangki/' . $st->foto_surat); ?>" class="img img-box" width="100" height="100" alt="<?= $st->foto_surat; ?>"></td>
-                                                <td><?= $st->tanggal_expired ?></td>
-                                               
-                                                <!-- ulah function tombol hapus nya di admin controller -->
+                                                <td><?= $u->nama ?></td>
+                                                <td><?= $u->username ?></td>
+                                                <?php if ($u->level == 0) { ?>
+                                                    <td>User Admin</td>
+                                                <?php } elseif ($u->level == 1) { ?>
+                                                    <td>User Pimpinan</td>
+                                                <?php } elseif ($u->level == 2){ ?>
+                                                    <td>User Koordinator Perbaikan</td>
+                                                <?php } elseif ($u->level == 3){ ?>
+                                                    <td>User  PERCOBAAN</td>
+                                                <?php } ?>
+                                                    
+                                                
+                                                <td><a href="<?= base_url('admin/edit_user/' . $u->id); ?>" type="button" class="btn btn-sm btn-success" name="btn_edit"><i class="fa fa-edit"></i>&nbsp;Edit</a></td>
+                                                <td><a href="<?= base_url('admin/proses_deleteuser/' . $u->id); ?>" type="button" class="btn btn-sm btn-danger btn-delete" name="btn_delete"><i class="fa fa-trash"></i>&nbsp;Hapus</a></td>
                                             </tr>
                                         <?php endforeach; ?>
+                                    <?php } else { ?>
+                                        <td colspan="5" align="center"><strong>Data Kosong</strong></td>
                                     <?php } ?>
                                 </tbody>
-                                <tr>
-                                    <thead>
-                                        <th></th>
-                                        <th style="width: 200px;"><input type="text" name="filter_nama" class="form-control" id="filter_nama" placeholder="Filter Nama Supir"></th>
-                                        <th style="width: 200px;"><input type="text" name="filter_no_telp" class="form-control" id="filter_no_telp" placeholder="Filter No. Telp Supir"></th>
-                                        <th colspan="5"></th>
-                                    </thead>
-                                </tr>
                             </table>
                         </div>
                     </div>

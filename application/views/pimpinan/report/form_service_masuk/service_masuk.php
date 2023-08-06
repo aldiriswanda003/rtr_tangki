@@ -1,6 +1,6 @@
 <?php $this->load->view('template/head'); ?>
-<?php $this->load->view('admin/template/nav'); ?>
-<?php $this->load->view('admin/template/sidebar'); ?>
+<?php $this->load->view('pimpinan/template/nav'); ?>
+<?php $this->load->view('pimpinan/template/sidebar'); ?>
 
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -42,7 +42,7 @@
                                     <strong>Berhasil!</strong><br> <?= $this->session->flashdata('msg_sukses'); ?>
                                 </div>
                             <?php } ?>
-                            <!-- <a href="<?= base_url('admin/tambah_service_masuk'); ?>" style="margin-bottom:10px;" type="button" class="btn btn-sm btn-primary" name="tambah_data"><i class="fa fa-plus mr-2" aria-hidden="true"></i>Tambah</a> -->
+                            <!-- <a href="<?= base_url('pimpinan/tambah_service_masuk'); ?>" style="margin-bottom:10px;" type="button" class="btn btn-sm btn-primary" name="tambah_data"><i class="fa fa-plus mr-2" aria-hidden="true"></i>Tambah</a> -->
 
                             <table id="example1" class="table table-bordered table-striped table-hover" >
                                 <thead>
@@ -86,10 +86,10 @@
                                                 <!-- <td><img src="<?= base_url('assets/upload/surat_tangki/' . $st->foto_surat); ?>" class="img img-box" width="100" height="100" alt="<?= $st->foto_surat; ?>"></td> -->
                                                 
 
-                                                <!-- <td><a href="<?= base_url('admin/edit_service_masuk/' . $sm->id_service_masuk); ?>" type="button" class="btn btn-xs btn-success" name="btn_edit"><i class="fa fa-edit"></i>&nbsp;Edit</a></td> -->
-                                                <!-- <td><a href="<?= base_url('admin/hapus_service_masuk/' . $sm->id_service_masuk); ?>" type="button" class="btn btn-xs btn-danger btn-delete" name="btn_delete"><i class="fa fa-trash"></i>&nbsp;Hapus</a></td> -->
-                                                <td><a href="<?= base_url('admin/info_service_unit/' . $sm->id_service_masuk); ?>" type="button" class="btn btn-sm btn-warning " name=""><i class="fa fa-circle-info"></i>&nbsp;DETAIL</a></td>
-                                                <!-- ulah function tombol hapus nya di admin controller -->
+                                                <!-- <td><a href="<?= base_url('pimpinan/edit_service_masuk/' . $sm->id_service_masuk); ?>" type="button" class="btn btn-xs btn-success" name="btn_edit"><i class="fa fa-edit"></i>&nbsp;Edit</a></td> -->
+                                                <!-- <td><a href="<?= base_url('pimpinan/hapus_service_masuk/' . $sm->id_service_masuk); ?>" type="button" class="btn btn-xs btn-danger btn-delete" name="btn_delete"><i class="fa fa-trash"></i>&nbsp;Hapus</a></td> -->
+                                                <td><a href="<?= base_url('pimpinan/info_service_unit/' . $sm->id_service_masuk); ?>" type="button" class="btn btn-sm btn-warning " name=""><i class="fa fa-circle-info"></i>&nbsp;DETAIL</a></td>
+                                                <!-- ulah function tombol hapus nya di pimpinan controller -->
                                             </tr>
                                         <?php endforeach; ?>
                                     <?php } ?>
@@ -112,7 +112,7 @@
 </div>
 <?php $this->load->view('template/footer'); ?>
 
-<?php $this->load->view('admin/template/script') ?>
+<?php $this->load->view('pimpinan/template/script') ?>
 <script>
     //* Script untuk menampilkan loading
     document.onreadystatechange = function() {

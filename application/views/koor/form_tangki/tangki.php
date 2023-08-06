@@ -41,7 +41,7 @@
                                     <strong>Berhasil!</strong><br> <?= $this->session->flashdata('msg_sukses'); ?>
                                 </div>
                             <?php } ?>
-                            <a href="<?= base_url('koor/tambah_tangki'); ?>" style="margin-bottom:10px;" type="button" class="btn btn-sm btn-primary" name="tambah_data"><i class="fa fa-plus mr-2" aria-hidden="true"></i>Tambah</a>
+                            <!-- <a href="<?= base_url('koor/tambah_tangki'); ?>" style="margin-bottom:10px;" type="button" class="btn btn-sm btn-primary" name="tambah_data"><i class="fa fa-plus mr-2" aria-hidden="true"></i>Tambah</a> -->
 
                             <table id="example1" class="table table-bordered table-striped table-hover" style="width:100%">
                                 <thead>
@@ -64,10 +64,10 @@
                                                 <td><?= $t->nopol ?></td>
                                                 <td><?= $t->tahun_dibuat ?></td>
                                                 <td><?= number_format($t->volume_tangki) ?>&nbsp;Liter</td>
-                                                <td><a href="<?= base_url('koor/edit_tangki/' . $t->id_tangki); ?>" type="button" class="btn btn-sm btn-success" name="btn_edit" title="EDIT"><i class="fa fa-edit" title="EDIT"></i></a>&nbsp;
-                                                <a href="<?= base_url('koor/hapus_data_tangki/' . $t->id_tangki); ?>" type="button" class="btn btn-sm btn-danger btn-delete" name="btn_delete" title="HAPUS"><i class="fa fa-trash" title="HAPUS"></i></a>
-                                                <br>
-                                                <a href="<?= base_url('koor/control_detail_tangki/' . $t->id_tangki); ?>" type="button" class="btn btn-xs btn-warning " name=""><i class="fa fa-circle-info"></i>&nbsp;DETAIL</a></td>
+                                                <!-- <td><a href="<?= base_url('koor/edit_tangki/' . $t->id_tangki); ?>" type="button" class="btn btn-sm btn-success" name="btn_edit" title="EDIT"><i class="fa fa-edit" title="EDIT"></i></a>&nbsp;
+                                                <a href="<?= base_url('koor/hapus_data_tangki/' . $t->id_tangki); ?>" type="button" class="btn btn-sm btn-danger btn-delete" name="btn_delete" title="HAPUS"><i class="fa fa-trash" title="HAPUS"></i></a> -->
+                                                
+                                                <td><a href="<?= base_url('koor/control_detail_tangki/' . $t->id_tangki); ?>" type="button" class="btn btn-xs btn-warning " name=""><i class="fa fa-circle-info"></i>&nbsp;DETAIL</a></td>
                                             </tr>
                                         <?php endforeach; ?>
                                     <?php } ?>
