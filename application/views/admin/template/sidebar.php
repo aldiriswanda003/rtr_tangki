@@ -213,6 +213,14 @@
                         </li>
 
                         <li class="nav-item">
+                            <a href="<?= base_url(); ?>report/tabel_rep_seri_ban" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>SERI BAN</p>
+                            </a>
+                        </li>
+
+
+                        <li class="nav-item">
                             <a href="<?= base_url(); ?>report/tabel_angkutan" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>ANGKUTAN</p>

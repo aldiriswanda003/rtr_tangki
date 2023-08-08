@@ -397,4 +397,49 @@ class Report extends CI_Controller
         $data['title'] = 'Angkutan RTR';
         $this->load->view('admin/report/angkutan/print_angkutan', $data);
     }
+
+    ########################################
+
+    public function tabel_rep_seri_ban()
+    {
+        $nopol = $this->input->get('nopol');
+
+
+
+        if (empty($nopol)) {
+            $data['seri_ban'] = $this->M_admin->get_seri_ban('tb_seri_ban');
+        } else {
+
+            $data['seri_ban'] = $this->M_admin->nopol_seri_ban($nopol);
+        }
+
+
+        $data['tangki'] = $this->M_admin->get_sp_tangki('tb_supir_tangki');
+
+        $data['avatar'] = $this->M_admin->get_data_avatar('tb_user', $this->session->userdata('name'));
+        $data['title'] = 'Seri Ban';
+        $this->load->view('admin/report/form_seri_ban/tampilan_rep_seri_ban', $data);
+    }
+
+    public function cetak_seri_ban()
+    {
+        $nopol = $this->input->get('nopol');
+
+
+
+        if (empty($nopol)) {
+            $data['seri_ban'] = $this->M_admin->get_seri_ban('tb_seri_ban');
+        } else {
+
+            $data['seri_ban'] = $this->M_admin->nopol_seri_ban($nopol);
+        }
+
+
+        $data['tangki'] = $this->M_admin->get_sp_tangki('tb_supir_tangki');
+
+        $data['avatar'] = $this->M_admin->get_data_avatar('tb_user', $this->session->userdata('name'));
+        $data['title'] = 'Seri Ban';
+        $this->load->view('admin/report/form_seri_ban/print_seri_ban', $data);
+    }
+
 }

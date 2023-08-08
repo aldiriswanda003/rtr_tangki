@@ -82,8 +82,13 @@
             <center><small style="color: antiquewhite;"> &copy; ARPRO 2023-<script type="text/javascript">
                         document.write(new Date().getFullYear());
                     </script></small>
+                    <br>
+                    <text style="color: black;">admin | admin</text><br>
+                    <text style="color: black;">bayunug | bayunug</text><br>
+                    <text style="color: black;">devinabos | 123</text>
             </center>
         </div>
+        
 
     <?php $this->load->view('login/template/script'); ?>
 

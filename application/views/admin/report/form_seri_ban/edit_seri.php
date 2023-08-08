@@ -1,4 +1,3 @@
-<?php $this->load->view('template/head'); ?>
 <?php $this->load->view('admin/template/nav'); ?>
 <?php $this->load->view('admin/template/sidebar'); ?>
 
@@ -50,14 +49,14 @@
                             <form action="<?= base_url('admin/proses_edit_seri'); ?>" method="post" role="form" enctype="multipart/form-data">
                                 <?php foreach ($seri_ban as $s) { ?>
 
-                                    <div class="form-group">
-                                        <label for="nopol" class="form-label">Nopol</label>
-                                        <!-- <input type="text" name="nopol" class="form-control" id="nopol" placeholder="Masukkan Nopol" required> -->
-
-
-                                        <input type="hidden" name="id_seri_ban" value="<?= $s->id_seri_ban; ?>">
-
-                                        <select name="id_tangki" class="form-control" id="id_tangki">
+                                <div class="form-group">
+                                    <label for="nopol" class="form-label">Nopol</label>
+                                    <!-- <input type="text" name="nopol" class="form-control" id="nopol" placeholder="Masukkan Nopol" required> -->
+                                   
+                                   
+                                    <input type="hidden" name="id_seri_ban" value="<?= $s->id_seri_ban; ?>">
+                                    
+                                    <select name="id_tangki" class="form-control" id="id_tangki">
                                             <option value="" disabled>-- Pilih Tangki --</option>
                                             <?php foreach ($tangki as $t) { ?>
                                                 <?php if ($s->id_tangki == $t->id_tangki) { ?>
@@ -67,46 +66,46 @@
                                                 <?php } ?>
                                             <?php } ?>
                                         </select>
-                                    </div>
+                                </div>
 
-                                    <div class="form-group">
-                                        <label for="tanggal_beli" class="form-label">Tanggal Beli</label>
-                                        <input type="date" name="tanggal_beli" class="form-control" id="tanggal_beli" placeholder="Masukkan Tanggal Beli" required value="<?= $s->tanggal_beli; ?>">
+                                <div class="form-group">
+                                    <label for="tanggal_beli" class="form-label">Tanggal Beli</label>
+                                    <input type="date" name="tanggal_beli" class="form-control" id="tanggal_beli" placeholder="Masukkan Tanggal Beli" required  value="<?= $s->tanggal_beli; ?>" >
+                
+                                <div class="form-group">
+                                    <label for="tempat_beli" class="form-label">Tempat Beli</label>
+                                    <input type="text" name="tempat_beli" class="form-control" id="tempat_beli" placeholder="Masukkan Tempat Pembelian" required value="<?= $s->tempat_beli; ?> ">
+                                </div>
 
-                                        <div class="form-group">
-                                            <label for="tempat_beli" class="form-label">Tempat Beli</label>
-                                            <input type="text" name="tempat_beli" class="form-control" id="tempat_beli" placeholder="Masukkan Tempat Pembelian" required value="<?= $s->tempat_beli; ?> ">
-                                        </div>
+                                <div class="form-group">
+                                    <label for="no_seri_ban" class="form-label">Nomor Seri</label>
+                                    <input type="text" name="no_seri_ban" class="form-control" id="no_seri_ban" placeholder="Masukkan Nomor Seri Ban" required value="<?= $s->no_seri_ban; ?>" >
+                                </div>
 
-                                        <div class="form-group">
-                                            <label for="no_seri_ban" class="form-label">Nomor Seri</label>
-                                            <input type="text" name="no_seri_ban" class="form-control" id="no_seri_ban" placeholder="Masukkan Nomor Seri Ban" required value="<?= $s->no_seri_ban; ?>">
-                                        </div>
+                                <div class="form-group">
+                                    <label for="ukuran_ban" class="form-label">Ukuran Ban</label>
+                                    <input type="text" name="ukuran_ban" class="form-control" id="ukuran_ban" placeholder="Masukkan Ukuran Ban" required required value="<?= $s->ukuran_ban; ?>">
+                                </div>
 
-                                        <div class="form-group">
-                                            <label for="ukuran_ban" class="form-label">Ukuran Ban</label>
-                                            <input type="text" name="ukuran_ban" class="form-control" id="ukuran_ban" placeholder="Masukkan Ukuran Ban" required required value="<?= $s->ukuran_ban; ?>">
-                                        </div>
+                                <div class="form-group">
+                                    <label for="keterangan" class="form-label">Keterangan</label>
+                                    <input type="text" name="keterangan" class="form-control" id="keterangan" placeholder="Tambahkan Keterangan" required required value="<?= $s->keterangan; ?>">
+                                </div>
 
-                                        <div class="form-group">
-                                            <label for="keterangan" class="form-label">Keterangan</label>
-                                            <input type="text" name="keterangan" class="form-control" id="keterangan" placeholder="Tambahkan Keterangan" required required value="<?= $s->keterangan; ?>">
-                                        </div>
-
-
-
-
-
+                               
+                                    
 
 
-                                        <hr>
-                                        <div class="form-group" align="center">
-                                            <a href="<?= base_url('admin/tabel_seri_ban'); ?>" type="button" class="btn btn-sm btn-danger" name="btn_kembali"><i class="fa fa-arrow-left mr-2"></i>Batal</a>
-                                            <!-- <button type="reset" class="btn btn-sm btn-warning"><i class="fa fa-eraser mr-2"></i>Reset</button> -->
-                                            <button type="submit" class="btn btn-sm btn-success"><i class="fa fa-check mr-2"></i>Simpan</button>
-                                        </div>
-                                    <?php } ?>
-
+                                   
+                            
+                                <hr>
+                                <div class="form-group" align="center">
+                                    <a href="<?= base_url('admin/tabel_seri_ban'); ?>" type="button" class="btn btn-sm btn-danger" name="btn_kembali"><i class="fa fa-arrow-left mr-2"></i>Batal</a>
+                                    <!-- <button type="reset" class="btn btn-sm btn-warning"><i class="fa fa-eraser mr-2"></i>Reset</button> -->
+                                    <button type="submit" class="btn btn-sm btn-success"><i class="fa fa-check mr-2"></i>Simpan</button>
+                                </div>
+                                <?php }?>
+                        
                             </form>
                         </div>
                     </div>
