@@ -134,9 +134,15 @@
                         <i class="nav-icon fa fa-edit"></i>
                         <p>Pengeluaran</p>
                     </a>
-
                 </li>
 
+                <li class="nav-item">
+                    <a href="<?= base_url(); ?>admin/tabel_data1" class="nav-link">
+                        <i class="nav-icon fa fa-edit"></i>
+                        <p>BUKU</p>
+                    </a>
+                </li>
+                
                 <li class="nav-item">
                     <a href="#" class="nav-link">
                         <i class="nav-icon fa fa-truck"></i>
@@ -260,6 +266,8 @@
                             </a>
                         </li>
 
+
+                        
                     </ul>
                 </li>
                 <!-- <li class="nav-header">PENGATURAN</li> -->

@@ -2298,4 +2298,113 @@ class Admin extends CI_Controller
         // redirect(base_url('admin/email'));
         echo "<br /><a href='" . base_url("admin/email") . "'>Kembali ke Form</a>";
     }
+
+
+    public function tabel_data1()
+    {
+        $data['data1'] = $this->M_admin->select('tb_buku');
+        $data['avatar'] = $this->M_admin->get_data_avatar('tb_user', $this->session->userdata('name'));
+        $data['title'] = 'Data Buku';
+        $this->load->view('admin/form_data1/data1', $data);
+    }
+
+    public function tambah_data1()
+    {
+        $data['avatar'] = $this->M_admin->get_data_avatar('tb_user', $this->session->userdata('name'));
+        $data['title'] = 'Tambah Data 1';
+        $this->load->view('admin/form_data1/tambah_data1', $data);
+    }
+
+    public function proses_tambah_data1()
+    {
+        // $this->form_validation->set_rules('nomor_buku', 'nomor_buku', 'trim|required');
+        $this->form_validation->set_rules('judul', 'judul', 'trim|required');
+        $this->form_validation->set_rules('penerbit', 'penerbit', 'trim|required');
+        $this->form_validation->set_rules('tahun', 'tahun', 'trim|required');
+
+        if ($this->form_validation->run() === TRUE) {
+         
+
+            $nomor_buku = $this->input->post('nomor_buku', TRUE);
+            $judul = $this->input->post('judul', TRUE);
+            $penerbit = $this->input->post('penerbit', TRUE);
+            $tahun = $this->input->post('tahun', TRUE);
+
+            $data = array(
+                'nomor_buku' => $nomor_buku,
+                'judul' => $judul,
+                'penerbit' => $penerbit,
+                'tahun' => $tahun
+            );
+            $this->M_admin->insert('tb_buku', $data);
+            $this->session->set_flashdata('msg_sukses', 'Data Berhasil Di Tambahkan');
+            redirect(base_url('admin/tabel_data1'));
+        } else {
+            $data['avatar'] = $this->M_admin->get_data_avatar('tb_user', $this->session->userdata('name'));
+            $data['title'] = 'Tambah Data 1';
+            $this->load->view('admin/form_data1/tambah_data1', $data);
+        }
+    }
+
+
+    public function cetak_data1()
+    {
+        $data['data1'] = $this->M_admin->select('tb_buku');
+        $data['avatar'] = $this->M_admin->get_data_avatar('tb_user', $this->session->userdata('name'));
+        $data['title'] = 'Buku 1';
+        $this->load->view('admin/form_data1/print_data1', $data);
+    }
+
+    public function edit_data1()
+    {
+        $uri = $this->uri->segment(3);
+        $where = array('id_buku' => $uri);
+        $data['data1'] = $this->M_admin->get_data('tb_buku', $where);
+        $data['avatar'] = $this->M_admin->get_data_avatar('tb_user', $this->session->userdata('name'));
+        $data['title'] = 'Edit data1';
+        $this->load->view('admin/form_data1/edit_data1', $data);
+    }
+
+    public function proses_edit_data1()
+    {
+
+        $this->form_validation->set_rules('nomor_buku', 'Nama karyawan', 'trim|required');
+        $this->form_validation->set_rules('judul', 'No Telp', 'trim|required');
+        $this->form_validation->set_rules('penerbit', 'penerbit', 'trim|required');
+        $this->form_validation->set_rules('tahun', 'tahun', 'trim|required');
+
+        if ($this->form_validation->run() === TRUE) {
+            $id_buku = $this->input->post('id_buku');
+            $nomor_buku = $this->input->post('nomor_buku', TRUE);
+            $judul = $this->input->post('judul', TRUE);
+            $penerbit = $this->input->post('penerbit', TRUE);
+            $tahun = $this->input->post('tahun', TRUE);
+
+
+            $where = array('id_buku' => $id_buku);
+            $data = array(
+                'nomor_buku' => $nomor_buku,
+                'judul' => $judul,
+                'penerbit' => $penerbit,
+                'tahun' => $tahun,
+            );
+            $this->M_admin->update('tb_buku', $data, $where);
+            $this->session->set_flashdata('msg_sukses', 'Data Berhasil Di Edit');
+            redirect(base_url('admin/tabel_data1'));
+        } else {
+            $data['avatar'] = $this->M_admin->get_data_avatar('tb_avatar', $this->session->userdata('name'));
+            $data['title'] = 'Edit Data';
+            $this->load->view('admin/form_data1/editbengkel', $data);
+        }
+    }
+
+    public function hapus_data1()
+    {
+        $uri = $this->uri->segment(3);
+        $where = array('id_buku' => $uri);
+
+        $this->M_admin->delete('tb_buku', $where);
+        $this->session->set_flashdata('msg_sukses', 'Data Berhasil Dihapus');
+        redirect(base_url('admin/tabel_data1'));
+    }
 }
