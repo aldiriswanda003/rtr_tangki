@@ -56,6 +56,7 @@
                                     </tr>
                                     <tr>
                                         <th style="width :10px">No.</th>
+                                        <th>NOPOL</th>
                                         <th>Tanggal</th>
                                         <th>Keterangan Pengeluaran</th>
                                         <th>Biaya Pengeluaran</th>
@@ -69,6 +70,7 @@
                                         <?php foreach ($pengeluaran as $p) : ?>
                                             <tr>
                                                 <td><?= $no++; ?></td>
+                                                <td><?= $p->nopol?></td>
                                                 <td><?= $p->tanggal?></td>
                                                 <td><?= $p->nama_pengeluaran ?></td>
                                                 <td>Rp <?= number_format($p->biaya_pengeluaran) ?></td>

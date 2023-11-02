@@ -1439,7 +1439,7 @@ class Admin extends CI_Controller
         $bulan = $this->input->get('bulan');
         $tahun = $this->input->get('tahun');
         if (empty($bulan) or empty($tahun)) { // Cek jika tgl_awal atau tgl_akhir kosong, maka :            
-            $data['pengeluaran'] = $this->M_admin->select('tb_pengeluaran');
+            $data['pengeluaran'] = $this->M_admin->select_pengeluaran('tb_pengeluaran');
             $data['total_data'] = $this->M_admin->sum_pengeluaran('tb_pengeluaran');
             $label = 'Bulan ke ...' . ' Tahun ...';
         } else {
@@ -1459,6 +1459,7 @@ class Admin extends CI_Controller
     public function tambah_pengeluaran()
     {
 
+        $data['list_tangki'] = $this->M_admin->select('tb_tangki');
         $data['avatar'] = $this->M_admin->get_data_avatar('tb_user', $this->session->userdata('name'));
         $data['title'] = 'Tambah Pengeluaran';
         $this->load->view('admin/form_pengeluaran/tambah_pengeluaran', $data);
@@ -1467,6 +1468,7 @@ class Admin extends CI_Controller
     public function proses_tambah_pengeluaran()
     {
 
+        $this->form_validation->set_rules('id_tangki', 'Nopol Pengeluaran', 'trim|required');
         $this->form_validation->set_rules('tanggal', 'Tanggal Pengeluaran', 'trim|required');
         $this->form_validation->set_rules('nama_pengeluaran', 'Keterangan Pengeluaran', 'trim|required');
         $this->form_validation->set_rules('biaya_pengeluaran', 'biaya nya bujur kah', 'trim|required');
@@ -1474,12 +1476,14 @@ class Admin extends CI_Controller
 
         if ($this->form_validation->run() === TRUE) {
             $tanggal = $this->input->post('tanggal', TRUE);
+            $id_tangki = $this->input->post('id_tangki', TRUE);
             $nama_pengeluaran = $this->input->post('nama_pengeluaran', TRUE);
             $biaya_pengeluaran = $this->input->post('biaya_pengeluaran', TRUE);
 
 
 
             $data = array(
+                'id_tangki' => $id_tangki,
                 'tanggal' => $tanggal,
                 'nama_pengeluaran' => $nama_pengeluaran,
                 'biaya_pengeluaran' => $biaya_pengeluaran
@@ -1502,6 +1506,7 @@ class Admin extends CI_Controller
         $where = array('id_pengeluaran' => $uri);
 
         $data['pengeluaran'] = $this->M_admin->get_data('tb_pengeluaran', $where);
+        $data['list_tangki'] = $this->M_admin->select('tb_tangki');
 
         $data['avatar'] = $this->M_admin->get_data_avatar('tb_user', $this->session->userdata('name'));
         $data['title'] = 'Edit Pengeluaran';
@@ -1511,6 +1516,7 @@ class Admin extends CI_Controller
     public function proses_edit_pengeluaran()
     {
         $this->form_validation->set_rules('tanggal', 'Tanggal Pengeluaran', 'trim|required');
+        $this->form_validation->set_rules('tanggal', 'Tanggal Pengeluaran', 'trim|required');
         $this->form_validation->set_rules('nama_pengeluaran', 'Keterangan Pengeluaran', 'trim|required');
         $this->form_validation->set_rules('biaya_pengeluaran', 'biaya nya bujur kah', 'trim|required');
 
@@ -1518,6 +1524,7 @@ class Admin extends CI_Controller
         if ($this->form_validation->run() === TRUE) {
             $id_pengeluaran = $this->input->post('id_pengeluaran');
             $tanggal = $this->input->post('tanggal');
+            $id_tangki = $this->input->post('id_tangki', TRUE);
             $nama_pengeluaran = $this->input->post('nama_pengeluaran', TRUE);
             $biaya_pengeluaran = $this->input->post('biaya_pengeluaran', TRUE);
 
@@ -1525,6 +1532,7 @@ class Admin extends CI_Controller
             $where = array('id_pengeluaran' => $id_pengeluaran);
             $data = array(
 
+                'id_tangki' => $id_tangki,
                 'tanggal' => $tanggal,
                 'nama_pengeluaran' => $nama_pengeluaran,
                 'biaya_pengeluaran' => $biaya_pengeluaran

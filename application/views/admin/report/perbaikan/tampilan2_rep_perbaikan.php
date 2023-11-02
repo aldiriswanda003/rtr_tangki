@@ -44,7 +44,8 @@
                             <?php } ?>
                             <a href="<?= base_url('report/cetak_rep_perbaikan'); ?>"  style="margin-bottom:10px;" type="button" class="btn btn-sm btn-success" name="cetak_data"><i class="fa fa-print mr-2" aria-hidden="true"></i>Cetak</a>
 
-                            <button data-toggle="modal" data-target="#static_perbaikan_bulanan" style="margin-bottom:10px;" type="button" class="btn btn-sm btn-warning" name="static_perbaikan_bulanan"><i class="fa fa-table"></i>&nbsp;Pilih Periode</button>
+                            <button data-toggle="modal" data-target="#static_perbaikan_bulanan" style="margin-bottom:10px;" type="button" class="btn btn-sm btn-warning" name="static_perbaikan_bulanan"><i class="fa fa-table"></i>&nbsp;FILTER PERIODE</button>
+                            <button data-toggle="modal" data-target="#static_perbaikan_bulan1tahun" style="margin-bottom:10px;" type="button" class="btn btn-sm btn-primary" name="static_perbaikan_bulan1tahun"><i class="fa fa-table"></i>&nbsp;FILTER PERBULAN DALAM 1 TAHUN</button>
                             
                             
                         </div>
@@ -111,14 +112,66 @@
                                 <div class="modal-footer">
                                     <button type="submit" class="btn btn-success btn-sm">Tampilkan</button>
                                     <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Close</button>
+<hr>
+
+
+
                                 </div>
                                 </form>
                             </div>
                         </div>
                     </div>
 
+<!-- FILTER BULAN PERTAHUN -->
+                    <div class="modal fade" id="static_perbaikan_bulan1tahun" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h6 class="modal-title" id="staticBackdropLabel">Tampilkan Bulanan</h6>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span>&times;</span>
+                                    </button>
+                                </div>
+                                
+                                <div class="modal-body">
+                                    <form action="<?= site_url('report/cetak_rep_perbaikanbulan1tahun'); ?>" method="get" role="form">
+
+                                    <div class="form-group row">
+                                            <label for="bulan" class="col-sm-3 col-form-label">Nopol</label>
+                                            <div class="col-sm-6">
+
+                                            
+                                                <select name="nopol" class="form-control" id="nopol">
+                                                    <option value="" selected>NOPOL</option>
+                                                    <?php foreach ($tangki  as $s) : ?>
+                                                        <option value="<?= $s->nopol; ?>"><?= $s->nopol; ?> - <?= $s->volume_tangki; ?> Liter
+                                                        </option>
+                                                    <?php endforeach; ?>
+                                                </select>
+
+                                            </div>
+                                        </div>
+
+                                    
+                                        <div class="form-group row">
+                                            <label for="tahun" class="col-sm-3 col-form-label">Tahun</label>
+                                            <div class="col-sm-6">
+                                                <input type="text" name="tahun" class="form-control" id="tahun" value="<?= date('Y'); ?>">
+                                            </div>
+                                        </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="submit" class="btn btn-success btn-sm">Tampilkan</button>
+                                    <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Close</button>
+<hr>
 
 
+
+                                </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
 
                 </div>
             </div>

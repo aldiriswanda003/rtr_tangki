@@ -50,6 +50,18 @@
                             <form action="<?= base_url('admin/proses_edit_pengeluaran'); ?>" method="post" role="form">
                                 <?php foreach ($pengeluaran as $b) { ?>
 
+                                    <select name="id_tangki" class="form-control" id="id_tangki">
+                                            <option value="" disabled>-- Pilih Tangki --</option>
+                                            <?php foreach ($list_tangki as $t) { ?>
+                                                <?php if ($st->id_tangki == $st->id_tangki) { ?>
+                                                    <option value="<?= $t->id_tangki; ?>" selected><?= $t->nopol; ?></option>
+                                                <?php } else { ?>
+                                                    <option value="<?= $t->id_tangki; ?>"><?= $t->nopol; ?></option>
+                                                    <!-- meambil di foreach -->
+
+                                                <?php } ?>
+                                            <?php } ?>
+                                        </select>
                                     <div class="form-group">
                                         <input type="hidden" name="id_pengeluaran" value="<?= $b->id_pengeluaran; ?>">
                                         <label for="tanggal" class="form-label">Tanggal</label>

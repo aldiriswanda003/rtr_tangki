@@ -3,12 +3,12 @@ $pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8',
 
 // document informasi
 $pdf->SetCreator('SIMRENT Genset Web');
-$pdf->SetTitle('Laporan Pengeluaran');
+$pdf->SetTitle('Admin - Laporan Perbaikan Disetujui ');
 $pdf->SetSubject('Operator');
 
 $PDF_HEADER_STRING = "";
 
-$pdf->SetHeaderData('KOP RTR REPORT APK V2.jpg', 180, '', $PDF_HEADER_STRING, array(0, 0, 0), array(0, 0, 0));
+$pdf->SetHeaderData('KOP RTR REPORT APK V2.jpg', 180    , '', $PDF_HEADER_STRING, array(0, 0, 0), array(0, 0, 0));
 
 $pdf->setHeaderFont(array(PDF_FONT_NAME_MAIN, 'I', 9));
 $pdf->setFooterFont(array(PDF_FONT_NAME_DATA, '', PDF_FONT_SIZE_DATA));
@@ -41,38 +41,43 @@ $pdf->SetAutoPageBreak(TRUE, PDF_MARGIN_BOTTOM);
 $html =
 
     '<div>
-       <h1 align="center">Laporan Pengeluaran Lain-Lain</h1>
+       <h1 align="center">Perbaikan Truk Tangki</h1>
        
        <table cellspacing="1" cellpadding="2"  border="1" >
 
+<tr>
+    <th colspan="6" width="658px"> Bulan : </th>
+</tr>
 
         <tr bgcolor=" #d1d1d1 ">
          <th width="30px" align="center">No.</th>
          <th width="100px" align="center">NOPOL</th>
-         <th width="100px" align="center">Tanggal</th>
-         <th align="center" width="300px"> Keterangan Pengeluaran</th>
-         <th  align="center"> Biaya Pengeluaran</th>
+         <th align="center"> Nama Bengkel </th>
+         <th align="center">Tanggal</th>
+         <th  width="200px" align="center"> Keterangan</th>
+         <th  align="center"> Biaya</th>
          </tr>';
 
 $no = 1;
 
-    foreach ($pengeluaran as $d) :
-        $html .= '<tr>
+foreach ($perbaikan as $d) :
+    $html .= '<tr>
     <td align="center">' . $no . '</td>
     <td >' . $d->nopol . '</td>
-    <td >' . $d->tanggal . '</td>
-    <td >' . $d->nama_pengeluaran . '</td>
-    <td>Rp' . number_format($d->biaya_pengeluaran) . '</td>';
+    <td >' . $d->nama_bengkel . '</td>
+    <td align="center">' . $d->tgl_perbaikan . '</td>
+    <td >' . $d->keterangan . '</td>
+    <td>Rp' . number_format($d->biaya_perbaikan) . '</td>';
 
-        $html .= '</tr>';
-        $no++;
-    endforeach;
+    $html .= '</tr>';
+    $no++;
+endforeach;
 
 foreach ($total_data as $td) :
     $html .=
         '<tr>
-                                            <th colspan="3" align="center"><b>Total</b></th>
-                                            <th ><b><span style="color: red;">Rp&nbsp;' . number_format($td->biaya_pengeluaran) . '</span></b></th>
+                                            <th colspan="5" align="center"><b>Total </b> </th>
+                                            <th ><b><span style="color: red;">Rp&nbsp;' . number_format($td->biaya_perbaikan) . '</span></b></th>
                                             </tr>';
 endforeach;
 

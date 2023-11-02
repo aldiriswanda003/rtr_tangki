@@ -41,7 +41,7 @@
                                     <strong>Berhasil!</strong><br> <?= $this->session->flashdata('msg_sukses'); ?>
                                 </div>
                             <?php } ?>
-                            <form action="<?= site_url('report/cetak_rep_pengeluaran'); ?>" method="post" role="form">
+                            <form action="<?= site_url('report/cetak_rep_pengeluaran'); ?>" method="get" role="form">
 
                                 <button type="submit" style="margin-bottom:10px;" type="button" class="btn btn-sm btn-success" name="cetak_data"><i class="fa fa-print mr-2" aria-hidden="true"></i>Cetak</button>
 
@@ -73,8 +73,23 @@
                                     </button>
                                 </div>
                                 <div class="modal-body">
-                                    <form action="<?= site_url('report/tabel_rep_pengeluaran'); ?>" method="get" role="form">
+                                    <form action="<?= site_url('report/cetak_rep_pengeluaran'); ?>" method="get" role="form">
 
+                                    <div class="form-group row">
+                                            <label for="bulan" class="col-sm-3 col-form-label">Nopol</label>
+                                            <div class="col-sm-6">
+
+                                            
+                                                <select name="nopol" class="form-control" id="nopol">
+                                                    <option value="" selected>NOPOL</option>
+                                                    <?php foreach ($tangki  as $s) : ?>
+                                                        <option value="<?= $s->nopol; ?>"><?= $s->nopol; ?> - <?= $s->volume_tangki; ?> Liter
+                                                        </option>
+                                                    <?php endforeach; ?>
+                                                </select>
+
+                                            </div>
+                                        </div>
                                         <div class="form-group row">
                                             <label for="bulan" class="col-sm-3 col-form-label">Bulan</label>
                                             <div class="col-sm-6">

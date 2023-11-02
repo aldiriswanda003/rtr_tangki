@@ -91,7 +91,7 @@ class Report extends CI_Controller
         if (empty($nopol)) { // Cek jika tgl_awal atau tgl_akhir kosong, maka :          
             $data['surat_tangki'] = $this->M_admin->get_surat_tangki('table_surat_tangki');
         } else {
-            $data['surat_tangki'] = $this->M_admin->filter_nopol_surat('table_surat_tangki',$nopol);
+            $data['surat_tangki'] = $this->M_admin->filter_nopol_surat('table_surat_tangki', $nopol);
         }
         $data['avatar'] = $this->M_admin->get_data_avatar('tb_user', $this->session->userdata('name'));
         $data['title'] = 'Report Surat Tangki';
@@ -105,7 +105,7 @@ class Report extends CI_Controller
         if (empty($nopol)) { // Cek jika tgl_awal atau tgl_akhir kosong, maka :          
             $data['surat_tangki'] = $this->M_admin->get_surat_tangki('table_surat_tangki');
         } else {
-            $data['surat_tangki'] = $this->M_admin->filter_nopol_surat('table_surat_tangki',$nopol);
+            $data['surat_tangki'] = $this->M_admin->filter_nopol_surat('table_surat_tangki', $nopol);
         }
         $data['avatar'] = $this->M_admin->get_data_avatar('tb_user', $this->session->userdata('name'));
         $data['title'] = 'Report Surat Tangki';
@@ -136,7 +136,7 @@ class Report extends CI_Controller
         $bulan = $this->input->get('bulan');
         $tahun = $this->input->get('tahun');
         $nopol = $this->input->get('nopol');
-        
+
         if (empty($bulan) or empty($tahun) or empty($nopol)) { // Cek jika tgl_awal atau tgl_akhir kosong, maka :            
             $data['perbaikan'] = $this->M_admin->select_perbaikan('tb_perbaikan');
             $data['total_data'] = $this->M_admin->sum_perbaikan('tb_perbaikan');
@@ -145,7 +145,6 @@ class Report extends CI_Controller
             $data['perbaikan'] = $this->M_admin->perbaikan_periode('tb_perbaikan', $bulan, $tahun, $nopol);
             $data['total_data'] = $this->M_admin->sum_perbaikan_periode('tb_perbaikan', $bulan, $tahun, $nopol);
             $label = 'Nopol ' . $nopol . ' Bulan ke ' . $bulan . ' Tahun ' .  $tahun;
-
         }
         $data['label'] = $label;
 
@@ -171,7 +170,6 @@ class Report extends CI_Controller
             $data['perbaikan'] = $this->M_admin->perbaikan_periode('tb_perbaikan', $bulan, $tahun, $nopol);
             $data['total_data'] = $this->M_admin->sum_perbaikan_periode('tb_perbaikan', $bulan, $tahun, $nopol);
             $label = 'Nopol ' . $nopol . ' Bulan ke ' . $bulan . ' Tahun ' .  $tahun;
-
         }
         $data['label'] = $label;
 
@@ -182,6 +180,33 @@ class Report extends CI_Controller
         $data['title'] = 'Perbaikan';
         $this->load->view('admin/report/perbaikan/print_rep_perbaikan', $data);
     }
+
+#######################
+public function cetak_rep_perbaikanbulan1tahun()
+    {
+        $tahun = $this->input->get('tahun');
+        $nopol = $this->input->get('nopol');
+
+        if (empty($tahun) or empty($nopol)) { // Cek jika tgl_awal atau tgl_akhir kosong, maka :            
+            $data['perbaikan'] = $this->M_admin->select_perbaikanbulan1tahun('tb_perbaikan');
+            $data['total_data'] = $this->M_admin->sum_perbaikan('tb_perbaikan');
+            $label = ' Tahun ...';
+        } else {
+            $data['perbaikan'] = $this->M_admin->perbaikan_bulan1tahun('tb_perbaikan', $tahun, $nopol);
+            $data['total_data'] = $this->M_admin->sum_perbaikan_bulan1tahun('tb_perbaikan', $tahun, $nopol);
+            $label = 'Nopol ' . $nopol . ' Tahun ' .  $tahun;
+        }
+        $data['label'] = $label;
+
+        // $data['perbaikan'] = $this->M_admin->select_perbaikan('tb_perbaikan');        
+
+        $data['tangki'] = $this->M_admin->get_sp_tangki('tb_supir_tangki');
+        $data['avatar'] = $this->M_admin->get_data_avatar('tb_user', $this->session->userdata('name'));
+        $data['title'] = 'Perbaikan';
+        $this->load->view('admin/report/perbaikan/print_rep_perbaikanbulan1tahun', $data);
+    }   
+
+
 
     #############################
     // SUPIR TANKI
@@ -255,18 +280,20 @@ class Report extends CI_Controller
     {
         $bulan = $this->input->get('bulan');
         $tahun = $this->input->get('tahun');
-        if (empty($bulan) or empty($tahun)) { // Cek jika tgl_awal atau tgl_akhir kosong, maka :            
-            $data['pengeluaran'] = $this->M_admin->select('tb_pengeluaran');
+        $nopol = $this->input->get('nopol');
+        if (empty($bulan) or empty($tahun) or empty($nopol)) { // Cek jika tgl_awal atau tgl_akhir kosong, maka :            
+            $data['pengeluaran'] = $this->M_admin->select_pengeluaran('tb_pengeluaran');
             $data['total_data'] = $this->M_admin->sum_pengeluaran('tb_pengeluaran');
             $label = 'Bulan ke ...' . ' Tahun ...';
         } else {
-            $data['pengeluaran'] = $this->M_admin->pengeluaran_periode('tb_pengeluaran', $bulan, $tahun);
-            $data['total_data'] = $this->M_admin->sum_penngeluaranPeriode('tb_pengeluaran', $bulan, $tahun);
-            $label = 'Bulan ke ' . $bulan . ' Tahun ' .  $tahun;
+            $data['pengeluaran'] = $this->M_admin->pengeluaran_periode('tb_pengeluaran', $bulan, $tahun,$nopol);
+            $data['total_data'] = $this->M_admin->sum_penngeluaranPeriode('tb_pengeluaran', $bulan, $tahun,$nopol);
+            $label = 'Nopol ' . $nopol . 'Bulan ke ' . $bulan . ' Tahun ' .  $tahun;
         }
         $data['label'] = $label;
 
         // $data['list_data'] = $this->M_admin->select('tb_pengeluaran');
+        $data['tangki'] = $this->M_admin->select('tb_tangki');
         $data['avatar'] = $this->M_admin->get_data_avatar('tb_user', $this->session->userdata('name'));
         $data['title'] = 'Data Pengeluaran Lain-lain';
         $this->load->view('admin/report/pengeluaran/tampilan_rep_pengeluaran', $data);
@@ -274,20 +301,22 @@ class Report extends CI_Controller
 
     public function cetak_rep_pengeluaran()
     {
-        $bulan = $this->input->post('bulan');
-        $tahun = $this->input->post('tahun');
-        if (empty($bulan) or empty($tahun)) { // Cek jika tgl_awal atau tgl_akhir kosong, maka :            
-            $data['pengeluaran'] = $this->M_admin->select('tb_pengeluaran');
+        $bulan = $this->input->get('bulan');
+        $tahun = $this->input->get('tahun');
+        $nopol = $this->input->get('nopol');
+        if (empty($bulan) or empty($tahun) or empty($nopol)) { // Cek jika tgl_awal atau tgl_akhir kosong, maka :            
+            $data['pengeluaran'] = $this->M_admin->select_pengeluaran('tb_pengeluaran');
             $data['total_data'] = $this->M_admin->sum_pengeluaran('tb_pengeluaran');
             $label = 'Bulan ke ...' . ' Tahun ...';
         } else {
-            $data['pengeluaran'] = $this->M_admin->pengeluaran_periode('tb_pengeluaran', $bulan, $tahun);
-            $data['total_data'] = $this->M_admin->sum_penngeluaranPeriode('tb_pengeluaran', $bulan, $tahun);
-            $label = 'Bulan ke ' . $bulan . ' Tahun ' .  $tahun;
+            $data['pengeluaran'] = $this->M_admin->pengeluaran_periode('tb_pengeluaran', $bulan, $tahun,$nopol);
+            $data['total_data'] = $this->M_admin->sum_pengeluaranPeriode('tb_pengeluaran', $bulan, $tahun,$nopol);
+            $label = 'Nopol ' . $nopol . 'Bulan ke ' . $bulan . ' Tahun ' .  $tahun;
         }
         $data['label'] = $label;
 
         // $data['list_data'] = $this->M_admin->select('tb_pengeluaran');
+        $data['tangki'] = $this->M_admin->select('tb_tangki');
         $data['avatar'] = $this->M_admin->get_data_avatar('tb_user', $this->session->userdata('name'));
         $data['title'] = 'Data Pengeluaran Lain-lain';
         $this->load->view('admin/report/pengeluaran/print_rep_pengeluaran', $data);
@@ -441,5 +470,4 @@ class Report extends CI_Controller
         $data['title'] = 'Seri Ban';
         $this->load->view('admin/report/form_seri_ban/print_seri_ban', $data);
     }
-
 }

@@ -49,6 +49,17 @@
 
                             <form action="<?= base_url('admin/proses_tambah_pengeluaran'); ?>" method="post" role="form">
 
+                            <div class="form-group">
+                                    <label for="nopol" class="form-label">Nopol</label>
+                                    <!-- <input type="text" name="nopol" class="form-control" id="nopol" placeholder="Masukkan Nopol" required> -->
+                                    <select name="id_tangki" class="form-control" id="id_tangki">
+                                        <option value="" selected>-- Pilih Nopol --</option>
+                                        <?php foreach ($list_tangki as $s) { ?>
+                                            <option value="<?= $s->id_tangki; ?>"><?= $s->nopol; ?></option>
+                                        <?php } ?>
+                                    </select>
+
+                                </div>
                                 <div class="form-group">
                                     <label for="tanggal" class="form-label">Tanggal</label>
                                     <input type="date" name="tanggal" class="form-control" id="tanggal" placeholder="Masukkan Tanggal" required>
