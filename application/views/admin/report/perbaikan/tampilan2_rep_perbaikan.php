@@ -32,7 +32,7 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header">
-                                Data Perbaikan yang proses nya sudah selesai atau sudah disetujui
+                            Data Perbaikan yang proses nya sudah selesai atau sudah disetujui
                         </div>
                         <div class="card-body">
                             <?php if ($this->session->flashdata('msg_sukses')) { ?>
@@ -40,20 +40,20 @@
                                     <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
                                     <strong>Berhasil!</strong><br> <?= $this->session->flashdata('msg_sukses'); ?>
                                 </div>
-                                
+
                             <?php } ?>
-                            <a href="<?= base_url('report/cetak_rep_perbaikan'); ?>"  style="margin-bottom:10px;" type="button" class="btn btn-sm btn-success" name="cetak_data"><i class="fa fa-print mr-2" aria-hidden="true"></i>Cetak</a>
+                            <a href="<?= base_url('report/cetak_rep_perbaikan'); ?>" style="margin-bottom:10px;" type="button" class="btn btn-sm btn-success" name="cetak_data"><i class="fa fa-print mr-2" aria-hidden="true"></i>Cetak</a>
 
                             <button data-toggle="modal" data-target="#static_perbaikan_bulanan" style="margin-bottom:10px;" type="button" class="btn btn-sm btn-warning" name="static_perbaikan_bulanan"><i class="fa fa-table"></i>&nbsp;FILTER PERIODE</button>
                             <button data-toggle="modal" data-target="#static_perbaikan_bulan1tahun" style="margin-bottom:10px;" type="button" class="btn btn-sm btn-primary" name="static_perbaikan_bulan1tahun"><i class="fa fa-table"></i>&nbsp;FILTER PERBULAN DALAM 1 TAHUN</button>
-                            
-                            
+
+
                         </div>
                     </div>
-                    
 
-<!-- Modal -->
-<div class="modal fade" id="static_perbaikan_bulanan" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+
+                    <!-- Modal -->
+                    <div class="modal fade" id="static_perbaikan_bulanan" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                         <div class="modal-dialog modal-dialog-centered">
                             <div class="modal-content">
                                 <div class="modal-header">
@@ -62,15 +62,15 @@
                                         <span>&times;</span>
                                     </button>
                                 </div>
-                                
+
                                 <div class="modal-body">
                                     <form action="<?= site_url('report/cetak_rep_perbaikan'); ?>" method="get" role="form">
 
-                                    <div class="form-group row">
+                                        <div class="form-group row">
                                             <label for="bulan" class="col-sm-3 col-form-label">Nopol</label>
                                             <div class="col-sm-6">
 
-                                            
+
                                                 <select name="nopol" class="form-control" id="nopol">
                                                     <option value="" selected>NOPOL</option>
                                                     <?php foreach ($tangki  as $s) : ?>
@@ -112,7 +112,7 @@
                                 <div class="modal-footer">
                                     <button type="submit" class="btn btn-success btn-sm">Tampilkan</button>
                                     <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Close</button>
-<hr>
+                                    <hr>
 
 
 
@@ -122,7 +122,7 @@
                         </div>
                     </div>
 
-<!-- FILTER BULAN PERTAHUN -->
+                    <!-- FILTER BULAN PERTAHUN -->
                     <div class="modal fade" id="static_perbaikan_bulan1tahun" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                         <div class="modal-dialog modal-dialog-centered">
                             <div class="modal-content">
@@ -132,15 +132,15 @@
                                         <span>&times;</span>
                                     </button>
                                 </div>
-                                
-                                <div class="modal-body">
-                                    <form action="<?= site_url('report/cetak_rep_perbaikanbulan1tahun'); ?>" method="get" role="form">
 
-                                    <div class="form-group row">
+                                <div class="modal-body">
+                                    <form action="<?= site_url('report/cetak_rep_perbaikanbulan1tahun'); ?>" method="get" role="form" target="_blank">
+
+                                        <div class="form-group row">
                                             <label for="bulan" class="col-sm-3 col-form-label">Nopol</label>
                                             <div class="col-sm-6">
 
-                                            
+
                                                 <select name="nopol" class="form-control" id="nopol">
                                                     <option value="" selected>NOPOL</option>
                                                     <?php foreach ($tangki  as $s) : ?>
@@ -152,7 +152,7 @@
                                             </div>
                                         </div>
 
-                                    
+
                                         <div class="form-group row">
                                             <label for="tahun" class="col-sm-3 col-form-label">Tahun</label>
                                             <div class="col-sm-6">
@@ -163,7 +163,7 @@
                                 <div class="modal-footer">
                                     <button type="submit" class="btn btn-success btn-sm">Tampilkan</button>
                                     <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Close</button>
-<hr>
+                                    <hr>
 
 
 

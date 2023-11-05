@@ -8,7 +8,7 @@ $pdf->SetSubject('Operator');
 
 $PDF_HEADER_STRING = "";
 
-$pdf->SetHeaderData('KOP RTR REPORT APK V2.jpg', 180    , '', $PDF_HEADER_STRING, array(0, 0, 0), array(0, 0, 0));
+$pdf->SetHeaderData('KOP RTR REPORT APK V2.jpg', 180, '', $PDF_HEADER_STRING, array(0, 0, 0), array(0, 0, 0));
 
 $pdf->setHeaderFont(array(PDF_FONT_NAME_MAIN, 'I', 9));
 $pdf->setFooterFont(array(PDF_FONT_NAME_DATA, '', PDF_FONT_SIZE_DATA));
@@ -38,16 +38,21 @@ $pdf->AddPage('p');
 // set auto page breaks
 $pdf->SetAutoPageBreak(TRUE, PDF_MARGIN_BOTTOM);
 
+// $bulan = array('Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul', 'Agu', 'Sep', 'Okt', 'Nov', 'Des');
 $html =
 
     '<div>
-       <h1 align="center">Perbaikan Truk Tangki</h1>
-       
-       <table cellspacing="1" cellpadding="2"  border="1" >
+       <h1 align="center">Perbaikan Truk Tangki</h1> ';
 
-<tr>
-    <th colspan="6" width="658px"> Bulan : </th>
-</tr>
+$html =  '<br><br><br><br><table cellspacing="1" cellpadding="2"  border="1" >';
+foreach ($bln as $bl) :
+
+    $html .= '<tr>
+<th colspan="6" width="658px"> Bulan : ' . bulan_to_string($bl) . '</th>
+</tr>';
+
+
+    $html .= '
 
         <tr bgcolor=" #d1d1d1 ">
          <th width="30px" align="center">No.</th>
@@ -58,10 +63,10 @@ $html =
          <th  align="center"> Biaya</th>
          </tr>';
 
-$no = 1;
+    $no = 1;
+    foreach ($perbaikan as $d) :
 
-foreach ($perbaikan as $d) :
-    $html .= '<tr>
+        $html .= '<tr>
     <td align="center">' . $no . '</td>
     <td >' . $d->nopol . '</td>
     <td >' . $d->nama_bengkel . '</td>
@@ -69,24 +74,26 @@ foreach ($perbaikan as $d) :
     <td >' . $d->keterangan . '</td>
     <td>Rp' . number_format($d->biaya_perbaikan) . '</td>';
 
-    $html .= '</tr>';
-    $no++;
-endforeach;
+        $html .= '</tr>';
+        $no++;
+    endforeach;
 
-foreach ($total_data as $td) :
-    $html .=
-        '<tr>
+    foreach ($total_data as $td) :
+        $html .=
+            '<tr>
                                             <th colspan="5" align="center"><b>Total </b> </th>
                                             <th ><b><span style="color: red;">Rp&nbsp;' . number_format($td->biaya_perbaikan) . '</span></b></th>
                                             </tr>';
+    endforeach;
+
+
 endforeach;
 
-
-
 $html .= '
-         </table><br><br><br><br>
-         <table>
-         <tr>
+         </table><br><br><br><br>';
+$html .= '
+<table>
+<tr>
              <td><br><br><br><br><br></td>
              <td align="right">Banjarmasin, ' . date('d-M-Y') . '</td>
          </tr>

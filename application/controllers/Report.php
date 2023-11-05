@@ -181,9 +181,12 @@ class Report extends CI_Controller
         $this->load->view('admin/report/perbaikan/print_rep_perbaikan', $data);
     }
 
-#######################
-public function cetak_rep_perbaikanbulan1tahun()
+    #######################
+    public function cetak_rep_perbaikanbulan1tahun()
     {
+        // $bulan = array('Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul', 'Agu', 'Sep', 'Okt', 'Nov', 'Des');
+        // $bulan = array('01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12');
+        $bulan = array('1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12');
         $tahun = $this->input->get('tahun');
         $nopol = $this->input->get('nopol');
 
@@ -192,8 +195,13 @@ public function cetak_rep_perbaikanbulan1tahun()
             $data['total_data'] = $this->M_admin->sum_perbaikan('tb_perbaikan');
             $label = ' Tahun ...';
         } else {
-            $data['perbaikan'] = $this->M_admin->perbaikan_bulan1tahun('tb_perbaikan', $tahun, $nopol);
-            $data['total_data'] = $this->M_admin->sum_perbaikan_bulan1tahun('tb_perbaikan', $tahun, $nopol);
+            for ($i = 0; $i <= 11; $i++) {
+
+                $data['bln'] = $bulan[$i];
+            }
+            $data['bln'] = $bulan;
+            $data['perbaikan'] = $this->M_admin->perbaikan_bulan1tahun_tgl('tb_perbaikan', $bulan, $tahun, $nopol);
+            $data['total_data'] = $this->M_admin->sum_perbaikan_bulan1tahun_tgl('tb_perbaikan', $bulan, $tahun, $nopol);
             $label = 'Nopol ' . $nopol . ' Tahun ' .  $tahun;
         }
         $data['label'] = $label;
@@ -204,7 +212,7 @@ public function cetak_rep_perbaikanbulan1tahun()
         $data['avatar'] = $this->M_admin->get_data_avatar('tb_user', $this->session->userdata('name'));
         $data['title'] = 'Perbaikan';
         $this->load->view('admin/report/perbaikan/print_rep_perbaikanbulan1tahun', $data);
-    }   
+    }
 
 
 
@@ -286,8 +294,8 @@ public function cetak_rep_perbaikanbulan1tahun()
             $data['total_data'] = $this->M_admin->sum_pengeluaran('tb_pengeluaran');
             $label = 'Bulan ke ...' . ' Tahun ...';
         } else {
-            $data['pengeluaran'] = $this->M_admin->pengeluaran_periode('tb_pengeluaran', $bulan, $tahun,$nopol);
-            $data['total_data'] = $this->M_admin->sum_penngeluaranPeriode('tb_pengeluaran', $bulan, $tahun,$nopol);
+            $data['pengeluaran'] = $this->M_admin->pengeluaran_periode('tb_pengeluaran', $bulan, $tahun, $nopol);
+            $data['total_data'] = $this->M_admin->sum_penngeluaranPeriode('tb_pengeluaran', $bulan, $tahun, $nopol);
             $label = 'Nopol ' . $nopol . 'Bulan ke ' . $bulan . ' Tahun ' .  $tahun;
         }
         $data['label'] = $label;
@@ -309,8 +317,8 @@ public function cetak_rep_perbaikanbulan1tahun()
             $data['total_data'] = $this->M_admin->sum_pengeluaran('tb_pengeluaran');
             $label = 'Bulan ke ...' . ' Tahun ...';
         } else {
-            $data['pengeluaran'] = $this->M_admin->pengeluaran_periode('tb_pengeluaran', $bulan, $tahun,$nopol);
-            $data['total_data'] = $this->M_admin->sum_pengeluaranPeriode('tb_pengeluaran', $bulan, $tahun,$nopol);
+            $data['pengeluaran'] = $this->M_admin->pengeluaran_periode('tb_pengeluaran', $bulan, $tahun, $nopol);
+            $data['total_data'] = $this->M_admin->sum_pengeluaranPeriode('tb_pengeluaran', $bulan, $tahun, $nopol);
             $label = 'Nopol ' . $nopol . 'Bulan ke ' . $bulan . ' Tahun ' .  $tahun;
         }
         $data['label'] = $label;

@@ -253,8 +253,8 @@ class M_admin extends CI_Model
     return $query->result();
   }
 
-###############################
-public function select_perbaikanbulan1tahun($tabel)
+  ###############################
+  public function select_perbaikanbulan1tahun($tabel)
   {
     $query = $this->db->select()
       ->from($tabel)
@@ -403,9 +403,9 @@ public function select_perbaikanbulan1tahun($tabel)
       ->join('tb_bengkel', 'tb_bengkel.id_bengkel = tb_service_masuk.id_bengkel')
       ->join('tb_tangki', 'tb_tangki.id_tangki = tb_supir_tangki.id_tangki')
 
-      ->where('MONTH (tb_perbaikan.tgl_perbaikan) =' . $bulan . ' AND YEAR (tb_perbaikan.tgl_perbaikan) =' . $tahun)
+      ->where('MONTH (tb_perbaikan.tgl_perbaikan) =' . $bulan)
+      ->where('YEAR (tb_perbaikan.tgl_perbaikan) =' . $tahun)
       ->where_in('tb_tangki.nopol', $nopol)
-      // ->where('YEAR (tanggal_masuk)' . $tahun)
       ->order_by('tgl_perbaikan', 'asc')
       ->get();
     return $query->result();
@@ -424,7 +424,9 @@ public function select_perbaikanbulan1tahun($tabel)
       ->join('tb_bengkel', 'tb_bengkel.id_bengkel = tb_service_masuk.id_bengkel')
       ->join('tb_tangki', 'tb_tangki.id_tangki = tb_supir_tangki.id_tangki')
 
-      ->where('MONTH (tgl_perbaikan) =' . $bulan . ' AND YEAR (tgl_perbaikan) =' . $tahun)
+      ->where('MONTH (tb_perbaikan.tgl_perbaikan) =' . $bulan)
+      ->where('YEAR (tb_perbaikan.tgl_perbaikan) =' . $tahun)
+
       ->where_in('tb_tangki.nopol', $nopol)
 
 
@@ -444,7 +446,6 @@ public function select_perbaikanbulan1tahun($tabel)
   ##########################
   public function perbaikan_bulan1tahun($tabel, $tahun, $nopol)
   {
-    
     $tahun = $this->db->escape($tahun);
     // $nopol = $this->db->escape($nopol);
 
@@ -477,6 +478,100 @@ public function select_perbaikanbulan1tahun($tabel)
 
       ->where('YEAR (tgl_perbaikan) =' . $tahun)
       ->where_in('tb_tangki.nopol', $nopol)
+
+      ->get();
+    return $query->result();
+  }
+
+  // public function perbaikan_bulan1tahun_bln($tabel, $bulan, $tahun, $nopol)
+  // {
+  //   // $bulan = array('Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul', 'Agu', 'Sep', 'Okt', 'Nov', 'Des');
+  //   // $bulan = array('01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12');
+  //   // $bulan = array('1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12');
+  //   $bulan = $this->db->escape($bulan);
+  //   $tahun = $this->db->escape($tahun);
+  //   // $nopol = $this->db->escape($nopol);
+
+  //   for ($i = 0; $i <= 11; $i++) {
+  //     $query = $this->db->select('MONTH (tgl_perbaikan) =' . $bulan[$i]);
+  //   }
+  //   // $query = $this->db->select('MONTH (tgl_perbaikan) =' . $bulan);
+  //   $this->db->from($tabel)
+  //     ->join('tb_service_masuk', 'tb_service_masuk.id_service_masuk = tb_perbaikan.id_service_masuk')
+  //     ->join('tb_supir_tangki', 'tb_supir_tangki.id_supir_tangki = tb_service_masuk.id_supir_tangki')
+  //     ->join('tb_bengkel', 'tb_bengkel.id_bengkel = tb_service_masuk.id_bengkel')
+  //     ->join('tb_tangki', 'tb_tangki.id_tangki = tb_supir_tangki.id_tangki');
+  //   // ->where('id_perbaikan');
+  //   // for ($i = 0; $i <= 11; $i++) {
+
+  //   //   $query = $this->db->where_not_in('MONTH (tgl_perbaikan) =' . $bulan[$i]);
+  //   // $query = $this->db->group_by('MONTH (tgl_perbaikan) =' . $bulan[$i]);
+  //   // }
+  //   // $query = $this->db->where('MONTH (tgl_perbaikan) =' . $bulan);
+  //   $query = $this->db->where('YEAR (tgl_perbaikan) =' . $tahun)
+  //     ->where_in('tb_tangki.nopol', $nopol)
+  //     // ->group_by('tb_perbaikan.id_perbaikan')
+  //     // ->where('YEAR (tanggal_masuk)' . $tahun)
+  //     ->order_by('tgl_perbaikan', 'asc')
+  //     ->get();
+  //   return $query->result();
+  // }
+
+  public function perbaikan_bulan1tahun_tgl($tabel, $bulan, $tahun, $nopol)
+  {
+    // $bulan = array('Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul', 'Agu', 'Sep', 'Okt', 'Nov', 'Des');
+    // $bulan = array('01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12');
+    $bulan = array('1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12');
+    $bulan = $this->db->escape($bulan);
+    $tahun = $this->db->escape($tahun);
+    // $nopol = $this->db->escape($nopol);
+
+    $query = $this->db->select()
+      ->from($tabel)
+      ->join('tb_service_masuk', 'tb_service_masuk.id_service_masuk = tb_perbaikan.id_service_masuk')
+      ->join('tb_supir_tangki', 'tb_supir_tangki.id_supir_tangki = tb_service_masuk.id_supir_tangki')
+      ->join('tb_bengkel', 'tb_bengkel.id_bengkel = tb_service_masuk.id_bengkel')
+      ->join('tb_tangki', 'tb_tangki.id_tangki = tb_supir_tangki.id_tangki');
+    // ->where('id_perbaikan');
+    // for ($i = 0; $i <= 11; $i++) {
+
+    //   $query = $this->db->where_not_in('MONTH (tgl_perbaikan) =' . $bulan[$i]);
+    // $query = $this->db->group_by('MONTH (tgl_perbaikan) =' . $bulan[$i]);
+    // }
+    // $query = $this->db->where('MONTH (tgl_perbaikan) =' . $bulan);
+    $query = $this->db->where('YEAR (tgl_perbaikan) =' . $tahun)
+      ->where_in('tb_tangki.nopol', $nopol)
+      // ->group_by('tb_perbaikan.id_perbaikan')
+      // ->where('YEAR (tanggal_masuk)' . $tahun)
+      ->order_by('tgl_perbaikan', 'asc')
+      ->get();
+    return $query->result();
+  }
+
+  public function sum_perbaikan_bulan1tahun_tgl($tabel, $bulan, $tahun, $nopol)
+  {
+    // $bulan = array('Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul', 'Agu', 'Sep', 'Okt', 'Nov', 'Des');
+    // $bulan = array('01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12');
+    $bulan = array('1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12');
+    $bulan = $this->db->escape($bulan);
+    $tahun = $this->db->escape($tahun);
+    // $nopol = $this->db->escape($nopol);
+
+    $query = $this->db->select_sum('biaya_perbaikan')
+      ->from($tabel)
+      ->join('tb_service_masuk', 'tb_service_masuk.id_service_masuk = tb_perbaikan.id_service_masuk')
+      ->join('tb_supir_tangki', 'tb_supir_tangki.id_supir_tangki = tb_service_masuk.id_supir_tangki')
+      ->join('tb_bengkel', 'tb_bengkel.id_bengkel = tb_service_masuk.id_bengkel')
+      ->join('tb_tangki', 'tb_tangki.id_tangki = tb_supir_tangki.id_tangki');
+    // for ($i = 0; $i <= 11; $i++) {
+
+    //   $query = $this->db->where_not_in('MONTH (tgl_perbaikan) =' . $bulan[$i]);
+    // $query = $this->db->group_by('MONTH (tgl_perbaikan) =' . $bulan[$i]);
+    // }
+    // $query = $this->db->where('MONTH (tb_perbaikan.tgl_perbaikan) =' . $bulan);
+    $query = $this->db->where('YEAR (tgl_perbaikan) =' . $tahun)
+      ->where_in('tb_tangki.nopol', $nopol)
+      // ->group_by('tb_perbaikan.id_perbaikan')
 
 
       ->get();
