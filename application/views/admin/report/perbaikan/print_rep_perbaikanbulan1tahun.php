@@ -45,15 +45,15 @@ $html =
        <h1 align="center">Perbaikan Truk Tangki</h1> ';
 
 $html =  '<br><br><br><br><table cellspacing="1" cellpadding="2"  border="1" >';
+$no_bulan = 1;
+$total_keseluruhan = 0;
 foreach ($bln as $bl) :
-
     $html .= '<tr>
 <th colspan="6" width="658px"> Bulan : ' . bulan_to_string($bl) . '</th>
 </tr>';
 
 
     $html .= '
-
         <tr bgcolor=" #d1d1d1 ">
          <th width="30px" align="center">No.</th>
          <th width="100px" align="center">NOPOL</th>
@@ -62,32 +62,42 @@ foreach ($bln as $bl) :
          <th  width="200px" align="center"> Keterangan</th>
          <th  align="center"> Biaya</th>
          </tr>';
-
-    $no = 1;
-    foreach ($perbaikan as $d) :
-
-        $html .= '<tr>
+    if ($no_bulan == $bl) {
+        $no = 1;
+        $total_biaya_perbaikan = 0;
+        foreach ($perbaikan as $d) :
+            $bulan_now = date('n', strtotime($d->tgl_perbaikan));
+            if ($no_bulan == $bulan_now) {
+                $html .= '<tr>
     <td align="center">' . $no . '</td>
     <td >' . $d->nopol . '</td>
     <td >' . $d->nama_bengkel . '</td>
     <td align="center">' . $d->tgl_perbaikan . '</td>
     <td >' . $d->keterangan . '</td>
     <td>Rp' . number_format($d->biaya_perbaikan) . '</td>';
+                $html .= '</tr>';
+                $total_biaya_perbaikan += $d->biaya_perbaikan;
+            }
 
-        $html .= '</tr>';
-        $no++;
-    endforeach;
+            $no++;
+        endforeach;
 
-    foreach ($total_data as $td) :
+        // foreach ($total_data as $td) :
         $html .=
             '<tr>
                                             <th colspan="5" align="center"><b>Total </b> </th>
-                                            <th ><b><span style="color: red;">Rp&nbsp;' . number_format($td->biaya_perbaikan) . '</span></b></th>
+                                            <th ><b><span style="color: red;">Rp&nbsp;' . number_format($total_biaya_perbaikan) . '</span></b></th>
                                             </tr>';
-    endforeach;
-
-
+        // endforeach;
+        $total_keseluruhan += $total_biaya_perbaikan;
+    }
+    $no_bulan++;
 endforeach;
+$html .=
+    '<tr>
+                                            <th colspan="5" align="center"><b>Total Keseluruhan</b> </th>
+                                            <th ><b><span style="color: red;">Rp&nbsp;' . number_format($total_keseluruhan) . '</span></b></th>
+                                            </tr>';
 
 $html .= '
          </table><br><br><br><br>';
